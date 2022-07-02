@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "ClientPacketHandler.h"
 #include "GameSession.h"
-#include "Player.h"
+#include "Contents/Object/Player.h"
 #include "GameRoom.h"
 
-#include "LoginManager.h"
+#include "Contents/Manager/LoginManager.h"
 
 namespace FrokEngine
 {
@@ -20,6 +20,9 @@ namespace FrokEngine
 
 	bool Handle_C_LOGIN(PacketSessionRef& session, Protocol::C_LOGIN& pkt)
 	{
+		// 그 플레이어의 세션을 가져온다.
+		GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
+
 		// 로그인 실패인지 아닌지 판별한다.
 		Protocol::S_LOGIN loginPkt;
 
@@ -27,7 +30,7 @@ namespace FrokEngine
 		// Login 부분을 수정할 필요 있음
 
 		// ID 발급 (DB 아이디가 아니고, 인게임 아이디)
-		static Atomic<uint64> idGenerator = 1;
+		static Atomic<uint64> idGenerator = 0;
 
 		auto password = pkt.password();
 		password = SHA256::GetInst()->toString(reinterpret_cast<const uint8_t*>(password.c_str()));
@@ -39,6 +42,22 @@ namespace FrokEngine
 		{
 			cout << "로그인 성공" << endl;
 			loginPkt.set_success(1);
+			
+			// 그 유저가 가진 캐릭터의 목록을 가져온다.
+			auto player = loginPkt.add_players();
+
+			string name = "Player_Actor_" + to_string(++idGenerator);
+
+			player->set_name(u8"");
+			// player->set_playertype(Protocol::PLAYER_TYPE_KNIGHT);
+
+			PlayerRef playerRef = MakeShared<Player>();
+			playerRef->playerId = idGenerator;
+			playerRef->name = player->name();
+			// playerRef->type = player->playertype();
+			playerRef->ownerSession = gameSession;
+
+			gameSession->_players.push_back(playerRef);
 		}
 		else 
 		{

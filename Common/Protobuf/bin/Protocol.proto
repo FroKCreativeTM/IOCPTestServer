@@ -70,3 +70,12 @@ message C_MOVE
 {
 	PosInfo posInfo = 1;
 }
+
+message S_MOVE
+{
+	// 어떤 플레이어가 보내는지 파악하기 위한 
+	// 플레이어 아이디를 통해서 어떤 플레이어가 보내는 지 파악한다.
+	uint64 playerId = 1;
+	PosInfo posInfo = 2;
+}
+

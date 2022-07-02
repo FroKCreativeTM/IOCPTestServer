@@ -10,7 +10,7 @@
 #include "Protocol.pb.h"
 #include "Job.h"
 #include "GameRoom.h"
-#include "Player.h"
+#include "Contents/Object/Player.h"
 
 #include <DBBind.h>
 #include <Timer.h>

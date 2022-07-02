@@ -19,6 +19,7 @@ namespace FrokEngine
 		PKT_C_CHAT = 8,
 		PKT_S_CHAT = 9,
 		PKT_C_MOVE = 10,
+		PKT_S_MOVE = 11,
 	};
 
 	// Custom Handlers
@@ -28,6 +29,7 @@ namespace FrokEngine
 	bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt);
 	bool Handle_S_CURRENT_PLAYER_INFO(PacketSessionRef& session, Protocol::S_CURRENT_PLAYER_INFO& pkt);
 	bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt);
+	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
 
 	class ServerPacketHandler
 	{
@@ -41,6 +43,7 @@ namespace FrokEngine
 			GPacketHandler[PKT_S_ENTER_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ENTER_GAME > (Handle_S_ENTER_GAME, session, buffer, len); };
 			GPacketHandler[PKT_S_CURRENT_PLAYER_INFO] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_CURRENT_PLAYER_INFO > (Handle_S_CURRENT_PLAYER_INFO, session, buffer, len); };
 			GPacketHandler[PKT_S_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_CHAT > (Handle_S_CHAT, session, buffer, len); };
+			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
 		}
 
 		static bool HandlePacket(PacketSessionRef & session, BYTE * buffer, int32 len)

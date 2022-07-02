@@ -19,6 +19,7 @@ namespace FrokEngine
 		PKT_C_CHAT = 8,
 		PKT_S_CHAT = 9,
 		PKT_C_MOVE = 10,
+		PKT_S_MOVE = 11,
 	};
 
 	// Custom Handlers
@@ -55,6 +56,7 @@ namespace FrokEngine
 		static SendBufferRef MakeSendBuffer(Protocol::S_ENTER_GAME&pkt) { return MakeSendBuffer(pkt, PKT_S_ENTER_GAME); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_CURRENT_PLAYER_INFO&pkt) { return MakeSendBuffer(pkt, PKT_S_CURRENT_PLAYER_INFO); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_CHAT&pkt) { return MakeSendBuffer(pkt, PKT_S_CHAT); }
+		static SendBufferRef MakeSendBuffer(Protocol::S_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
 
 	private:
 		template<typename PacketType, typename ProcessFunc>

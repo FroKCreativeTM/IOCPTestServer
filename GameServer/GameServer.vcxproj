@@ -175,10 +175,13 @@
   <ItemGroup>
     <ClCompile Include="Contents\Data\MapData.cpp" />
     <ClCompile Include="Contents\Manager\LoginManager.cpp" />
+    <ClCompile Include="Contents\Manager\PlayerManager.cpp" />
     <ClCompile Include="Contents\Object\GameObject.cpp" />
     <ClCompile Include="Contents\Object\ObjectManager.cpp" />
     <ClCompile Include="Contents\Object\Player.cpp" />
-    <ClCompile Include="Enum.pb.cc" />
+    <ClCompile Include="Enum.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="GameRoom.cpp" />
     <ClCompile Include="GameServer.cpp" />
     <ClCompile Include="GameSession.cpp" />
@@ -190,13 +193,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ClientPacketHandler.cpp" />
-    <ClCompile Include="Protocol.pb.cc" />
-    <ClCompile Include="Struct.pb.cc" />
+    <ClCompile Include="Protocol.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Struct.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="UsageManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contents\Data\MapData.h" />
     <ClInclude Include="Contents\Manager\LoginManager.h" />
+    <ClInclude Include="Contents\Manager\PlayerManager.h" />
     <ClInclude Include="Contents\Object\GameObject.h" />
     <ClInclude Include="Contents\Object\ObjectManager.h" />
     <ClInclude Include="Contents\Object\Player.h" />
