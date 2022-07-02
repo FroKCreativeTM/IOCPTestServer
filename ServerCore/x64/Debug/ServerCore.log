@@ -1,0 +1,44 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1098,5): warning MSB8027: 이름이 main.cpp인 둘 이상의 파일이 같은 위치에 출력을 생성합니다. 이로 인해 잘못된 빌드 결과가 나타날 수 있습니다.  관련된 파일은 ..\Libraries\Include\jsoncpp\src\jsontestrunner\main.cpp, ..\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp입니다.
+  pch.cpp
+  Allocator.cpp
+  BufferReader.cpp
+  BufferWriter.cpp
+  ConsoleLog.cpp
+  CoreGlobal.cpp
+  CorePch.cpp
+  CoreTLS.cpp
+  DeadLockProfiler.cpp
+  GlobalQueue.cpp
+  IocpCore.cpp
+  IocpEvent.cpp
+  Job.cpp
+  JobTimer.cpp
+  LockQueue.cpp
+  JobQueue.cpp
+  Listener.cpp
+  Lock.cpp
+  Memory.cpp
+  MemoryPool.cpp
+  NetAddress.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  RecvBuffer.cpp
+  RefCounting.cpp
+  SendBuffer.cpp
+  Service.cpp
+  Session.cpp
+  SHA256.cpp
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\SHA256.cpp(161,16): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\SHA256.cpp(162,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\SHA256.cpp(163,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\SHA256.cpp(164,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\SHA256.cpp(165,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\SHA256.cpp(166,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\SHA256.cpp(167,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  SocketUtils.cpp
+  ThreadManager.cpp
+  Timer.cpp
+C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\ServerCore\Timer.cpp(33,15): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+x64\Debug\main.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
+  ServerCore.vcxproj -> C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\Libraries\Libs\ServerCore\Debug\ServerCore.lib

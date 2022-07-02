@@ -1,0 +1,32 @@
+syntax = "proto3";
+package Protocol;
+
+import "Enum.proto";
+
+message PosInfo
+{
+	float posX = 1;
+	float posY = 2;
+	float posZ = 3;
+	
+	float yaw = 4;
+	float roll = 5;
+	float pitch = 6;
+		
+	float veloX = 7;
+	float veloY = 8;
+	float veloZ = 9;
+}
+
+message Player
+{
+	// Ω∫≈» ¡§∫∏...
+	uint64 id = 1;
+	string name = 2;
+
+	bool		isAlive = 3;
+	int32		health = 4;	
+	bool		isAttack = 5;
+
+	PosInfo posInfo = 6;
+}

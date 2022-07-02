@@ -1,0 +1,72 @@
+syntax = "proto3";
+package Protocol;
+
+import "Enum.proto";
+import "Struct.proto";
+
+message C_LOGIN
+{
+	string id = 1;
+	string password = 2;
+}
+
+message S_LOGIN
+{
+	bool success = 1;
+	repeated Player players = 2; // 아이디 발급 전
+}
+
+// 가입
+message C_SIGNUP
+{
+	string id = 1;
+	string password = 2;
+}
+
+// 가입이 성공적인가?
+// 아니면 그에 대한 이유를 서술한다.
+message S_SIGNUP
+{
+	bool success = 1;
+}
+
+// Entergame부터 구현
+message C_ENTER_GAME
+{
+	Player		player = 1;
+}
+
+// 
+message S_ENTER_GAME
+{
+	bool success = 1;
+}
+
+// 서버와 싱크를 맞추기 위해서 실시간으로 보내는 데이터
+message C_CURRENT_PLAYER_INFO
+{
+	Player		player = 1;
+}
+
+// 현재 접속중인 플레이어들의 모든 정보를 보낸다.
+message S_CURRENT_PLAYER_INFO
+{
+	repeated Player players = 1; 
+}
+
+message C_CHAT
+{
+	string msg = 1;
+}
+
+message S_CHAT
+{
+	// 플레이어 아이디를 통해서 어떤 플레이어가 보내는 지 파악한다.
+	uint64 playerId = 1;
+	string msg = 2;
+}
+
+message C_MOVE
+{
+	PosInfo posInfo = 1;
+}

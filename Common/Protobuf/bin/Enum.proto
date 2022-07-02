@@ -1,0 +1,18 @@
+syntax = "proto3";
+package Protocol;
+
+enum PlayerType
+{
+	PLAYER_TYPE_NONE = 0;
+	PLAYER_TYPE_KNIGHT = 1;
+	PLAYER_TYPE_MAGE = 2;
+	PLAYER_TYPE_ARCHER = 3;
+}
+
+enum GameObjectType
+{
+	GAME_OBJECT_TYPE_NONE = 0;			// 아무 것도 아닌 경우
+	GAME_OBJECT_TYPE_PLAYE = 1;			// 플레이어
+	GAME_OBJECT_TYPE_MONSTER = 2;		// 몬스터
+	GAME_OBJECT_TYPE_PROJECTILE = 3;	// 화살같은 투사체
+}
