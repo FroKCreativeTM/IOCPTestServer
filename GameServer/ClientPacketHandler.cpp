@@ -104,24 +104,6 @@ namespace FrokEngine
 		return true;
 	}
 
-	bool Handle_C_CURRENT_PLAYER_INFO(PacketSessionRef& session, Protocol::C_CURRENT_PLAYER_INFO& pkt)
-	{
-		cout << "[\tLOG\t]" << endl;
-		cout << "Position X : " << pkt.player().posinfo().posx()
-			<< " Y : " << pkt.player().posinfo().posy()
-			<< " Z : " << pkt.player().posinfo().posz() << endl;
-
-		cout << "Rotation Yaw : " << pkt.player().posinfo().yaw()
-			<< " Roll : " << pkt.player().posinfo().roll()
-			<< " Pitch : " << pkt.player().posinfo().pitch() << endl;
-
-		cout << "Velocity X : " << pkt.player().posinfo().velox()
-			<< " Y : " << pkt.player().posinfo().veloy()
-			<< " Z : " << pkt.player().posinfo().veloz() << endl << endl;
-
-		return true;
-	}
-
 	bool Handle_C_CHAT(PacketSessionRef& session, Protocol::C_CHAT& pkt)
 	{
 		std::cout << pkt.msg() << endl;
@@ -133,6 +115,11 @@ namespace FrokEngine
 		GRoom->DoAsync(&GameRoom::Broadcast, sendBuffer);
 
 		return true;
+	}
+
+	bool Handle_C_SPAWN(PacketSessionRef& session, Protocol::C_SPAWN& pkt)
+	{
+		return false;
 	}
 
 	bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt)

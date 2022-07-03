@@ -14,10 +14,10 @@ namespace FrokEngine
 		PKT_S_SIGNUP = 3,
 		PKT_C_ENTER_GAME = 4,
 		PKT_S_ENTER_GAME = 5,
-		PKT_C_CURRENT_PLAYER_INFO = 6,
-		PKT_S_CURRENT_PLAYER_INFO = 7,
-		PKT_C_CHAT = 8,
-		PKT_S_CHAT = 9,
+		PKT_C_CHAT = 6,
+		PKT_S_CHAT = 7,
+		PKT_C_SPAWN = 8,
+		PKT_S_SPAWN = 9,
 		PKT_C_MOVE = 10,
 		PKT_S_MOVE = 11,
 	};
@@ -27,8 +27,8 @@ namespace FrokEngine
 	bool Handle_S_LOGIN(PacketSessionRef& session, Protocol::S_LOGIN& pkt);
 	bool Handle_S_SIGNUP(PacketSessionRef& session, Protocol::S_SIGNUP& pkt);
 	bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt);
-	bool Handle_S_CURRENT_PLAYER_INFO(PacketSessionRef& session, Protocol::S_CURRENT_PLAYER_INFO& pkt);
 	bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt);
+	bool Handle_S_SPAWN(PacketSessionRef& session, Protocol::S_SPAWN& pkt);
 	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
 
 	class ServerPacketHandler
@@ -41,8 +41,8 @@ namespace FrokEngine
 			GPacketHandler[PKT_S_LOGIN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_LOGIN > (Handle_S_LOGIN, session, buffer, len); };
 			GPacketHandler[PKT_S_SIGNUP] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_SIGNUP > (Handle_S_SIGNUP, session, buffer, len); };
 			GPacketHandler[PKT_S_ENTER_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ENTER_GAME > (Handle_S_ENTER_GAME, session, buffer, len); };
-			GPacketHandler[PKT_S_CURRENT_PLAYER_INFO] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_CURRENT_PLAYER_INFO > (Handle_S_CURRENT_PLAYER_INFO, session, buffer, len); };
 			GPacketHandler[PKT_S_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_CHAT > (Handle_S_CHAT, session, buffer, len); };
+			GPacketHandler[PKT_S_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_SPAWN > (Handle_S_SPAWN, session, buffer, len); };
 			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
 		}
 
@@ -54,8 +54,8 @@ namespace FrokEngine
 		static SendBufferRef MakeSendBuffer(Protocol::C_LOGIN&pkt) { return MakeSendBuffer(pkt, PKT_C_LOGIN); }
 		static SendBufferRef MakeSendBuffer(Protocol::C_SIGNUP&pkt) { return MakeSendBuffer(pkt, PKT_C_SIGNUP); }
 		static SendBufferRef MakeSendBuffer(Protocol::C_ENTER_GAME&pkt) { return MakeSendBuffer(pkt, PKT_C_ENTER_GAME); }
-		static SendBufferRef MakeSendBuffer(Protocol::C_CURRENT_PLAYER_INFO&pkt) { return MakeSendBuffer(pkt, PKT_C_CURRENT_PLAYER_INFO); }
 		static SendBufferRef MakeSendBuffer(Protocol::C_CHAT&pkt) { return MakeSendBuffer(pkt, PKT_C_CHAT); }
+		static SendBufferRef MakeSendBuffer(Protocol::C_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_C_SPAWN); }
 		static SendBufferRef MakeSendBuffer(Protocol::C_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
 
 	private:
