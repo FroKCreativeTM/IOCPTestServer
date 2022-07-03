@@ -1767,9 +1767,10 @@ class C_MOVE final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPosInfoFieldNumber = 1,
+    kPosInfoFieldNumber = 2,
+    kPlayerIdFieldNumber = 1,
   };
-  // .Protocol.PosInfo posInfo = 1;
+  // .Protocol.PosInfo posInfo = 2;
   bool has_posinfo() const;
   private:
   bool _internal_has_posinfo() const;
@@ -1787,6 +1788,15 @@ class C_MOVE final :
       ::Protocol::PosInfo* posinfo);
   ::Protocol::PosInfo* unsafe_arena_release_posinfo();
 
+  // uint64 playerId = 1;
+  void clear_playerid();
+  uint64_t playerid() const;
+  void set_playerid(uint64_t value);
+  private:
+  uint64_t _internal_playerid() const;
+  void _internal_set_playerid(uint64_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_MOVE)
  private:
   class _Internal;
@@ -1795,6 +1805,7 @@ class C_MOVE final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::Protocol::PosInfo* posinfo_;
+  uint64_t playerid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -2561,7 +2572,27 @@ S_SPAWN::objects() const {
 
 // C_MOVE
 
-// .Protocol.PosInfo posInfo = 1;
+// uint64 playerId = 1;
+inline void C_MOVE::clear_playerid() {
+  playerid_ = uint64_t{0u};
+}
+inline uint64_t C_MOVE::_internal_playerid() const {
+  return playerid_;
+}
+inline uint64_t C_MOVE::playerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_MOVE.playerId)
+  return _internal_playerid();
+}
+inline void C_MOVE::_internal_set_playerid(uint64_t value) {
+  
+  playerid_ = value;
+}
+inline void C_MOVE::set_playerid(uint64_t value) {
+  _internal_set_playerid(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_MOVE.playerId)
+}
+
+// .Protocol.PosInfo posInfo = 2;
 inline bool C_MOVE::_internal_has_posinfo() const {
   return this != internal_default_instance() && posinfo_ != nullptr;
 }

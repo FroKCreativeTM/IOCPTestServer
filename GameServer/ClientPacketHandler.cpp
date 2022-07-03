@@ -86,6 +86,8 @@ namespace FrokEngine
 		// 게임 세션을 가져온다.
 		GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
 
+		static Atomic<int> idGenerator = 0;
+
 		uint64 index = pkt.playerindex();
 		// TODO : Validation
 
@@ -95,8 +97,9 @@ namespace FrokEngine
 		GRoom->DoAsync(&GameRoom::Enter, gameSession->_currentPlayer);
 
 		Protocol::S_ENTER_GAME enterGamePkt;
-
 		
+		auto objectInfo = enterGamePkt.mutable_player();
+		objectInfo->set_objectid(++idGenerator);
 
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(enterGamePkt);
 		gameSession->_currentPlayer->ownerSession->Send(sendBuffer);
@@ -124,6 +127,7 @@ namespace FrokEngine
 
 	bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt)
 	{
+		cout << "ID : " << pkt.playerid() << endl;
 		cout << "Position X : " << pkt.posinfo().posx()
 			<< " Y : " << pkt.posinfo().posy()
 			<< " Z : " << pkt.posinfo().posz() << endl;
