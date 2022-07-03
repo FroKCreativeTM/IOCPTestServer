@@ -33,13 +33,17 @@ message S_SIGNUP
 // Entergame부터 구현
 message C_ENTER_GAME
 {
-	Player		player = 1;
+	// Player		player = 1;
+	uint64 playerIndex = 1;
 }
 
 // 
 message S_ENTER_GAME
 {
-	bool success = 1;
+	ObjectInfo player = 1;
+	// TODO : 플레이어 정보를 DB에서 받아서 이를 보내는 식으로 처리
+	// 사유 : 플레이어의 정보는 다양할 수 있기 때문이다.
+	// Player		player = 1;
 }
 
 // 서버와 싱크를 맞추기 위해서 실시간으로 보내는 데이터

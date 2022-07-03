@@ -18,6 +18,7 @@ namespace FrokEngine
 		virtual void OnSend(int32 len) override;
 
 	public:
+		// 현재 접속한 플레이어 정보
 		Vector<PlayerRef> _players;
 
 		PlayerRef _currentPlayer;

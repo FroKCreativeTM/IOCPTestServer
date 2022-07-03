@@ -18,7 +18,7 @@
 PROTOBUF_PRAGMA_INIT_SEG
 namespace Protocol {
 }  // namespace Protocol
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[2];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Enum_2eproto = nullptr;
 const uint32_t TableStruct_Enum_2eproto::offsets[1] = {};
 static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = nullptr;
@@ -28,14 +28,16 @@ const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\n\nEnum.proto\022\010Protocol*h\n\nPlayerType\022\024\n\020"
   "PLAYER_TYPE_NONE\020\000\022\026\n\022PLAYER_TYPE_KNIGHT"
   "\020\001\022\024\n\020PLAYER_TYPE_MAGE\020\002\022\026\n\022PLAYER_TYPE_"
-  "ARCHER\020\003*\206\001\n\016GameObjectType\022\031\n\025GAME_OBJE"
-  "CT_TYPE_NONE\020\000\022\032\n\026GAME_OBJECT_TYPE_PLAYE"
-  "\020\001\022\034\n\030GAME_OBJECT_TYPE_MONSTER\020\002\022\037\n\033GAME"
-  "_OBJECT_TYPE_PROJECTILE\020\003b\006proto3"
+  "ARCHER\020\003*\207\001\n\016GameObjectType\022\031\n\025GAME_OBJE"
+  "CT_TYPE_NONE\020\000\022\033\n\027GAME_OBJECT_TYPE_PLAYE"
+  "R\020\001\022\034\n\030GAME_OBJECT_TYPE_MONSTER\020\002\022\037\n\033GAM"
+  "E_OBJECT_TYPE_PROJECTILE\020\003*:\n\rCreatureSt"
+  "ate\022\010\n\004IDLE\020\000\022\n\n\006MOVING\020\001\022\t\n\005SKILL\020\002\022\010\n\004"
+  "DEAD\020\003b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Enum_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Enum_2eproto = {
-  false, false, 273, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
+  false, false, 334, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
   &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
   schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
   nullptr, file_level_enum_descriptors_Enum_2eproto, file_level_service_descriptors_Enum_2eproto,
@@ -68,6 +70,22 @@ const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GameObjectType_descriptor() {
   return file_level_enum_descriptors_Enum_2eproto[1];
 }
 bool GameObjectType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CreatureState_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[2];
+}
+bool CreatureState_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:

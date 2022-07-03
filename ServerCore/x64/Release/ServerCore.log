@@ -1,2 +1,52 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1098,5): warning MSB8027: Two or more files with the name of main.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are ..\Libraries\Include\jsoncpp\src\jsontestrunner\main.cpp, ..\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp.
-  ServerCore.vcxproj -> C:\Users\user\Desktop\UnrealProject\BattleRoyalServer\Libraries\Libs\ServerCore\Release\ServerCore.lib
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1098,5): warning MSB8027: 이름이 main.cpp인 둘 이상의 파일이 같은 위치에 출력을 생성합니다. 이로 인해 잘못된 빌드 결과가 나타날 수 있습니다.  관련된 파일은 ..\Libraries\Include\jsoncpp\src\jsontestrunner\main.cpp, ..\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp입니다.
+  pch.cpp
+  main.cpp
+  json_reader.cpp
+  json_value.cpp
+  json_writer.cpp
+  fuzz.cpp
+  jsontest.cpp
+  main.cpp
+C:\UnrealProject\IOCPTestServer\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(1548,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\UnrealProject\IOCPTestServer\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(2354,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\UnrealProject\IOCPTestServer\Libraries\Include\jsoncpp\src\test_lib_json\main.cpp(3135,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  Allocator.cpp
+  BufferReader.cpp
+  BufferWriter.cpp
+  ConsoleLog.cpp
+  CoreGlobal.cpp
+  CorePch.cpp
+  CoreTLS.cpp
+  DeadLockProfiler.cpp
+  GlobalQueue.cpp
+  IocpCore.cpp
+  IocpEvent.cpp
+  Job.cpp
+  JobTimer.cpp
+  LockQueue.cpp
+  JobQueue.cpp
+  Listener.cpp
+  Lock.cpp
+  Memory.cpp
+  MemoryPool.cpp
+  NetAddress.cpp
+  컴파일하고 있습니다...
+  RecvBuffer.cpp
+  RefCounting.cpp
+  SendBuffer.cpp
+  Service.cpp
+  Session.cpp
+  SHA256.cpp
+C:\UnrealProject\IOCPTestServer\ServerCore\SHA256.cpp(161,16): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\ServerCore\SHA256.cpp(162,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\ServerCore\SHA256.cpp(163,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\ServerCore\SHA256.cpp(164,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\ServerCore\SHA256.cpp(165,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\ServerCore\SHA256.cpp(166,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\ServerCore\SHA256.cpp(167,25): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  SocketUtils.cpp
+  ThreadManager.cpp
+  Timer.cpp
+C:\UnrealProject\IOCPTestServer\ServerCore\Timer.cpp(33,15): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+x64\Release\main.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
+  ServerCore.vcxproj -> C:\UnrealProject\IOCPTestServer\Libraries\Libs\ServerCore\Release\ServerCore.lib

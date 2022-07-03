@@ -879,25 +879,16 @@ class C_ENTER_GAME final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPlayerFieldNumber = 1,
+    kPlayerIndexFieldNumber = 1,
   };
-  // .Protocol.Player player = 1;
-  bool has_player() const;
+  // uint64 playerIndex = 1;
+  void clear_playerindex();
+  uint64_t playerindex() const;
+  void set_playerindex(uint64_t value);
   private:
-  bool _internal_has_player() const;
+  uint64_t _internal_playerindex() const;
+  void _internal_set_playerindex(uint64_t value);
   public:
-  void clear_player();
-  const ::Protocol::Player& player() const;
-  PROTOBUF_NODISCARD ::Protocol::Player* release_player();
-  ::Protocol::Player* mutable_player();
-  void set_allocated_player(::Protocol::Player* player);
-  private:
-  const ::Protocol::Player& _internal_player() const;
-  ::Protocol::Player* _internal_mutable_player();
-  public:
-  void unsafe_arena_set_allocated_player(
-      ::Protocol::Player* player);
-  ::Protocol::Player* unsafe_arena_release_player();
 
   // @@protoc_insertion_point(class_scope:Protocol.C_ENTER_GAME)
  private:
@@ -906,7 +897,7 @@ class C_ENTER_GAME final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::Protocol::Player* player_;
+  uint64_t playerindex_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -1034,16 +1025,25 @@ class S_ENTER_GAME final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSuccessFieldNumber = 1,
+    kPlayerFieldNumber = 1,
   };
-  // bool success = 1;
-  void clear_success();
-  bool success() const;
-  void set_success(bool value);
+  // .Protocol.ObjectInfo player = 1;
+  bool has_player() const;
   private:
-  bool _internal_success() const;
-  void _internal_set_success(bool value);
+  bool _internal_has_player() const;
   public:
+  void clear_player();
+  const ::Protocol::ObjectInfo& player() const;
+  PROTOBUF_NODISCARD ::Protocol::ObjectInfo* release_player();
+  ::Protocol::ObjectInfo* mutable_player();
+  void set_allocated_player(::Protocol::ObjectInfo* player);
+  private:
+  const ::Protocol::ObjectInfo& _internal_player() const;
+  ::Protocol::ObjectInfo* _internal_mutable_player();
+  public:
+  void unsafe_arena_set_allocated_player(
+      ::Protocol::ObjectInfo* player);
+  ::Protocol::ObjectInfo* unsafe_arena_release_player();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_ENTER_GAME)
  private:
@@ -1052,7 +1052,7 @@ class S_ENTER_GAME final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  bool success_;
+  ::Protocol::ObjectInfo* player_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -2308,24 +2308,48 @@ inline void S_SIGNUP::set_success(bool value) {
 
 // C_ENTER_GAME
 
-// .Protocol.Player player = 1;
-inline bool C_ENTER_GAME::_internal_has_player() const {
+// uint64 playerIndex = 1;
+inline void C_ENTER_GAME::clear_playerindex() {
+  playerindex_ = uint64_t{0u};
+}
+inline uint64_t C_ENTER_GAME::_internal_playerindex() const {
+  return playerindex_;
+}
+inline uint64_t C_ENTER_GAME::playerindex() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_ENTER_GAME.playerIndex)
+  return _internal_playerindex();
+}
+inline void C_ENTER_GAME::_internal_set_playerindex(uint64_t value) {
+  
+  playerindex_ = value;
+}
+inline void C_ENTER_GAME::set_playerindex(uint64_t value) {
+  _internal_set_playerindex(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_ENTER_GAME.playerIndex)
+}
+
+// -------------------------------------------------------------------
+
+// S_ENTER_GAME
+
+// .Protocol.ObjectInfo player = 1;
+inline bool S_ENTER_GAME::_internal_has_player() const {
   return this != internal_default_instance() && player_ != nullptr;
 }
-inline bool C_ENTER_GAME::has_player() const {
+inline bool S_ENTER_GAME::has_player() const {
   return _internal_has_player();
 }
-inline const ::Protocol::Player& C_ENTER_GAME::_internal_player() const {
-  const ::Protocol::Player* p = player_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::Player&>(
-      ::Protocol::_Player_default_instance_);
+inline const ::Protocol::ObjectInfo& S_ENTER_GAME::_internal_player() const {
+  const ::Protocol::ObjectInfo* p = player_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::ObjectInfo&>(
+      ::Protocol::_ObjectInfo_default_instance_);
 }
-inline const ::Protocol::Player& C_ENTER_GAME::player() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_ENTER_GAME.player)
+inline const ::Protocol::ObjectInfo& S_ENTER_GAME::player() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_ENTER_GAME.player)
   return _internal_player();
 }
-inline void C_ENTER_GAME::unsafe_arena_set_allocated_player(
-    ::Protocol::Player* player) {
+inline void S_ENTER_GAME::unsafe_arena_set_allocated_player(
+    ::Protocol::ObjectInfo* player) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(player_);
   }
@@ -2335,11 +2359,11 @@ inline void C_ENTER_GAME::unsafe_arena_set_allocated_player(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_ENTER_GAME.player)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_ENTER_GAME.player)
 }
-inline ::Protocol::Player* C_ENTER_GAME::release_player() {
+inline ::Protocol::ObjectInfo* S_ENTER_GAME::release_player() {
   
-  ::Protocol::Player* temp = player_;
+  ::Protocol::ObjectInfo* temp = player_;
   player_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -2352,27 +2376,27 @@ inline ::Protocol::Player* C_ENTER_GAME::release_player() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::Player* C_ENTER_GAME::unsafe_arena_release_player() {
-  // @@protoc_insertion_point(field_release:Protocol.C_ENTER_GAME.player)
+inline ::Protocol::ObjectInfo* S_ENTER_GAME::unsafe_arena_release_player() {
+  // @@protoc_insertion_point(field_release:Protocol.S_ENTER_GAME.player)
   
-  ::Protocol::Player* temp = player_;
+  ::Protocol::ObjectInfo* temp = player_;
   player_ = nullptr;
   return temp;
 }
-inline ::Protocol::Player* C_ENTER_GAME::_internal_mutable_player() {
+inline ::Protocol::ObjectInfo* S_ENTER_GAME::_internal_mutable_player() {
   
   if (player_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::Player>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::ObjectInfo>(GetArenaForAllocation());
     player_ = p;
   }
   return player_;
 }
-inline ::Protocol::Player* C_ENTER_GAME::mutable_player() {
-  ::Protocol::Player* _msg = _internal_mutable_player();
-  // @@protoc_insertion_point(field_mutable:Protocol.C_ENTER_GAME.player)
+inline ::Protocol::ObjectInfo* S_ENTER_GAME::mutable_player() {
+  ::Protocol::ObjectInfo* _msg = _internal_mutable_player();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_ENTER_GAME.player)
   return _msg;
 }
-inline void C_ENTER_GAME::set_allocated_player(::Protocol::Player* player) {
+inline void S_ENTER_GAME::set_allocated_player(::Protocol::ObjectInfo* player) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(player_);
@@ -2391,31 +2415,7 @@ inline void C_ENTER_GAME::set_allocated_player(::Protocol::Player* player) {
     
   }
   player_ = player;
-  // @@protoc_insertion_point(field_set_allocated:Protocol.C_ENTER_GAME.player)
-}
-
-// -------------------------------------------------------------------
-
-// S_ENTER_GAME
-
-// bool success = 1;
-inline void S_ENTER_GAME::clear_success() {
-  success_ = false;
-}
-inline bool S_ENTER_GAME::_internal_success() const {
-  return success_;
-}
-inline bool S_ENTER_GAME::success() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_ENTER_GAME.success)
-  return _internal_success();
-}
-inline void S_ENTER_GAME::_internal_set_success(bool value) {
-  
-  success_ = value;
-}
-inline void S_ENTER_GAME::set_success(bool value) {
-  _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_ENTER_GAME.success)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_ENTER_GAME.player)
 }
 
 // -------------------------------------------------------------------

@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "ClientPacketHandler.h"
-#include "GameSession.h"
 #include "Contents/Object/Player.h"
 #include "GameRoom.h"
+#include "GameSession.h"
 
 #include "Contents/Manager/LoginManager.h"
 
@@ -48,7 +48,7 @@ namespace FrokEngine
 
 			string name = "Player_Actor_" + to_string(++idGenerator);
 
-			player->set_name(u8"");
+			player->set_name(name);
 			// player->set_playertype(Protocol::PLAYER_TYPE_KNIGHT);
 
 			PlayerRef playerRef = MakeShared<Player>();
@@ -57,6 +57,7 @@ namespace FrokEngine
 			// playerRef->type = player->playertype();
 			playerRef->ownerSession = gameSession;
 
+			// 게임 세션에 플레이어를 등록한다.
 			gameSession->_players.push_back(playerRef);
 		}
 		else 
@@ -82,39 +83,23 @@ namespace FrokEngine
 
 	bool Handle_C_ENTER_GAME(PacketSessionRef& session, Protocol::C_ENTER_GAME& pkt)
 	{
-		//GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
+		// 게임 세션을 가져온다.
+		GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
 
-		//Protocol::S_LOGIN loginPkt;
-		//loginPkt.set_success(true);
+		uint64 index = pkt.playerindex();
+		// TODO : Validation
 
-		//static Atomic<uint64> idGenerator = 1;
+		gameSession->_currentPlayer = gameSession->_players[index]; // READ_ONLY?
+		gameSession->_room = GRoom;
 
-		//auto player = loginPkt.add_players();
-		//player->set_name(u8"DB에서긁어온이름1");
+		GRoom->DoAsync(&GameRoom::Enter, gameSession->_currentPlayer);
 
-		//PlayerRef playerRef = MakeShared<Player>();
-		//playerRef->playerId = idGenerator++;
-		//playerRef->name = player->name();
-		//// playerRef->type = player->ge();
-		//playerRef->SetOwnerSession(gameSession);
+		Protocol::S_ENTER_GAME enterGamePkt;
 
-		//gameSession->_players.push_back(playerRef);
+		
 
-		//auto sendBuffer = ClientPacketHandler::MakeSendBuffer(loginPkt);
-		//session->Send(sendBuffer);
-
-		cout << "[\tLOG\t]" << endl;
-		cout << "Position X : " << pkt.player().posinfo().posx()
-			<< " Y : " << pkt.player().posinfo().posy()
-			<< " Z : " << pkt.player().posinfo().posz() << endl;
-
-		cout << "Rotation Yaw : " << pkt.player().posinfo().yaw()
-			<< " Roll : " << pkt.player().posinfo().roll()
-			<< " Pitch : " << pkt.player().posinfo().pitch() << endl;
-
-		cout << "Velocity X : " << pkt.player().posinfo().velox()
-			<< " Y : " << pkt.player().posinfo().veloy()
-			<< " Z : " << pkt.player().posinfo().veloz() << endl << endl;
+		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(enterGamePkt);
+		gameSession->_currentPlayer->ownerSession->Send(sendBuffer);
 
 		return true;
 	}
@@ -149,6 +134,7 @@ namespace FrokEngine
 
 		return true;
 	}
+
 	bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt)
 	{
 		cout << "Position X : " << pkt.posinfo().posx()

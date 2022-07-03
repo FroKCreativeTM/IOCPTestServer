@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\UnrealProject\BattleRoyalServer\Binary\Release\DummyClient.exe</FullPath>
+      <FullPath>C:\UnrealProject\IOCPTestServer\Binary\Release\DummyClient.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

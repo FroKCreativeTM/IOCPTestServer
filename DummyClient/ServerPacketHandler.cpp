@@ -69,4 +69,8 @@ namespace FrokEngine
 		std::cout << pkt.msg() << endl;
 		return true;
 	}
+	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt)
+	{
+		return false;
+	}
 }
