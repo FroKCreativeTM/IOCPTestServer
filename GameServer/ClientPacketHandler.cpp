@@ -38,27 +38,48 @@ namespace FrokEngine
 		cout << "id : " << pkt.id() << endl;
 		cout << "password : " << password << endl;
 
+		cout << "로그인 성공" << endl;
+		loginPkt.set_success(1);
+
+		// 그 유저가 가진 캐릭터의 목록을 가져온다.
+		auto player = loginPkt.add_players();
+
+		string name = "Player_Actor_" + to_string(++idGenerator);
+
+		player->set_name(name);
+		// player->set_playertype(Protocol::PLAYER_TYPE_KNIGHT);
+
+		PlayerRef playerRef = MakeShared<Player>();
+		playerRef->playerId = idGenerator;
+		playerRef->name = player->name();
+		// playerRef->type = player->playertype();
+		playerRef->ownerSession = gameSession;
+
+		// 게임 세션에 플레이어를 등록한다.
+		gameSession->_players.push_back(playerRef);
+
+
 		if (LoginManager::GetInst()->Login(pkt.id(), password))
 		{
-			cout << "로그인 성공" << endl;
-			loginPkt.set_success(1);
-			
-			// 그 유저가 가진 캐릭터의 목록을 가져온다.
-			auto player = loginPkt.add_players();
+			//cout << "로그인 성공" << endl;
+			//loginPkt.set_success(1);
 
-			string name = "Player_Actor_" + to_string(++idGenerator);
+			//// 그 유저가 가진 캐릭터의 목록을 가져온다.
+			//auto player = loginPkt.add_players();
 
-			player->set_name(name);
-			// player->set_playertype(Protocol::PLAYER_TYPE_KNIGHT);
+			//string name = "Player_Actor_" + to_string(++idGenerator);
 
-			PlayerRef playerRef = MakeShared<Player>();
-			playerRef->playerId = idGenerator;
-			playerRef->name = player->name();
-			// playerRef->type = player->playertype();
-			playerRef->ownerSession = gameSession;
+			//player->set_name(name);
+			//// player->set_playertype(Protocol::PLAYER_TYPE_KNIGHT);
 
-			// 게임 세션에 플레이어를 등록한다.
-			gameSession->_players.push_back(playerRef);
+			//PlayerRef playerRef = MakeShared<Player>();
+			//playerRef->playerId = idGenerator;
+			//playerRef->name = player->name();
+			//// playerRef->type = player->playertype();
+			//playerRef->ownerSession = gameSession;
+
+			//// 게임 세션에 플레이어를 등록한다.
+			//gameSession->_players.push_back(playerRef);
 		}
 		else 
 		{

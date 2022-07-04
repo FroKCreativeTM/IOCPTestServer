@@ -293,7 +293,7 @@ namespace FrokEngine
 			break;
 		default:
 			// TODO : Log
-			cout << "Handle Error : " << errorCode << endl;
+			// cout << "Handle Error : " << errorCode << endl;
 			break;
 		}
 	}
