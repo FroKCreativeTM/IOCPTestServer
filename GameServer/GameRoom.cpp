@@ -3,12 +3,16 @@
 #include "Contents/Object/Player.h"
 #include "GameSession.h"
 
+#include "ClientPacketHandler.h"
+
 namespace FrokEngine
 {
 	shared_ptr<GameRoom> GRoom = make_shared<GameRoom>();
 
 	void GameRoom::Enter(PlayerRef player)
 	{
+		if (player == nullptr) return;
+
 		_players[player->playerId] = player;
 	}
 
@@ -21,7 +25,7 @@ namespace FrokEngine
 	{
 		for (auto& p : _players)
 		{
-			p.second->GetOwnerSession()->Send(sendBuffer);
+			p.second->ownerSession->Send(sendBuffer);
 		}
 	}
 }

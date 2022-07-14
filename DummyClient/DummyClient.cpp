@@ -17,11 +17,9 @@ public:
 
 	virtual void OnConnected() override
 	{
-		//Protocol::C_LOGIN pkt;
-		//pkt.set_id("cscculture");
-		//pkt.set_password("testpassword");
-		//auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
-		//Send(sendBuffer);
+		Protocol::C_ENTER_GAME pkt;
+		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
+		Send(sendBuffer);
 	}
 
 	virtual void OnRecvPacket(BYTE* buffer, int32 len) override
@@ -68,22 +66,6 @@ int main()
 				}
 			});
 	}
-
-	//Protocol::C_LOGIN pkt;
-	//pkt.set_id("cscculture");
-	//pkt.set_password("testpassword");
-	//auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
-	//service->Broadcast(sendBuffer);
-
-	//Protocol::C_CHAT chatPkt;
-	//chatPkt.set_msg(u8"Hello World !");
-	//auto sendBuffer = ServerPacketHandler::MakeSendBuffer(chatPkt);
-	//
-	//while (true)
-	//{
-	//	service->Broadcast(sendBuffer);
-	//	this_thread::sleep_for(1s);
-	//}
 
 	GThreadManager->Join();
 }

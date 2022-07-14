@@ -46,13 +46,11 @@ int main()
 	// 2번째 인자 : 연결을 위한 DSN 
 	// ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().dbConnectionString.c_str()));
 
-	ClientPacketHandler::Init();
-
-	// TODO : 플레이어가 들어오면 만약 방이 있으면 거기로 안내
-	// 만약 그 방이 이미 플레이중이거나, 100명이 찼다면 새로운 방을 생성한다.
 	GRoom->DoTimer(1000, [] { cout << "Hello 1000" << endl; });
 	GRoom->DoTimer(2000, [] { cout << "Hello 2000" << endl; });
 	GRoom->DoTimer(3000, [] { cout << "Hello 3000" << endl; });
+
+	ClientPacketHandler::Init();
 
 	ServerServiceRef service = MakeShared<ServerService>(
 		NetAddress(L"127.0.0.1", 7777),
