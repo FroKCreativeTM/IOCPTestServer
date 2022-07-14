@@ -3,9 +3,6 @@
 
 namespace FrokEngine
 {
-	PacketHandlerFunc GPacketHandler[UINT16_MAX];
-
-	// Á÷Á¢ ÄÁÅÙÃ÷ ÀÛ¾÷ÀÚ
 
 	bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 	{
@@ -16,7 +13,6 @@ namespace FrokEngine
 
 	bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt)
 	{
-		// TODO
 		return true;
 	}
 
@@ -30,6 +26,12 @@ namespace FrokEngine
 	{
 		return false;
 	}
+	
+	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt)
+	{
+		return false;
+	}
+
 	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt)
 	{
 		return false;

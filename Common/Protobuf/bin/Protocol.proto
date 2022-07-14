@@ -4,7 +4,6 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
-// ·Î±×ÀÎÀº ³ªÁß¿¡ ±¸ÇöÇÏÀÚ
 //message C_LOGIN
 //{
 //	string id = 1;
@@ -14,31 +13,32 @@ import "Struct.proto";
 //message S_LOGIN
 //{
 //	bool success = 1;
-//	repeated Player players = 2; // ¾ÆÀÌµğ ¹ß±Ş Àü
+//	repeated Player players = 2; 
 //}
 
-// °¡ÀÔ
 // message C_SIGNUP
 // {
 // 	string id = 1;
 // 	string password = 2;
 // }
+
 // 
-// // °¡ÀÔÀÌ ¼º°øÀûÀÎ°¡?
-// // ¾Æ´Ï¸é ±×¿¡ ´ëÇÑ ÀÌÀ¯¸¦ ¼­¼úÇÑ´Ù.
 // message S_SIGNUP
 // {
 // 	bool success = 1;
 // }
 
-// EntergameºÎÅÍ ±¸Çö
+
 message C_ENTER_GAME
 {
+	// ì–¸ë¦¬ì–¼ì—ì„œ ìŠ¤í°ë  ë•Œ ê·¸ ìœ„ì¹˜ë¥¼ ë³´ë‚¸ë‹¤.
+	ObjectInfo player = 1;
 }
 
 // 
 message S_ENTER_GAME
 {
+	// validí•œì§€ ì²´í¬í•˜ê³  ì•„ë‹ˆë¼ë©´ validí•œ ìœ„ì¹˜ì—ì„œ ìŠ¤í°í•˜ë„ë¡ ë³€ê²½í•œë‹¤.
 	ObjectInfo player = 1;
 }
 
@@ -49,7 +49,6 @@ message C_CHAT
 
 message S_CHAT
 {
-	// ÇÃ·¹ÀÌ¾î ¾ÆÀÌµğ¸¦ ÅëÇØ¼­ ¾î¶² ÇÃ·¹ÀÌ¾î°¡ º¸³»´Â Áö ÆÄ¾ÇÇÑ´Ù.
 	uint64 playerId = 1;
 	string msg = 2;
 }
@@ -60,7 +59,22 @@ message C_SPAWN
 
 message S_SPAWN
 {
-	repeated ObjectInfo objects = 1;
+	uint64 playerId = 1;
+	ObjectInfo object = 2;
+}
+
+// í”Œë ˆì´ì–´ê°€ ì—°ê²°ì„ ëŠì—ˆì„ ê²½ìš°
+message C_LEAVE_GAME
+{
+	// í˜„ì¬ ìœ„ì¹˜ë¥¼ ë³´ë‚¸ë‹¤.
+	ObjectInfo leavePlayer = 1;
+}
+
+message S_DESPAWN
+{
+	// ë‚˜ê°„ ì‚¬ëŒì— ëŒ€í•œ ì •ë³´ë¥¼ ë‚˜ê°€ì§€ ì•Šì€ ì „ë¶€ì—ê²Œ ì „ì†¡í•œë‹¤.
+	uint64 playerId = 1;
+	ObjectInfo player = 2;
 }
 
 message C_MOVE
@@ -71,8 +85,6 @@ message C_MOVE
 
 message S_MOVE
 {
-	// ¾î¶² ÇÃ·¹ÀÌ¾î°¡ º¸³»´ÂÁö ÆÄ¾ÇÇÏ±â À§ÇÑ 
-	// ÇÃ·¹ÀÌ¾î ¾ÆÀÌµğ¸¦ ÅëÇØ¼­ ¾î¶² ÇÃ·¹ÀÌ¾î°¡ º¸³»´Â Áö ÆÄ¾ÇÇÑ´Ù.
 	uint64 playerId = 1;
 	PosInfo posInfo = 2;
 }

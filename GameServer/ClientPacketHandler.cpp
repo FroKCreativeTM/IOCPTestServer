@@ -12,7 +12,6 @@ namespace FrokEngine
 {
 	PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
-	// Á÷Á¢ ÄÁÅÙÃ÷ ÀÛ¾÷ÀÚ
 	bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 	{
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
@@ -24,9 +23,7 @@ namespace FrokEngine
 	//{
 	//	return true;
 	//}
-
-	// È¸¿ø °¡ÀÔ¿¡ ´ëÇÑ ¿äÃ»À» Ã³¸®ÇÑ´Ù.
-	// ¸¸¾à È¸¿ø°¡ÀÔÀÌ µÇÁö ¾Ê´Â »óÈ²ÀÌ¶ó¸é ÀÌ¿¡ ´ëÇÑ »çÀ¯¸¦ Àü´ÞÇÑ´Ù.
+	// 
 	//bool Handle_C_SIGNUP(PacketSessionRef& session, Protocol::C_SIGNUP& pkt)
 	//{
 	//	return false;
@@ -54,21 +51,6 @@ namespace FrokEngine
 
 		GRoom->DoAsync(&GameRoom::Enter, gameSession->_currentPlayer);
 
-		Protocol::S_ENTER_GAME enterGamePkt;
-		enterGamePkt.mutable_player()->set_objectid(static_cast<int32>(playerRef->playerId));
-		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(enterGamePkt);
-		session->Send(sendBuffer);
-
-		Protocol::S_SPAWN spawnGamePkt;
-		sendBuffer = ClientPacketHandler::MakeSendBuffer(spawnGamePkt);
-		for (auto otherPlayer : gameSession->_players)
-		{
-			if (otherPlayer->playerId != gameSession->_currentPlayer->playerId)
-			{
-				otherPlayer->ownerSession->Send(sendBuffer);
-			}
-		}
-
 		return true;
 	}
 
@@ -88,6 +70,20 @@ namespace FrokEngine
 	bool Handle_C_SPAWN(PacketSessionRef& session, Protocol::C_SPAWN& pkt)
 	{
 		return true;
+	}
+
+	bool Handle_C_LEAVE_GAME(PacketSessionRef& session, Protocol::C_LEAVE_GAME& pkt)
+	{
+		GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
+
+		cout << "Leave Game packet id : " << pkt.leaveplayer().objectid() << endl;
+		cout << "Leave Game player id : " << gameSession->_currentPlayer->playerId << endl;
+
+		// í˜„ìž¬ ê·¸ ì„¸ì…˜ê³¼ ì—°ê²°ì¤‘ì¸ í”Œë ˆì´ì–´ì— ëŒ€í•œ ì •ë³´ë¥¼ ì§€ìš´ë‹¤.
+		// ì´í›„ ì„œë²„ì™€ ì„¸ì…˜ìœ¼ë¡œ ì—°ê²°ì¤‘ì¸ ëª¨ë“  í”Œë ˆì´ì–´ì—ê²Œ DESPAWNì„ ë³´ë‚¸ë‹¤.
+		GRoom->DoAsync(&GameRoom::Leave, gameSession->_currentPlayer);
+
+		return false;
 	}
 
 	bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt)

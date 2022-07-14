@@ -1,6 +1,1 @@
-﻿  pch.cpp
-  DBBind.cpp
-  DBConnectionPool.cpp
-  DBConnection.cpp
-  코드를 생성하고 있습니다...
-  DBCore.vcxproj -> C:\UnrealProject\IOCPTestServer\Libraries\Libs\ServerCore\Debug\DBCore.lib
+﻿  DBCore.vcxproj -> C:\Users\user\Desktop\Game\IOCPTestServer\Libraries\Libs\ServerCore\Debug\DBCore.lib

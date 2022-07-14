@@ -9,7 +9,7 @@ char sendData[] = "Hello World";
 
 class ServerSession : public PacketSession
 {
-public:
+
 	~ServerSession()
 	{
 		cout << "~ServerSession" << endl;
@@ -39,6 +39,9 @@ public:
 	virtual void OnDisconnected() override
 	{
 		//cout << "Disconnected" << endl;
+		Protocol::C_LEAVE_GAME pkt;
+		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
+		Send(sendBuffer);
 	}
 };
 
