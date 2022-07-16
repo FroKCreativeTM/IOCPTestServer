@@ -11,10 +11,10 @@ enum PlayerType
 
 enum GameObjectType
 {
-	GAME_OBJECT_TYPE_NONE = 0;			// 아무 것도 아닌 경우
-	GAME_OBJECT_TYPE_PLAYER = 1;			// 플레이어
-	GAME_OBJECT_TYPE_MONSTER = 2;		// 몬스터
-	GAME_OBJECT_TYPE_PROJECTILE = 3;	// 화살같은 투사체
+	GAME_OBJECT_TYPE_NONE = 0;			
+	GAME_OBJECT_TYPE_PLAYER = 1;			
+	GAME_OBJECT_TYPE_MONSTER = 2;		
+	GAME_OBJECT_TYPE_PROJECTILE = 3;	
 }
 
 enum CreatureState {
