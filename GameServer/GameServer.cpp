@@ -52,6 +52,8 @@ int main()
 
 	ClientPacketHandler::Init();
 
+	// 로그인 서버 포트 번호 : 7776
+	// 게임 컨텐츠 서버 포트 번호 : 7777
 	ServerServiceRef service = MakeShared<ServerService>(
 		NetAddress(L"127.0.0.1", 7777),
 		MakeShared<IocpCore>(),

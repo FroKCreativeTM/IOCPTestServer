@@ -4,41 +4,40 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
-//message C_LOGIN
-//{
-//	string id = 1;
-//	string password = 2;
-//}
-//
-//message S_LOGIN
-//{
-//	bool success = 1;
-//	repeated Player players = 2; 
-//}
+message C_LOGIN
+{
+	string id = 1;
+	string password = 2;
+}
 
-// message C_SIGNUP
-// {
-// 	string id = 1;
-// 	string password = 2;
-// }
+message S_LOGIN
+{
+	bool success = 1;
+	repeated Player players = 2; 
+}
 
-// 
-// message S_SIGNUP
-// {
-// 	bool success = 1;
-// }
+message C_SIGNUP
+{
+	string id = 1;
+	string password = 2;
+}
 
+message S_SIGNUP
+{
+	bool success = 1;
+}
 
 message C_ENTER_GAME
 {
-	// ????? ??? ? ? ??? ???.
+	// My infomation
 	ObjectInfo player = 1;
 }
 
-// 
 message S_ENTER_GAME
 {
-	// valid?? ???? ???? valid? ???? ????? ????.
+	// already connected player
+	// TODO : use repeated keyword to read all connected players data
+	// and send to connect player immediatly
 	ObjectInfo player = 1;
 }
 
@@ -89,3 +88,14 @@ message S_MOVE
 	PosInfo posInfo = 2;
 }
 
+// message C_JUMP
+// {
+// 	// who is jumping
+// 	uint64 playerId = 1;
+// }
+// 
+// message S_JUMP
+// {
+// 	// send all player for know jumping player
+// 	uint64 playerId = 1;
+// }
