@@ -12,7 +12,6 @@
 
 #include <DBBind.h>
 #include <Timer.h>
-
 enum
 {
 	WORKER_TICK = 64
@@ -42,7 +41,8 @@ int main()
 	// DB부터 켜자
 	// 1번째 인자 : 스레드 수
 	// 2번째 인자 : 연결을 위한 DSN 
-	// ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().dbConnectionString.c_str()));
+	ASSERT_CRASH(GDBConnectionPool->Connect(1, 
+		ConfigManager::GetInst()->GetServerConfig().dbConnectionString.c_str()));
 
 	ClientPacketHandler::Init();
 

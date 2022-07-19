@@ -75,6 +75,9 @@
     <ClCompile Include="Contents\Manager\PlayerManager.cpp">
       <Filter>GameContents\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>GameContents\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSessionManager.h">
@@ -120,6 +123,9 @@
       <Filter>GameContents\Data</Filter>
     </ClInclude>
     <ClInclude Include="Contents\Manager\PlayerManager.h">
+      <Filter>GameContents\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
       <Filter>GameContents\Manager</Filter>
     </ClInclude>
   </ItemGroup>

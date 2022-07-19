@@ -173,6 +173,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="Contents\Data\MapData.cpp" />
     <ClCompile Include="Contents\Manager\LoginManager.cpp" />
     <ClCompile Include="Contents\Manager\PlayerManager.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="UsageManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="Contents\Data\MapData.h" />
     <ClInclude Include="Contents\Manager\LoginManager.h" />
     <ClInclude Include="Contents\Manager\PlayerManager.h" />
