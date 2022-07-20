@@ -1,1 +1,6 @@
-﻿  DBCore.vcxproj -> C:\UnrealProject\IOCPTestServer\Libraries\Libs\ServerCore\Debug\DBCore.lib
+﻿  pch.cpp
+  DBBind.cpp
+  DBConnection.cpp
+  DBConnectionPool.cpp
+  Generating Code...
+  DBCore.vcxproj -> C:\Users\user\Desktop\Game\IOCPTestServer\Libraries\Libs\ServerCore\Debug\DBCore.lib

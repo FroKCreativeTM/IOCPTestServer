@@ -6,8 +6,6 @@
 
 namespace FrokEngine
 {
-	shared_ptr<SHA256> SHA256::_inst = nullptr;
-
 	SHA256::SHA256() : m_blocklen(0), m_bitlen(0) 
 	{
 		m_state[0] = 0x6a09e667;
@@ -22,11 +20,6 @@ namespace FrokEngine
 
 	SHA256::~SHA256()
 	{
-		if (_inst)
-		{
-			_inst.reset();
-		}
-		_inst = nullptr;
 	}
 
 	void SHA256::update(const uint8_t* data, size_t length)

@@ -10,6 +10,8 @@
 #include "Protocol.pb.h"
 #include "Job.h"
 
+#include "ConfigManager.h"
+
 #include <DBBind.h>
 #include <Timer.h>
 enum
@@ -38,13 +40,17 @@ unique_ptr<DBConnectionPool> GDBConnectionPool = make_unique<DBConnectionPool>()
 
 int main()
 {
+	ClientPacketHandler::Init();
+	ConfigManager::GetInst()->LoadConfig();
+
+	// 데이터가 로딩될 때를 기다리기 위해서 잠시 스레드를 휴식한다.
+	this_thread::sleep_for(1s);
+
 	// DB부터 켜자
 	// 1번째 인자 : 스레드 수
 	// 2번째 인자 : 연결을 위한 DSN 
 	ASSERT_CRASH(GDBConnectionPool->Connect(1, 
 		ConfigManager::GetInst()->GetServerConfig().dbConnectionString.c_str()));
-
-	ClientPacketHandler::Init();
 
 	// 로그인 서버 포트 번호 : 7776
 	// 게임 컨텐츠 서버 포트 번호 : 7777

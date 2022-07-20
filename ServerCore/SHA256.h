@@ -16,15 +16,6 @@ namespace FrokEngine
 
 		static std::string toString(const uint8_t* digest);
 
-		static shared_ptr<SHA256> GetInst()
-		{
-			if (_inst == nullptr)
-			{
-				_inst = make_shared<SHA256>();
-			}
-			return _inst;
-		}
-
 	private:
 		uint8_t  m_data[64];
 		uint32_t m_blocklen;
@@ -58,7 +49,5 @@ namespace FrokEngine
 		void transform();
 		void pad();
 		void revert(uint8_t* hash);
-
-		static shared_ptr<SHA256> _inst;
 	};
 }

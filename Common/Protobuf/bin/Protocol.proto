@@ -13,7 +13,9 @@ message C_LOGIN
 message S_LOGIN
 {
 	bool success = 1;
-	repeated Player players = 2; 
+	string token = 2;
+	// 이 사람이 가지고 있는 캐릭터 리스트 어떻게 보내줄까
+	repeated ObjectInfo characterList = 3;
 }
 
 message C_SIGNUP
@@ -48,6 +50,8 @@ message C_CHAT
 
 message S_CHAT
 {
+	// TODO : 유효한 토큰인지 파악하고
+	// 맞으면 그 플레이어의 id
 	uint64 playerId = 1;
 	string msg = 2;
 }
