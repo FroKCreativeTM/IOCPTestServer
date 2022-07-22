@@ -5,7 +5,7 @@ const wss = new WebSocketServer({ port: 7776 }); //로그인 서버 포트 번�
 
 // set up event handlers and do other things upon a client connecting to the server
 wss.on('connection', (ws) => {
-    // create an id to track the client
+    // TODO : UUID 생성을 로그인에서 해준다.
     const id = randomUUID();
     clients.set(ws, id);
     console.log(`new connection assigned id: ${id}`);
