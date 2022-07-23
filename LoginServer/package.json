@@ -1,6 +1,20 @@
 {
   "type": "module",
   "dependencies": {
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.21.3",
+    "sequelize-cli": "^6.4.1",
     "ws": "^8.2.3"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "loginserver",
+  "description": "This sample is meant for testing out the capabilities of Unreal Engine's WebSocket client interface locally, but can be sued with non-UE clients too. All the server does is assign unique IDs to client connections, broadcast messages received from a client to all the connected clients, and tell clients how many connected clients there are every 15 seconds.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
