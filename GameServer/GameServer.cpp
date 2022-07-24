@@ -37,7 +37,9 @@ void DoWorkerJob(ServerServiceRef& service)
 	}
 }
 
+// 컨텐츠를 위한 DB와 AccountServer(NodeJS)와 토큰을 주고 받을 DB풀
 unique_ptr<DBConnectionPool> GDBConnectionPool = make_unique<DBConnectionPool>();
+unique_ptr<DBConnectionPool> GSharedDBConnectionPool = make_unique<DBConnectionPool>();
 
 int main()
 {
@@ -45,6 +47,7 @@ int main()
 	// 1번째 인자 : 스레드 수
 	// 2번째 인자 : 연결을 위한 DSN 
 	// ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().dbConnectionString.c_str()));
+	// TODO : SharedDB를 관리하기 위한 풀도!
 
 	GRoom->DoTimer(1000, [] { cout << "Hello 1000" << endl; });
 	GRoom->DoTimer(2000, [] { cout << "Hello 2000" << endl; });
