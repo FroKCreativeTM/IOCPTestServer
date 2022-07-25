@@ -21,9 +21,6 @@ sequelize.sync({ force: false })
 
 // set up event handlers and do other things upon a client connecting to the server
 wss.on('connection', async (ws) => {
-    let serverInfos = await ServerInfo.findAll();
-    console.log(serferInfos);
-
     ws.on('message', async (data) => {
         const json = JSON.parse(data);
         console.log(json);
@@ -81,7 +78,8 @@ wss.on('connection', async (ws) => {
                         const id = randomUUID();
                         clients.set(ws, id);
 
-    
+                        let serverInfos = await ServerInfo.findAll();
+                        console.log(serverInfos);
                         // uuid를 전달한다.
                         // 그리고 현재 serverinfo들을 같이 보내준다.
                         ws.send(JSON.stringify({ jsontype : "Login", success : true, UUID : id, serverInfo : serverInfos }));

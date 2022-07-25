@@ -209,7 +209,6 @@ class PosInfo final :
     kVeloXFieldNumber = 7,
     kVeloYFieldNumber = 8,
     kVeloZFieldNumber = 9,
-    kStateFieldNumber = 10,
   };
   // float posX = 1;
   void clear_posx();
@@ -292,15 +291,6 @@ class PosInfo final :
   void _internal_set_veloz(float value);
   public:
 
-  // .Protocol.CreatureState state = 10;
-  void clear_state();
-  ::Protocol::CreatureState state() const;
-  void set_state(::Protocol::CreatureState value);
-  private:
-  ::Protocol::CreatureState _internal_state() const;
-  void _internal_set_state(::Protocol::CreatureState value);
-  public:
-
   // @@protoc_insertion_point(class_scope:Protocol.PosInfo)
  private:
   class _Internal;
@@ -317,7 +307,6 @@ class PosInfo final :
   float velox_;
   float veloy_;
   float veloz_;
-  int state_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
 };
@@ -445,79 +434,34 @@ class Player final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNameFieldNumber = 2,
-    kPosInfoFieldNumber = 6,
-    kIdFieldNumber = 1,
-    kHealthFieldNumber = 4,
-    kIsAliveFieldNumber = 3,
-    kIsAttackFieldNumber = 5,
+    kObjectInfoFieldNumber = 1,
+    kStateFieldNumber = 2,
   };
-  // string name = 2;
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  PROTOBUF_NODISCARD std::string* release_name();
-  void set_allocated_name(std::string* name);
+  // .Protocol.ObjectInfo objectInfo = 1;
+  bool has_objectinfo() const;
   private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
+  bool _internal_has_objectinfo() const;
   public:
+  void clear_objectinfo();
+  const ::Protocol::ObjectInfo& objectinfo() const;
+  PROTOBUF_NODISCARD ::Protocol::ObjectInfo* release_objectinfo();
+  ::Protocol::ObjectInfo* mutable_objectinfo();
+  void set_allocated_objectinfo(::Protocol::ObjectInfo* objectinfo);
+  private:
+  const ::Protocol::ObjectInfo& _internal_objectinfo() const;
+  ::Protocol::ObjectInfo* _internal_mutable_objectinfo();
+  public:
+  void unsafe_arena_set_allocated_objectinfo(
+      ::Protocol::ObjectInfo* objectinfo);
+  ::Protocol::ObjectInfo* unsafe_arena_release_objectinfo();
 
-  // .Protocol.PosInfo posInfo = 6;
-  bool has_posinfo() const;
+  // .Protocol.CreatureState state = 2;
+  void clear_state();
+  ::Protocol::CreatureState state() const;
+  void set_state(::Protocol::CreatureState value);
   private:
-  bool _internal_has_posinfo() const;
-  public:
-  void clear_posinfo();
-  const ::Protocol::PosInfo& posinfo() const;
-  PROTOBUF_NODISCARD ::Protocol::PosInfo* release_posinfo();
-  ::Protocol::PosInfo* mutable_posinfo();
-  void set_allocated_posinfo(::Protocol::PosInfo* posinfo);
-  private:
-  const ::Protocol::PosInfo& _internal_posinfo() const;
-  ::Protocol::PosInfo* _internal_mutable_posinfo();
-  public:
-  void unsafe_arena_set_allocated_posinfo(
-      ::Protocol::PosInfo* posinfo);
-  ::Protocol::PosInfo* unsafe_arena_release_posinfo();
-
-  // uint64 id = 1;
-  void clear_id();
-  uint64_t id() const;
-  void set_id(uint64_t value);
-  private:
-  uint64_t _internal_id() const;
-  void _internal_set_id(uint64_t value);
-  public:
-
-  // int32 health = 4;
-  void clear_health();
-  int32_t health() const;
-  void set_health(int32_t value);
-  private:
-  int32_t _internal_health() const;
-  void _internal_set_health(int32_t value);
-  public:
-
-  // bool isAlive = 3;
-  void clear_isalive();
-  bool isalive() const;
-  void set_isalive(bool value);
-  private:
-  bool _internal_isalive() const;
-  void _internal_set_isalive(bool value);
-  public:
-
-  // bool isAttack = 5;
-  void clear_isattack();
-  bool isattack() const;
-  void set_isattack(bool value);
-  private:
-  bool _internal_isattack() const;
-  void _internal_set_isattack(bool value);
+  ::Protocol::CreatureState _internal_state() const;
+  void _internal_set_state(::Protocol::CreatureState value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.Player)
@@ -527,12 +471,8 @@ class Player final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  ::Protocol::PosInfo* posinfo_;
-  uint64_t id_;
-  int32_t health_;
-  bool isalive_;
-  bool isattack_;
+  ::Protocol::ObjectInfo* objectinfo_;
+  int state_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
 };
@@ -662,10 +602,13 @@ class StatInfo final :
   enum : int {
     kLevelFieldNumber = 1,
     kHpFieldNumber = 2,
-    kMaxHpFieldNumber = 3,
-    kAttackFieldNumber = 4,
-    kSpeedFieldNumber = 5,
-    kTotalExpFieldNumber = 6,
+    kMpFieldNumber = 3,
+    kMaxHpFieldNumber = 4,
+    kMaxMpFieldNumber = 5,
+    kAttackFieldNumber = 6,
+    kSpeedFieldNumber = 7,
+    kExpFieldNumber = 8,
+    kTotalExpFieldNumber = 9,
   };
   // int32 level = 1;
   void clear_level();
@@ -685,7 +628,16 @@ class StatInfo final :
   void _internal_set_hp(int32_t value);
   public:
 
-  // int32 maxHp = 3;
+  // int32 mp = 3;
+  void clear_mp();
+  int32_t mp() const;
+  void set_mp(int32_t value);
+  private:
+  int32_t _internal_mp() const;
+  void _internal_set_mp(int32_t value);
+  public:
+
+  // int32 maxHp = 4;
   void clear_maxhp();
   int32_t maxhp() const;
   void set_maxhp(int32_t value);
@@ -694,7 +646,16 @@ class StatInfo final :
   void _internal_set_maxhp(int32_t value);
   public:
 
-  // int32 attack = 4;
+  // int32 maxMp = 5;
+  void clear_maxmp();
+  int32_t maxmp() const;
+  void set_maxmp(int32_t value);
+  private:
+  int32_t _internal_maxmp() const;
+  void _internal_set_maxmp(int32_t value);
+  public:
+
+  // int32 attack = 6;
   void clear_attack();
   int32_t attack() const;
   void set_attack(int32_t value);
@@ -703,7 +664,7 @@ class StatInfo final :
   void _internal_set_attack(int32_t value);
   public:
 
-  // float speed = 5;
+  // float speed = 7;
   void clear_speed();
   float speed() const;
   void set_speed(float value);
@@ -712,7 +673,16 @@ class StatInfo final :
   void _internal_set_speed(float value);
   public:
 
-  // int32 totalExp = 6;
+  // int32 exp = 8;
+  void clear_exp();
+  int32_t exp() const;
+  void set_exp(int32_t value);
+  private:
+  int32_t _internal_exp() const;
+  void _internal_set_exp(int32_t value);
+  public:
+
+  // int32 totalExp = 9;
   void clear_totalexp();
   int32_t totalexp() const;
   void set_totalexp(int32_t value);
@@ -730,9 +700,12 @@ class StatInfo final :
   typedef void DestructorSkippable_;
   int32_t level_;
   int32_t hp_;
+  int32_t mp_;
   int32_t maxhp_;
+  int32_t maxmp_;
   int32_t attack_;
   float speed_;
+  int32_t exp_;
   int32_t totalexp_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
@@ -1130,200 +1103,49 @@ inline void PosInfo::set_veloz(float value) {
   // @@protoc_insertion_point(field_set:Protocol.PosInfo.veloZ)
 }
 
-// .Protocol.CreatureState state = 10;
-inline void PosInfo::clear_state() {
-  state_ = 0;
-}
-inline ::Protocol::CreatureState PosInfo::_internal_state() const {
-  return static_cast< ::Protocol::CreatureState >(state_);
-}
-inline ::Protocol::CreatureState PosInfo::state() const {
-  // @@protoc_insertion_point(field_get:Protocol.PosInfo.state)
-  return _internal_state();
-}
-inline void PosInfo::_internal_set_state(::Protocol::CreatureState value) {
-  
-  state_ = value;
-}
-inline void PosInfo::set_state(::Protocol::CreatureState value) {
-  _internal_set_state(value);
-  // @@protoc_insertion_point(field_set:Protocol.PosInfo.state)
-}
-
 // -------------------------------------------------------------------
 
 // Player
 
-// uint64 id = 1;
-inline void Player::clear_id() {
-  id_ = uint64_t{0u};
+// .Protocol.ObjectInfo objectInfo = 1;
+inline bool Player::_internal_has_objectinfo() const {
+  return this != internal_default_instance() && objectinfo_ != nullptr;
 }
-inline uint64_t Player::_internal_id() const {
-  return id_;
+inline bool Player::has_objectinfo() const {
+  return _internal_has_objectinfo();
 }
-inline uint64_t Player::id() const {
-  // @@protoc_insertion_point(field_get:Protocol.Player.id)
-  return _internal_id();
-}
-inline void Player::_internal_set_id(uint64_t value) {
-  
-  id_ = value;
-}
-inline void Player::set_id(uint64_t value) {
-  _internal_set_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.Player.id)
-}
-
-// string name = 2;
-inline void Player::clear_name() {
-  name_.ClearToEmpty();
-}
-inline const std::string& Player::name() const {
-  // @@protoc_insertion_point(field_get:Protocol.Player.name)
-  return _internal_name();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void Player::set_name(ArgT0&& arg0, ArgT... args) {
- 
- name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.Player.name)
-}
-inline std::string* Player::mutable_name() {
-  std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:Protocol.Player.name)
-  return _s;
-}
-inline const std::string& Player::_internal_name() const {
-  return name_.Get();
-}
-inline void Player::_internal_set_name(const std::string& value) {
-  
-  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
-}
-inline std::string* Player::_internal_mutable_name() {
-  
-  return name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
-}
-inline std::string* Player::release_name() {
-  // @@protoc_insertion_point(field_release:Protocol.Player.name)
-  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
-}
-inline void Player::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
-    
-  } else {
-    
+inline void Player::clear_objectinfo() {
+  if (GetArenaForAllocation() == nullptr && objectinfo_ != nullptr) {
+    delete objectinfo_;
   }
-  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (name_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
-    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.Player.name)
+  objectinfo_ = nullptr;
 }
-
-// bool isAlive = 3;
-inline void Player::clear_isalive() {
-  isalive_ = false;
+inline const ::Protocol::ObjectInfo& Player::_internal_objectinfo() const {
+  const ::Protocol::ObjectInfo* p = objectinfo_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::ObjectInfo&>(
+      ::Protocol::_ObjectInfo_default_instance_);
 }
-inline bool Player::_internal_isalive() const {
-  return isalive_;
+inline const ::Protocol::ObjectInfo& Player::objectinfo() const {
+  // @@protoc_insertion_point(field_get:Protocol.Player.objectInfo)
+  return _internal_objectinfo();
 }
-inline bool Player::isalive() const {
-  // @@protoc_insertion_point(field_get:Protocol.Player.isAlive)
-  return _internal_isalive();
-}
-inline void Player::_internal_set_isalive(bool value) {
-  
-  isalive_ = value;
-}
-inline void Player::set_isalive(bool value) {
-  _internal_set_isalive(value);
-  // @@protoc_insertion_point(field_set:Protocol.Player.isAlive)
-}
-
-// int32 health = 4;
-inline void Player::clear_health() {
-  health_ = 0;
-}
-inline int32_t Player::_internal_health() const {
-  return health_;
-}
-inline int32_t Player::health() const {
-  // @@protoc_insertion_point(field_get:Protocol.Player.health)
-  return _internal_health();
-}
-inline void Player::_internal_set_health(int32_t value) {
-  
-  health_ = value;
-}
-inline void Player::set_health(int32_t value) {
-  _internal_set_health(value);
-  // @@protoc_insertion_point(field_set:Protocol.Player.health)
-}
-
-// bool isAttack = 5;
-inline void Player::clear_isattack() {
-  isattack_ = false;
-}
-inline bool Player::_internal_isattack() const {
-  return isattack_;
-}
-inline bool Player::isattack() const {
-  // @@protoc_insertion_point(field_get:Protocol.Player.isAttack)
-  return _internal_isattack();
-}
-inline void Player::_internal_set_isattack(bool value) {
-  
-  isattack_ = value;
-}
-inline void Player::set_isattack(bool value) {
-  _internal_set_isattack(value);
-  // @@protoc_insertion_point(field_set:Protocol.Player.isAttack)
-}
-
-// .Protocol.PosInfo posInfo = 6;
-inline bool Player::_internal_has_posinfo() const {
-  return this != internal_default_instance() && posinfo_ != nullptr;
-}
-inline bool Player::has_posinfo() const {
-  return _internal_has_posinfo();
-}
-inline void Player::clear_posinfo() {
-  if (GetArenaForAllocation() == nullptr && posinfo_ != nullptr) {
-    delete posinfo_;
-  }
-  posinfo_ = nullptr;
-}
-inline const ::Protocol::PosInfo& Player::_internal_posinfo() const {
-  const ::Protocol::PosInfo* p = posinfo_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::PosInfo&>(
-      ::Protocol::_PosInfo_default_instance_);
-}
-inline const ::Protocol::PosInfo& Player::posinfo() const {
-  // @@protoc_insertion_point(field_get:Protocol.Player.posInfo)
-  return _internal_posinfo();
-}
-inline void Player::unsafe_arena_set_allocated_posinfo(
-    ::Protocol::PosInfo* posinfo) {
+inline void Player::unsafe_arena_set_allocated_objectinfo(
+    ::Protocol::ObjectInfo* objectinfo) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(posinfo_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(objectinfo_);
   }
-  posinfo_ = posinfo;
-  if (posinfo) {
+  objectinfo_ = objectinfo;
+  if (objectinfo) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.Player.posInfo)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.Player.objectInfo)
 }
-inline ::Protocol::PosInfo* Player::release_posinfo() {
+inline ::Protocol::ObjectInfo* Player::release_objectinfo() {
   
-  ::Protocol::PosInfo* temp = posinfo_;
-  posinfo_ = nullptr;
+  ::Protocol::ObjectInfo* temp = objectinfo_;
+  objectinfo_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -1335,44 +1157,64 @@ inline ::Protocol::PosInfo* Player::release_posinfo() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::PosInfo* Player::unsafe_arena_release_posinfo() {
-  // @@protoc_insertion_point(field_release:Protocol.Player.posInfo)
+inline ::Protocol::ObjectInfo* Player::unsafe_arena_release_objectinfo() {
+  // @@protoc_insertion_point(field_release:Protocol.Player.objectInfo)
   
-  ::Protocol::PosInfo* temp = posinfo_;
-  posinfo_ = nullptr;
+  ::Protocol::ObjectInfo* temp = objectinfo_;
+  objectinfo_ = nullptr;
   return temp;
 }
-inline ::Protocol::PosInfo* Player::_internal_mutable_posinfo() {
+inline ::Protocol::ObjectInfo* Player::_internal_mutable_objectinfo() {
   
-  if (posinfo_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::PosInfo>(GetArenaForAllocation());
-    posinfo_ = p;
+  if (objectinfo_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Protocol::ObjectInfo>(GetArenaForAllocation());
+    objectinfo_ = p;
   }
-  return posinfo_;
+  return objectinfo_;
 }
-inline ::Protocol::PosInfo* Player::mutable_posinfo() {
-  ::Protocol::PosInfo* _msg = _internal_mutable_posinfo();
-  // @@protoc_insertion_point(field_mutable:Protocol.Player.posInfo)
+inline ::Protocol::ObjectInfo* Player::mutable_objectinfo() {
+  ::Protocol::ObjectInfo* _msg = _internal_mutable_objectinfo();
+  // @@protoc_insertion_point(field_mutable:Protocol.Player.objectInfo)
   return _msg;
 }
-inline void Player::set_allocated_posinfo(::Protocol::PosInfo* posinfo) {
+inline void Player::set_allocated_objectinfo(::Protocol::ObjectInfo* objectinfo) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete posinfo_;
+    delete objectinfo_;
   }
-  if (posinfo) {
+  if (objectinfo) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::Protocol::PosInfo>::GetOwningArena(posinfo);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::Protocol::ObjectInfo>::GetOwningArena(objectinfo);
     if (message_arena != submessage_arena) {
-      posinfo = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, posinfo, submessage_arena);
+      objectinfo = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, objectinfo, submessage_arena);
     }
     
   } else {
     
   }
-  posinfo_ = posinfo;
-  // @@protoc_insertion_point(field_set_allocated:Protocol.Player.posInfo)
+  objectinfo_ = objectinfo;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.Player.objectInfo)
+}
+
+// .Protocol.CreatureState state = 2;
+inline void Player::clear_state() {
+  state_ = 0;
+}
+inline ::Protocol::CreatureState Player::_internal_state() const {
+  return static_cast< ::Protocol::CreatureState >(state_);
+}
+inline ::Protocol::CreatureState Player::state() const {
+  // @@protoc_insertion_point(field_get:Protocol.Player.state)
+  return _internal_state();
+}
+inline void Player::_internal_set_state(::Protocol::CreatureState value) {
+  
+  state_ = value;
+}
+inline void Player::set_state(::Protocol::CreatureState value) {
+  _internal_set_state(value);
+  // @@protoc_insertion_point(field_set:Protocol.Player.state)
 }
 
 // -------------------------------------------------------------------
@@ -1419,7 +1261,27 @@ inline void StatInfo::set_hp(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.hp)
 }
 
-// int32 maxHp = 3;
+// int32 mp = 3;
+inline void StatInfo::clear_mp() {
+  mp_ = 0;
+}
+inline int32_t StatInfo::_internal_mp() const {
+  return mp_;
+}
+inline int32_t StatInfo::mp() const {
+  // @@protoc_insertion_point(field_get:Protocol.StatInfo.mp)
+  return _internal_mp();
+}
+inline void StatInfo::_internal_set_mp(int32_t value) {
+  
+  mp_ = value;
+}
+inline void StatInfo::set_mp(int32_t value) {
+  _internal_set_mp(value);
+  // @@protoc_insertion_point(field_set:Protocol.StatInfo.mp)
+}
+
+// int32 maxHp = 4;
 inline void StatInfo::clear_maxhp() {
   maxhp_ = 0;
 }
@@ -1439,7 +1301,27 @@ inline void StatInfo::set_maxhp(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.maxHp)
 }
 
-// int32 attack = 4;
+// int32 maxMp = 5;
+inline void StatInfo::clear_maxmp() {
+  maxmp_ = 0;
+}
+inline int32_t StatInfo::_internal_maxmp() const {
+  return maxmp_;
+}
+inline int32_t StatInfo::maxmp() const {
+  // @@protoc_insertion_point(field_get:Protocol.StatInfo.maxMp)
+  return _internal_maxmp();
+}
+inline void StatInfo::_internal_set_maxmp(int32_t value) {
+  
+  maxmp_ = value;
+}
+inline void StatInfo::set_maxmp(int32_t value) {
+  _internal_set_maxmp(value);
+  // @@protoc_insertion_point(field_set:Protocol.StatInfo.maxMp)
+}
+
+// int32 attack = 6;
 inline void StatInfo::clear_attack() {
   attack_ = 0;
 }
@@ -1459,7 +1341,7 @@ inline void StatInfo::set_attack(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.attack)
 }
 
-// float speed = 5;
+// float speed = 7;
 inline void StatInfo::clear_speed() {
   speed_ = 0;
 }
@@ -1479,7 +1361,27 @@ inline void StatInfo::set_speed(float value) {
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.speed)
 }
 
-// int32 totalExp = 6;
+// int32 exp = 8;
+inline void StatInfo::clear_exp() {
+  exp_ = 0;
+}
+inline int32_t StatInfo::_internal_exp() const {
+  return exp_;
+}
+inline int32_t StatInfo::exp() const {
+  // @@protoc_insertion_point(field_get:Protocol.StatInfo.exp)
+  return _internal_exp();
+}
+inline void StatInfo::_internal_set_exp(int32_t value) {
+  
+  exp_ = value;
+}
+inline void StatInfo::set_exp(int32_t value) {
+  _internal_set_exp(value);
+  // @@protoc_insertion_point(field_set:Protocol.StatInfo.exp)
+}
+
+// int32 totalExp = 9;
 inline void StatInfo::clear_totalexp() {
   totalexp_ = 0;
 }

@@ -8,20 +8,16 @@ namespace FrokEngine
 
 	enum : uint16
 	{
-		PKT_C_LOGIN = 0,
-		PKT_S_LOGIN = 1,
-		PKT_C_SIGNUP = 2,
-		PKT_S_SIGNUP = 3,
-		PKT_C_ENTER_GAME = 4,
-		PKT_S_ENTER_GAME = 5,
-		PKT_C_CHAT = 6,
-		PKT_S_CHAT = 7,
-		PKT_C_SPAWN = 8,
-		PKT_S_SPAWN = 9,
-		PKT_C_LEAVE_GAME = 10,
-		PKT_S_DESPAWN = 11,
-		PKT_C_MOVE = 12,
-		PKT_S_MOVE = 13,
+		PKT_C_ENTER_GAME = 0,
+		PKT_S_ENTER_GAME = 1,
+		PKT_C_CHAT = 2,
+		PKT_S_CHAT = 3,
+		PKT_C_SPAWN = 4,
+		PKT_S_SPAWN = 5,
+		PKT_C_LEAVE_GAME = 6,
+		PKT_S_DESPAWN = 7,
+		PKT_C_MOVE = 8,
+		PKT_S_MOVE = 9,
 	};
 
 	// Custom Handlers
@@ -39,8 +35,6 @@ namespace FrokEngine
 		{
 			for (int32 i = 0; i < UINT16_MAX; i++)
 				GPacketHandler[i] = Handle_INVALID;
-			GPacketHandler[PKT_C_LOGIN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_LOGIN > (Handle_C_LOGIN, session, buffer, len); };
-			GPacketHandler[PKT_C_SIGNUP] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_SIGNUP > (Handle_C_SIGNUP, session, buffer, len); };
 			GPacketHandler[PKT_C_ENTER_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_ENTER_GAME > (Handle_C_ENTER_GAME, session, buffer, len); };
 			GPacketHandler[PKT_C_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_CHAT > (Handle_C_CHAT, session, buffer, len); };
 			GPacketHandler[PKT_C_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_SPAWN > (Handle_C_SPAWN, session, buffer, len); };
@@ -53,8 +47,6 @@ namespace FrokEngine
 			PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 			return GPacketHandler[header->id](session, buffer, len);
 		}
-		static SendBufferRef MakeSendBuffer(Protocol::S_LOGIN&pkt) { return MakeSendBuffer(pkt, PKT_S_LOGIN); }
-		static SendBufferRef MakeSendBuffer(Protocol::S_SIGNUP&pkt) { return MakeSendBuffer(pkt, PKT_S_SIGNUP); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_ENTER_GAME&pkt) { return MakeSendBuffer(pkt, PKT_S_ENTER_GAME); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_CHAT&pkt) { return MakeSendBuffer(pkt, PKT_S_CHAT); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_SPAWN); }
