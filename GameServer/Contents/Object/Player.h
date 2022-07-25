@@ -5,9 +5,13 @@ namespace FrokEngine
 	class Player
 	{
 	public:
-		uint64					playerId = 0;
-		string					name;
-		Protocol::PosInfo		pos;
+		// id(토큰으로 대체 예정), character name
+		// posInfo, statInfo
+		Protocol::ObjectInfo		objectInfo;
+
+		// 애니메이션 상태(이거에 맞춰서 애니메이션을 실행한다.)
+		Protocol::CreatureState		creatureState;
+
 		GameSessionRef			ownerSession; // Cycle
 	};
 }

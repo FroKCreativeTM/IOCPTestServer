@@ -16,29 +16,28 @@ message PosInfo
 	float veloX = 7;
 	float veloY = 8;
 	float veloZ = 9;
-
-	CreatureState state = 10;
 }
 
 message Player
 {
-	uint64 id = 1;
-	string name = 2;
+	ObjectInfo objectInfo = 1;
+	CreatureState state = 2;
 
-	bool		isAlive = 3;
-	int32		health = 4;	
-	bool		isAttack = 5;
-
-	PosInfo posInfo = 6;
+	// bool		isAlive = 2;
+	// int32		health = 3;	
+	// bool		isAttack = 4;
 }
 
 message StatInfo {
   int32 level = 1;
   int32 hp = 2;
-  int32 maxHp = 3;
-  int32 attack = 4;
-  float speed = 5;
-  int32 totalExp = 6;
+  int32 mp = 3;
+  int32 maxHp = 4;
+  int32 maxMp = 5;
+  int32 attack = 6;
+  float speed = 7;
+  int32 exp = 8;
+  int32 totalExp = 9;
 }
 
 message ObjectInfo {

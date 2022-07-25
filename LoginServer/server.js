@@ -5,6 +5,8 @@ import bcrypt  from 'bcrypt';
 
 const sequelize = db.sequelize;
 const Account = db.Account;
+const ServerInfo = db.ServerInfo;
+const Token = db.Token;
 
 const clients = new Map(); // has to be a Map instead of {} due to non-string keys
 const wss = new WebSocketServer({ port: 7776 }); //로그인 서버 포트 번호는 7776입니다.
@@ -18,7 +20,10 @@ sequelize.sync({ force: false })
 });
 
 // set up event handlers and do other things upon a client connecting to the server
-wss.on('connection', (ws) => {
+wss.on('connection', async (ws) => {
+    let serverInfos = await ServerInfo.findAll();
+    console.log(serferInfos);
+
     ws.on('message', async (data) => {
         const json = JSON.parse(data);
         console.log(json);
@@ -75,11 +80,11 @@ wss.on('connection', (ws) => {
                         // 성공시 UUID를 발급해서 전달한다.
                         const id = randomUUID();
                         clients.set(ws, id);
+
     
                         // uuid를 전달한다.
-                        ws.send(JSON.stringify({ jsontype : "Login", success : true, UUID : id }));
-
-
+                        // 그리고 현재 serverinfo들을 같이 보내준다.
+                        ws.send(JSON.stringify({ jsontype : "Login", success : true, UUID : id, serverInfo : serverInfos }));
 
                         // 상식!
                         // AccountDB와 Token을 중간에 가로채면 어떻게 하지?

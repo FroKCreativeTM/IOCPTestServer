@@ -4,31 +4,6 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
-message C_LOGIN
-{
-	string id = 1;
-	string password = 2;
-}
-
-message S_LOGIN
-{
-	bool success = 1;
-	string token = 2;
-	// 이 사람이 가지고 있는 캐릭터 리스트 어떻게 보내줄까
-	repeated ObjectInfo characterList = 3;
-}
-
-message C_SIGNUP
-{
-	string id = 1;
-	string password = 2;
-}
-
-message S_SIGNUP
-{
-	bool success = 1;
-}
-
 message C_ENTER_GAME
 {
 	// My infomation

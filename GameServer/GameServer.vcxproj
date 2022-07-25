@@ -175,7 +175,6 @@
   <ItemGroup>
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="Contents\Data\MapData.cpp" />
-    <ClCompile Include="Contents\Manager\LoginManager.cpp" />
     <ClCompile Include="Contents\Manager\PlayerManager.cpp" />
     <ClCompile Include="Contents\Object\GameObject.cpp" />
     <ClCompile Include="Contents\Object\ObjectManager.cpp" />
@@ -208,7 +207,6 @@
   <ItemGroup>
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="Contents\Data\MapData.h" />
-    <ClInclude Include="Contents\Manager\LoginManager.h" />
     <ClInclude Include="Contents\Manager\PlayerManager.h" />
     <ClInclude Include="Contents\Object\GameObject.h" />
     <ClInclude Include="Contents\Object\ObjectManager.h" />

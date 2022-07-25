@@ -16,7 +16,6 @@ namespace FrokEngine
 		GameSessionRef			_ownerSession; // Cycle
 
 		Protocol::GameObjectType _objectType = Protocol::GameObjectType::GAME_OBJECT_TYPE_NONE;
-		// Protocol::PosInfo
 	};
 }
 

@@ -54,8 +54,6 @@ namespace FrokEngine
 			_config.dataPath = root["dataPath"].asString();
 			string tmp = root["DbConnectionString"].asString();
 			_config.DBConnectionString.assign(tmp.begin(), tmp.end());
-			string tmp = root["SharedDbConnectionString"].asString();
-			_config.sharedDBConnectionString.assign(tmp.begin(), tmp.end());
 
 			fin.close();
 		}

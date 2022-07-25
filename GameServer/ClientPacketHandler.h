@@ -26,8 +26,6 @@ namespace FrokEngine
 
 	// Custom Handlers
 	bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len);
-	bool Handle_C_LOGIN(PacketSessionRef& session, Protocol::C_LOGIN& pkt);
-	bool Handle_C_SIGNUP(PacketSessionRef& session, Protocol::C_SIGNUP& pkt);
 	bool Handle_C_ENTER_GAME(PacketSessionRef& session, Protocol::C_ENTER_GAME& pkt);
 	bool Handle_C_CHAT(PacketSessionRef& session, Protocol::C_CHAT& pkt);
 	bool Handle_C_SPAWN(PacketSessionRef& session, Protocol::C_SPAWN& pkt);
