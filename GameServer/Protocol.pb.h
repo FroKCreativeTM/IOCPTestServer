@@ -552,9 +552,11 @@ class C_CHAT final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMsgFieldNumber = 1,
+    kMsgFieldNumber = 2,
+    kTokenFieldNumber = 3,
+    kPlayerIdFieldNumber = 1,
   };
-  // string msg = 1;
+  // string msg = 2;
   void clear_msg();
   const std::string& msg() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -568,6 +570,29 @@ class C_CHAT final :
   std::string* _internal_mutable_msg();
   public:
 
+  // string token = 3;
+  void clear_token();
+  const std::string& token() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_token(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_token();
+  PROTOBUF_NODISCARD std::string* release_token();
+  void set_allocated_token(std::string* token);
+  private:
+  const std::string& _internal_token() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_token(const std::string& value);
+  std::string* _internal_mutable_token();
+  public:
+
+  // uint64 playerId = 1;
+  void clear_playerid();
+  uint64_t playerid() const;
+  void set_playerid(uint64_t value);
+  private:
+  uint64_t _internal_playerid() const;
+  void _internal_set_playerid(uint64_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_CHAT)
  private:
   class _Internal;
@@ -576,6 +601,8 @@ class C_CHAT final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr msg_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
+  uint64_t playerid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -1920,7 +1947,27 @@ inline void S_ENTER_GAME::set_allocated_player(::Protocol::ObjectInfo* player) {
 
 // C_CHAT
 
-// string msg = 1;
+// uint64 playerId = 1;
+inline void C_CHAT::clear_playerid() {
+  playerid_ = uint64_t{0u};
+}
+inline uint64_t C_CHAT::_internal_playerid() const {
+  return playerid_;
+}
+inline uint64_t C_CHAT::playerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.playerId)
+  return _internal_playerid();
+}
+inline void C_CHAT::_internal_set_playerid(uint64_t value) {
+  
+  playerid_ = value;
+}
+inline void C_CHAT::set_playerid(uint64_t value) {
+  _internal_set_playerid(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.playerId)
+}
+
+// string msg = 2;
 inline void C_CHAT::clear_msg() {
   msg_.ClearToEmpty();
 }
@@ -1969,6 +2016,57 @@ inline void C_CHAT::set_allocated_msg(std::string* msg) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_CHAT.msg)
+}
+
+// string token = 3;
+inline void C_CHAT::clear_token() {
+  token_.ClearToEmpty();
+}
+inline const std::string& C_CHAT::token() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_CHAT.token)
+  return _internal_token();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_CHAT::set_token(ArgT0&& arg0, ArgT... args) {
+ 
+ token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_CHAT.token)
+}
+inline std::string* C_CHAT::mutable_token() {
+  std::string* _s = _internal_mutable_token();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_CHAT.token)
+  return _s;
+}
+inline const std::string& C_CHAT::_internal_token() const {
+  return token_.Get();
+}
+inline void C_CHAT::_internal_set_token(const std::string& value) {
+  
+  token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+}
+inline std::string* C_CHAT::_internal_mutable_token() {
+  
+  return token_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+}
+inline std::string* C_CHAT::release_token() {
+  // @@protoc_insertion_point(field_release:Protocol.C_CHAT.token)
+  return token_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+}
+inline void C_CHAT::set_allocated_token(std::string* token) {
+  if (token != nullptr) {
+    
+  } else {
+    
+  }
+  token_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), token,
+      GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (token_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
+    token_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_CHAT.token)
 }
 
 // -------------------------------------------------------------------
