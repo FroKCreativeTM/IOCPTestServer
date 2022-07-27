@@ -6,11 +6,11 @@ class Token extends Sequelize.Model {
         TokenDBId: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          unique: true,
+          autoIncrement: true,
           primaryKey: true,
         },
         AccountID: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.TEXT('long'),
           allowNull: false,
         },
         Token: {

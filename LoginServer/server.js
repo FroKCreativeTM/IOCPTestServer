@@ -59,24 +59,37 @@ wss.on('connection', async (ws) => {
                         //      insert(tokenDB);
                         // }
 
-                        // 이후 보낼 클라이언트에서 들고 있어야 할 정보를 가져온다.
-                        // sendJson.AccountID = json.json.PlayerID; -> PlayerID를 AccountID로 바꾸자.
-                        // sendJson.Token = id;(UUID);
-                        // sendJson.ServerList = [];
-                        // foreach(ServerDB serverDB in _shared.Servers) -> findAll을 하던 해서 가져온다.
-                        // {
-                        //      server.ServerName = serverDB.ServerName;
-                        //      server.IpAddress = serverDB.IpAddress;
-                        //      server.Port = serverDB.port;
-                        //      server.BusyScore = serverDB.BusyScore;
-                        //      sendJson.ServeList.Add(server);
-                        //}
-                        // 이후 json을 받은 클라이언트는 정보를 클라이언트에 띄운다.
-                        
-
                         // 성공시 UUID를 발급해서 전달한다.
                         const id = randomUUID();
                         clients.set(ws, id);
+
+                        // 만료 시간을 구한다. (10분 정도로 둔다.)
+                        let expired = new Date(); 
+                        expired = expired.getSeconds() + 600;
+
+                        const token = await Token.findOne({ where : { AccountID : json.PlayerID } });
+
+                        if(token)
+                        {
+                            await Token.update(
+                                {
+                                    Token : id,
+                                    Expired : expired
+                                },
+                                {
+                                    where : { AccountID : json.PlayerID },
+                                }
+                            );
+                        }
+                        else
+                        {   
+                            // 토큰 정보를 SharedDB에 넣는다.
+                            await Token.create({
+                                AccountID : json.PlayerID,
+                                Token : id,
+                                Expired : expired
+                            });
+                        }
 
                         let serverInfos = await ServerInfo.findAll();
                         console.log(serverInfos);
@@ -133,8 +146,14 @@ wss.on('connection', async (ws) => {
     });
 
     // stop tracking the client upon that client closing the connection
-    ws.on('close', () => {
+    ws.on('close', async () => {
         console.log(`connection (id = ${clients.get(ws)}) closed`);
+
+        await Token.destroy({
+            where : {
+                Token : clients.get(ws),
+            }});
+
         clients.delete(ws);
     });
 });
