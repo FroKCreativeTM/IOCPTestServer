@@ -48,8 +48,8 @@ int main()
 	// DB부터 켜자
 	// 1번째 인자 : 스레드 수
 	// 2번째 인자 : 연결을 위한 DSN 
-	ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().DBConnectionString.c_str()));
-	ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().DBConnectionString.c_str()));
+	// ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().DBConnectionString.c_str()));
+	// ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().DBConnectionString.c_str()));
 	// TODO : SharedDB를 관리하기 위한 풀도!
 
 	GRoom->DoTimer(1000, [] { cout << "Hello 1000" << endl; });
