@@ -149,10 +149,10 @@ wss.on('connection', async (ws) => {
     ws.on('close', async () => {
         console.log(`connection (id = ${clients.get(ws)}) closed`);
 
-        await Token.destroy({
-            where : {
-                Token : clients.get(ws),
-            }});
+        //await Token.destroy({
+         //   where : {
+          //      Token : clients.get(ws),
+           // }});
 
         clients.delete(ws);
     });
