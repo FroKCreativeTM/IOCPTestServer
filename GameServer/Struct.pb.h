@@ -209,6 +209,8 @@ class PosInfo final :
     kVeloXFieldNumber = 7,
     kVeloYFieldNumber = 8,
     kVeloZFieldNumber = 9,
+    kSpeedFieldNumber = 10,
+    kIsInAirFieldNumber = 11,
   };
   // float posX = 1;
   void clear_posx();
@@ -291,6 +293,24 @@ class PosInfo final :
   void _internal_set_veloz(float value);
   public:
 
+  // float speed = 10;
+  void clear_speed();
+  float speed() const;
+  void set_speed(float value);
+  private:
+  float _internal_speed() const;
+  void _internal_set_speed(float value);
+  public:
+
+  // bool isInAir = 11;
+  void clear_isinair();
+  bool isinair() const;
+  void set_isinair(bool value);
+  private:
+  bool _internal_isinair() const;
+  void _internal_set_isinair(bool value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.PosInfo)
  private:
   class _Internal;
@@ -307,6 +327,8 @@ class PosInfo final :
   float velox_;
   float veloy_;
   float veloz_;
+  float speed_;
+  bool isinair_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
 };
@@ -1101,6 +1123,46 @@ inline void PosInfo::_internal_set_veloz(float value) {
 inline void PosInfo::set_veloz(float value) {
   _internal_set_veloz(value);
   // @@protoc_insertion_point(field_set:Protocol.PosInfo.veloZ)
+}
+
+// float speed = 10;
+inline void PosInfo::clear_speed() {
+  speed_ = 0;
+}
+inline float PosInfo::_internal_speed() const {
+  return speed_;
+}
+inline float PosInfo::speed() const {
+  // @@protoc_insertion_point(field_get:Protocol.PosInfo.speed)
+  return _internal_speed();
+}
+inline void PosInfo::_internal_set_speed(float value) {
+  
+  speed_ = value;
+}
+inline void PosInfo::set_speed(float value) {
+  _internal_set_speed(value);
+  // @@protoc_insertion_point(field_set:Protocol.PosInfo.speed)
+}
+
+// bool isInAir = 11;
+inline void PosInfo::clear_isinair() {
+  isinair_ = false;
+}
+inline bool PosInfo::_internal_isinair() const {
+  return isinair_;
+}
+inline bool PosInfo::isinair() const {
+  // @@protoc_insertion_point(field_get:Protocol.PosInfo.isInAir)
+  return _internal_isinair();
+}
+inline void PosInfo::_internal_set_isinair(bool value) {
+  
+  isinair_ = value;
+}
+inline void PosInfo::set_isinair(bool value) {
+  _internal_set_isinair(value);
+  // @@protoc_insertion_point(field_set:Protocol.PosInfo.isInAir)
 }
 
 // -------------------------------------------------------------------
