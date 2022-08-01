@@ -27,7 +27,9 @@ constexpr PosInfo::PosInfo(
   , pitch_(0)
   , velox_(0)
   , veloy_(0)
-  , veloz_(0){}
+  , veloz_(0)
+  , speed_(0)
+  , isinair_(false){}
 struct PosInfoDefaultTypeInternal {
   constexpr PosInfoDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -107,6 +109,8 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::Protocol::PosInfo, velox_),
   PROTOBUF_FIELD_OFFSET(::Protocol::PosInfo, veloy_),
   PROTOBUF_FIELD_OFFSET(::Protocol::PosInfo, veloz_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::PosInfo, speed_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::PosInfo, isinair_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::Player, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -143,9 +147,9 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::PosInfo)},
-  { 15, -1, -1, sizeof(::Protocol::Player)},
-  { 23, -1, -1, sizeof(::Protocol::StatInfo)},
-  { 38, -1, -1, sizeof(::Protocol::ObjectInfo)},
+  { 17, -1, -1, sizeof(::Protocol::Player)},
+  { 25, -1, -1, sizeof(::Protocol::StatInfo)},
+  { 40, -1, -1, sizeof(::Protocol::ObjectInfo)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -156,27 +160,28 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\212\001\n"
+  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\252\001\n"
   "\007PosInfo\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022\014\n\004"
   "posZ\030\003 \001(\002\022\013\n\003yaw\030\004 \001(\002\022\014\n\004roll\030\005 \001(\002\022\r\n"
   "\005pitch\030\006 \001(\002\022\r\n\005veloX\030\007 \001(\002\022\r\n\005veloY\030\010 \001"
-  "(\002\022\r\n\005veloZ\030\t \001(\002\"Z\n\006Player\022(\n\nobjectInf"
-  "o\030\001 \001(\0132\024.Protocol.ObjectInfo\022&\n\005state\030\002"
-  " \001(\0162\027.Protocol.CreatureState\"\215\001\n\010StatIn"
-  "fo\022\r\n\005level\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\n\n\002mp\030\003 \001("
-  "\005\022\r\n\005maxHp\030\004 \001(\005\022\r\n\005maxMp\030\005 \001(\005\022\016\n\006attac"
-  "k\030\006 \001(\005\022\r\n\005speed\030\007 \001(\002\022\013\n\003exp\030\010 \001(\005\022\020\n\010t"
-  "otalExp\030\t \001(\005\"v\n\nObjectInfo\022\020\n\010objectId\030"
-  "\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\"\n\007posInfo\030\003 \001(\0132\021.P"
-  "rotocol.PosInfo\022$\n\010statInfo\030\004 \001(\0132\022.Prot"
-  "ocol.StatInfob\006proto3"
+  "(\002\022\r\n\005veloZ\030\t \001(\002\022\r\n\005speed\030\n \001(\002\022\017\n\007isIn"
+  "Air\030\013 \001(\010\"Z\n\006Player\022(\n\nobjectInfo\030\001 \001(\0132"
+  "\024.Protocol.ObjectInfo\022&\n\005state\030\002 \001(\0162\027.P"
+  "rotocol.CreatureState\"\215\001\n\010StatInfo\022\r\n\005le"
+  "vel\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\n\n\002mp\030\003 \001(\005\022\r\n\005max"
+  "Hp\030\004 \001(\005\022\r\n\005maxMp\030\005 \001(\005\022\016\n\006attack\030\006 \001(\005\022"
+  "\r\n\005speed\030\007 \001(\002\022\013\n\003exp\030\010 \001(\005\022\020\n\010totalExp\030"
+  "\t \001(\005\"v\n\nObjectInfo\022\020\n\010objectId\030\001 \001(\005\022\014\n"
+  "\004name\030\002 \001(\t\022\"\n\007posInfo\030\003 \001(\0132\021.Protocol."
+  "PosInfo\022$\n\010statInfo\030\004 \001(\0132\022.Protocol.Sta"
+  "tInfob\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Struct_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Struct_2eproto = {
-  false, false, 541, descriptor_table_protodef_Struct_2eproto, "Struct.proto", 
+  false, false, 573, descriptor_table_protodef_Struct_2eproto, "Struct.proto", 
   &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 4,
   schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
   file_level_metadata_Struct_2eproto, file_level_enum_descriptors_Struct_2eproto, file_level_service_descriptors_Struct_2eproto,
@@ -208,16 +213,16 @@ PosInfo::PosInfo(const PosInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&posx_, &from.posx_,
-    static_cast<size_t>(reinterpret_cast<char*>(&veloz_) -
-    reinterpret_cast<char*>(&posx_)) + sizeof(veloz_));
+    static_cast<size_t>(reinterpret_cast<char*>(&isinair_) -
+    reinterpret_cast<char*>(&posx_)) + sizeof(isinair_));
   // @@protoc_insertion_point(copy_constructor:Protocol.PosInfo)
 }
 
 inline void PosInfo::SharedCtor() {
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&posx_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&veloz_) -
-    reinterpret_cast<char*>(&posx_)) + sizeof(veloz_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&isinair_) -
+    reinterpret_cast<char*>(&posx_)) + sizeof(isinair_));
 }
 
 PosInfo::~PosInfo() {
@@ -248,8 +253,8 @@ void PosInfo::Clear() {
   (void) cached_has_bits;
 
   ::memset(&posx_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&veloz_) -
-      reinterpret_cast<char*>(&posx_)) + sizeof(veloz_));
+      reinterpret_cast<char*>(&isinair_) -
+      reinterpret_cast<char*>(&posx_)) + sizeof(isinair_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -328,6 +333,22 @@ const char* PosInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::in
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 77)) {
           veloz_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // float speed = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 85)) {
+          speed_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool isInAir = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
+          isinair_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -450,6 +471,22 @@ uint8_t* PosInfo::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(9, this->_internal_veloz(), target);
   }
 
+  // float speed = 10;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_speed = this->_internal_speed();
+  uint32_t raw_speed;
+  memcpy(&raw_speed, &tmp_speed, sizeof(tmp_speed));
+  if (raw_speed != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(10, this->_internal_speed(), target);
+  }
+
+  // bool isInAir = 11;
+  if (this->_internal_isinair() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_isinair(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -547,6 +584,20 @@ size_t PosInfo::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
+  // float speed = 10;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_speed = this->_internal_speed();
+  uint32_t raw_speed;
+  memcpy(&raw_speed, &tmp_speed, sizeof(tmp_speed));
+  if (raw_speed != 0) {
+    total_size += 1 + 4;
+  }
+
+  // bool isInAir = 11;
+  if (this->_internal_isinair() != 0) {
+    total_size += 1 + 1;
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
 }
 
@@ -632,6 +683,16 @@ void PosInfo::MergeFrom(const PosInfo& from) {
   if (raw_veloz != 0) {
     _internal_set_veloz(from._internal_veloz());
   }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_speed = from._internal_speed();
+  uint32_t raw_speed;
+  memcpy(&raw_speed, &tmp_speed, sizeof(tmp_speed));
+  if (raw_speed != 0) {
+    _internal_set_speed(from._internal_speed());
+  }
+  if (from._internal_isinair() != 0) {
+    _internal_set_isinair(from._internal_isinair());
+  }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -650,8 +711,8 @@ void PosInfo::InternalSwap(PosInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(PosInfo, veloz_)
-      + sizeof(PosInfo::veloz_)
+      PROTOBUF_FIELD_OFFSET(PosInfo, isinair_)
+      + sizeof(PosInfo::isinair_)
       - PROTOBUF_FIELD_OFFSET(PosInfo, posx_)>(
           reinterpret_cast<char*>(&posx_),
           reinterpret_cast<char*>(&other->posx_));

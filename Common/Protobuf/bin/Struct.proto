@@ -3,6 +3,7 @@ package Protocol;
 
 import "Enum.proto";
 
+// 위치에 대한 정보, 그리고 필수적인 물리 상황을 저장한다.
 message PosInfo
 {
 	float posX = 1;
@@ -16,6 +17,9 @@ message PosInfo
 	float veloX = 7;
 	float veloY = 8;
 	float veloZ = 9;
+
+	float speed = 10;
+	bool  isInAir = 11;
 }
 
 message Player
@@ -24,7 +28,7 @@ message Player
 	CreatureState state = 2;
 
 	// bool		isAlive = 2;
-	// int32		health = 3;	
+	// int32	health = 3;	
 	// bool		isAttack = 4;
 }
 
