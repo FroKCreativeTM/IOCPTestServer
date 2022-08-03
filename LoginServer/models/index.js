@@ -5,7 +5,7 @@ import { ServerInfo } from './serverInfo.js';
 
 const env = process.env.NODE_ENV || 'development';
 
-import jsonObject from "../config/config.json" //assert {type: "json"};
+import jsonObject from "../config/config.json" assert {type: "json"};
 const config = jsonObject[env];
 const db = {};
 
