@@ -43,7 +43,7 @@ void DoWorkerJob(ServerServiceRef& service)
 unique_ptr<DBConnectionPool> GDBConnectionPool = make_unique<DBConnectionPool>();
 unique_ptr<DBConnectionPool> GSharedDBConnectionPool = make_unique<DBConnectionPool>();
 
-int main()
+int main(int argc, char* argv[])
 {
 	// DB부터 켜자
 	// 1번째 인자 : 스레드 수
@@ -58,10 +58,32 @@ int main()
 
 	ClientPacketHandler::Init();
 
+	string IP;
+	int32 port;
+
+	// 테스트 상황에만 이렇게 합니다.
+	if (argc < 2)
+	{
+		IP = "127.0.0.1";
+		port = 7777;
+	}
+	else
+	{
+		IP = argv[1];
+		port = atoi(argv[2]);
+	}
+
+	wstring wIP;
+	wIP.assign(IP.begin(), IP.end());
+
+	cout << "[Server INFO]" << endl;
+	wcout << L"IP : " << wIP << endl;
+	cout << "port : " << port << endl;
+
 	// 로그인 서버 포트 번호 : 7776
 	// 게임 컨텐츠 서버 포트 번호 : 7777
 	ServerServiceRef service = MakeShared<ServerService>(
-		NetAddress(L"127.0.0.1", 7777),
+		NetAddress(wIP.c_str(), port),
 		MakeShared<IocpCore>(),
 		MakeShared<GameSession>, // TODO : SessionManager 등
 		100);

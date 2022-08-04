@@ -2,4 +2,4 @@
   DBBind.cpp
   DBConnectionPool.cpp
   DBConnection.cpp
-  DBCore.vcxproj -> C:\Users\user\Desktop\Game\IOCPTestServer\Libraries\Libs\ServerCore\Release\DBCore.lib
+  DBCore.vcxproj -> C:\UnrealProject\IOCPTestServer\Libraries\Libs\ServerCore\Release\DBCore.lib

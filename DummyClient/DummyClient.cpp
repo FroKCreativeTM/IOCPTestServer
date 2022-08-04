@@ -45,14 +45,35 @@ class ServerSession : public PacketSession
 	}
 };
 
-int main()
+int main(int argc, char** argv)
 {
+	string IP;
+	int32 port;
+
+	// 테스트 상황에만 이렇게 합니다.
+	if (argc != 2)
+	{
+		IP = "127.0.0.1";
+		port = 7777;
+	}
+	else
+	{
+		IP = string(argv[0]);
+		port = atoi(argv[1]);
+	}
+
+	wstring wIP;
+	wIP.assign(IP.begin(), IP.end());
+
 	ServerPacketHandler::Init();
 
 	this_thread::sleep_for(1s);
 
+	cout << "[Server INFO]" << endl;
+	wcout << L"IP : " << wIP << endl;
+	cout << "port : " << port << endl;
 	ClientServiceRef service = MakeShared<ClientService>(
-		NetAddress(L"127.0.0.1", 7777),
+		NetAddress(wIP.c_str(), port),
 		MakeShared<IocpCore>(),
 		MakeShared<ServerSession>, // TODO : SessionManager 등
 		1);
@@ -65,7 +86,7 @@ int main()
 			{
 				while (true)
 				{
-					service->GetIocpCore()->Dispatch();
+					service->GetIocpCore()->Dispatch(0);
 				}
 			});
 	}
