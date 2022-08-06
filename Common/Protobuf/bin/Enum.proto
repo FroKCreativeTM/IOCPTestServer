@@ -17,9 +17,13 @@ enum GameObjectType
 	GAME_OBJECT_TYPE_PROJECTILE = 3;	
 }
 
-enum CreatureState {
+enum CreatureState 
+{
   IDLE = 0;
-  MOVING = 1;
-  SKILL = 2;
-  DEAD = 3;
+  RUN_LEFT = 1;
+  RUN_RIGHT = 2;
+  JUMP = 3;
+  FALL = 4;
+  SKILL = 5;
+  DEAD = 6;
 }
