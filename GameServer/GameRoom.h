@@ -13,7 +13,7 @@ namespace FrokEngine
 		void Leave(PlayerRef player);
 		void Broadcast(SendBufferRef sendBuffer);
 
-		void SetPlayerPos(uint64 networkID, Protocol::PosInfo posInfo);
+		void SetPlayerPos(uint64 networkID, Protocol::PosInfo posInfo, Protocol::CreatureState animState);
 
 	private:
 		map<uint64, PlayerRef> _players;

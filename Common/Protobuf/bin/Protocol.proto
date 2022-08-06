@@ -40,6 +40,7 @@ message C_SPAWN
 
 message S_SPAWN
 {
+	CreatureState CreatureState = 1;
 	Player object = 2;
 }
 
@@ -61,12 +62,14 @@ message C_MOVE
 {
 	uint64 playerId = 1;
 	PosInfo posInfo = 2;
+	CreatureState CreatureState = 3;
 }
 
 message S_MOVE
 {
 	uint64 playerId = 1;
 	PosInfo posInfo = 2;
+	CreatureState CreatureState = 3;
 }
 
 // message C_JUMP

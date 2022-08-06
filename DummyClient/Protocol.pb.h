@@ -1011,6 +1011,7 @@ class S_SPAWN final :
 
   enum : int {
     kObjectFieldNumber = 2,
+    kCreatureStateFieldNumber = 1,
   };
   // .Protocol.Player object = 2;
   bool has_object() const;
@@ -1030,6 +1031,15 @@ class S_SPAWN final :
       ::Protocol::Player* object);
   ::Protocol::Player* unsafe_arena_release_object();
 
+  // .Protocol.CreatureState CreatureState = 1;
+  void clear_creaturestate();
+  ::Protocol::CreatureState creaturestate() const;
+  void set_creaturestate(::Protocol::CreatureState value);
+  private:
+  ::Protocol::CreatureState _internal_creaturestate() const;
+  void _internal_set_creaturestate(::Protocol::CreatureState value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_SPAWN)
  private:
   class _Internal;
@@ -1038,6 +1048,7 @@ class S_SPAWN final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::Protocol::Player* object_;
+  int creaturestate_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -1488,6 +1499,7 @@ class C_MOVE final :
   enum : int {
     kPosInfoFieldNumber = 2,
     kPlayerIdFieldNumber = 1,
+    kCreatureStateFieldNumber = 3,
   };
   // .Protocol.PosInfo posInfo = 2;
   bool has_posinfo() const;
@@ -1516,6 +1528,15 @@ class C_MOVE final :
   void _internal_set_playerid(uint64_t value);
   public:
 
+  // .Protocol.CreatureState CreatureState = 3;
+  void clear_creaturestate();
+  ::Protocol::CreatureState creaturestate() const;
+  void set_creaturestate(::Protocol::CreatureState value);
+  private:
+  ::Protocol::CreatureState _internal_creaturestate() const;
+  void _internal_set_creaturestate(::Protocol::CreatureState value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_MOVE)
  private:
   class _Internal;
@@ -1525,6 +1546,7 @@ class C_MOVE final :
   typedef void DestructorSkippable_;
   ::Protocol::PosInfo* posinfo_;
   uint64_t playerid_;
+  int creaturestate_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -1654,6 +1676,7 @@ class S_MOVE final :
   enum : int {
     kPosInfoFieldNumber = 2,
     kPlayerIdFieldNumber = 1,
+    kCreatureStateFieldNumber = 3,
   };
   // .Protocol.PosInfo posInfo = 2;
   bool has_posinfo() const;
@@ -1682,6 +1705,15 @@ class S_MOVE final :
   void _internal_set_playerid(uint64_t value);
   public:
 
+  // .Protocol.CreatureState CreatureState = 3;
+  void clear_creaturestate();
+  ::Protocol::CreatureState creaturestate() const;
+  void set_creaturestate(::Protocol::CreatureState value);
+  private:
+  ::Protocol::CreatureState _internal_creaturestate() const;
+  void _internal_set_creaturestate(::Protocol::CreatureState value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_MOVE)
  private:
   class _Internal;
@@ -1691,6 +1723,7 @@ class S_MOVE final :
   typedef void DestructorSkippable_;
   ::Protocol::PosInfo* posinfo_;
   uint64_t playerid_;
+  int creaturestate_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -2141,6 +2174,26 @@ inline void S_CHAT::set_allocated_msg(std::string* msg) {
 
 // S_SPAWN
 
+// .Protocol.CreatureState CreatureState = 1;
+inline void S_SPAWN::clear_creaturestate() {
+  creaturestate_ = 0;
+}
+inline ::Protocol::CreatureState S_SPAWN::_internal_creaturestate() const {
+  return static_cast< ::Protocol::CreatureState >(creaturestate_);
+}
+inline ::Protocol::CreatureState S_SPAWN::creaturestate() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_SPAWN.CreatureState)
+  return _internal_creaturestate();
+}
+inline void S_SPAWN::_internal_set_creaturestate(::Protocol::CreatureState value) {
+  
+  creaturestate_ = value;
+}
+inline void S_SPAWN::set_creaturestate(::Protocol::CreatureState value) {
+  _internal_set_creaturestate(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_SPAWN.CreatureState)
+}
+
 // .Protocol.Player object = 2;
 inline bool S_SPAWN::_internal_has_object() const {
   return this != internal_default_instance() && object_ != nullptr;
@@ -2537,6 +2590,26 @@ inline void C_MOVE::set_allocated_posinfo(::Protocol::PosInfo* posinfo) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_MOVE.posInfo)
 }
 
+// .Protocol.CreatureState CreatureState = 3;
+inline void C_MOVE::clear_creaturestate() {
+  creaturestate_ = 0;
+}
+inline ::Protocol::CreatureState C_MOVE::_internal_creaturestate() const {
+  return static_cast< ::Protocol::CreatureState >(creaturestate_);
+}
+inline ::Protocol::CreatureState C_MOVE::creaturestate() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_MOVE.CreatureState)
+  return _internal_creaturestate();
+}
+inline void C_MOVE::_internal_set_creaturestate(::Protocol::CreatureState value) {
+  
+  creaturestate_ = value;
+}
+inline void C_MOVE::set_creaturestate(::Protocol::CreatureState value) {
+  _internal_set_creaturestate(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_MOVE.CreatureState)
+}
+
 // -------------------------------------------------------------------
 
 // S_MOVE
@@ -2645,6 +2718,26 @@ inline void S_MOVE::set_allocated_posinfo(::Protocol::PosInfo* posinfo) {
   }
   posinfo_ = posinfo;
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_MOVE.posInfo)
+}
+
+// .Protocol.CreatureState CreatureState = 3;
+inline void S_MOVE::clear_creaturestate() {
+  creaturestate_ = 0;
+}
+inline ::Protocol::CreatureState S_MOVE::_internal_creaturestate() const {
+  return static_cast< ::Protocol::CreatureState >(creaturestate_);
+}
+inline ::Protocol::CreatureState S_MOVE::creaturestate() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MOVE.CreatureState)
+  return _internal_creaturestate();
+}
+inline void S_MOVE::_internal_set_creaturestate(::Protocol::CreatureState value) {
+  
+  creaturestate_ = value;
+}
+inline void S_MOVE::set_creaturestate(::Protocol::CreatureState value) {
+  _internal_set_creaturestate(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_MOVE.CreatureState)
 }
 
 #ifdef __GNUC__
