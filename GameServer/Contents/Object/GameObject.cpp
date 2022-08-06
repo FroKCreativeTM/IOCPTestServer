@@ -1,5 +1,9 @@
-#include "pch.h"
+#include "../../pch.h"
 #include "GameObject.h"
+
+#include "../../GameSession.h"
+#include "../../GameSessionManager.h"
+#include "../../ClientPacketHandler.h"
 
 namespace FrokEngine
 {
@@ -23,65 +27,62 @@ namespace FrokEngine
 
 	Protocol::StatInfo GameObject::GetStat()
 	{
-		return Protocol::StatInfo();
+		return _statInfo;
 	}
 
 	void GameObject::SetStat(const Protocol::StatInfo& stat)
 	{
-	}
-
-	Protocol::PositionInfo GameObject::GetPosInfo()
-	{
-		return Protocol::PositionInfo();
-	}
-
-	void GameObject::SetPosInfo(const Protocol::PositionInfo& posInfo)
-	{
+		_statInfo = stat;
 	}
 
 	Protocol::GameObjectType GameObject::GetGameObjectType() const
 	{
-		return Protocol::GameObjectType();
+		return _objectType;
 	}
 
 	void GameObject::SetGameObjectType(const Protocol::GameObjectType& objectType)
 	{
+		_objectType = objectType;
 	}
 
 	Protocol::ObjectInfo GameObject::GetObjectInfo()
 	{
-		return Protocol::ObjectInfo();
+		return _objectInfo;
 	}
 
 	void GameObject::SetObjectInfo(const Protocol::ObjectInfo& objInfo)
 	{
+		_objectInfo = objInfo;
 	}
 
 	Protocol::CreatureState GameObject::GetCreatureState() const
 	{
-		return Protocol::CreatureState();
+		return _state;
 	}
 
 	void GameObject::SetCreatureState(const Protocol::CreatureState& state)
 	{
+		_state = state;
 	}
 
 	float GameObject::GetSpeed() const
 	{
-		return 0.0f;
+		return _speed;
 	}
 
 	void GameObject::SetSpeed(float speed)
 	{
+		_speed = speed;
 	}
 
 	int32 GameObject::GetHP() const
 	{
-		return int32();
+		return _hp;
 	}
 
 	void GameObject::SetHP(int32 hp)
 	{
+		_hp = hp;
 	}
 
 	GameSessionRef GameObject::GetOwnerSession()
@@ -94,11 +95,12 @@ namespace FrokEngine
 		this->_ownerSession = ref;
 	}
 
-	void GameObject::OnDamaged(GameObjectPtr attacker, int damage)
+	void GameObject::OnDamaged(GameObjectRef attacker, int damage)
 	{
+
 	}
 
-	void GameObject::OnDead(GameObjectPtr attacker)
+	void GameObject::OnDead(GameObjectRef attacker)
 	{
 	}
 }

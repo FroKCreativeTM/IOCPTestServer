@@ -1,6 +1,6 @@
-#include "pch.h"
+#include "../../pch.h"
 #include "ObjectManager.h"
-#include "Player.h"
+#include "Player/Player.h"
 
 namespace FrokEngine
 {

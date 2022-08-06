@@ -263,18 +263,20 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1049): message : 'google::protobuf::RepeatedField<float>' 선언을 참조하십시오.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
-  ClientPacketHandler.cpp
   ConfigManager.cpp
   MapData.cpp
-  PlayerManager.cpp
-  GameObject.cpp
-  ObjectManager.cpp
-  Player.cpp
   GameRoom.cpp
   GameServer.cpp
   GameSession.cpp
   GameSessionManager.cpp
+  ClientPacketHandler.cpp
   UsageManager.cpp
+  PlayerManager.cpp
+  GameObject.cpp
+  ObjectManager.cpp
+  Luke.cpp
+  Player.cpp
+  Serana.cpp
   Enum.pb.cc
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
@@ -441,8 +443,8 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   코드를 생성하고 있습니다.
-  1 of 3306 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  273 of 3309 functions ( 8.3%) were compiled, the rest were copied from previous compilation.
+    22 functions were new in current compilation
+    92 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   GameServer.vcxproj -> C:\UnrealProject\IOCPTestServer\Binary\Release\GameServer.exe

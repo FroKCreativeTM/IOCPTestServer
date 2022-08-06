@@ -456,10 +456,11 @@ class Player final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kObjectInfoFieldNumber = 1,
-    kStateFieldNumber = 2,
+    kObjectInfoFieldNumber = 2,
+    kPlayerTypeFieldNumber = 1,
+    kStateFieldNumber = 3,
   };
-  // .Protocol.ObjectInfo objectInfo = 1;
+  // .Protocol.ObjectInfo objectInfo = 2;
   bool has_objectinfo() const;
   private:
   bool _internal_has_objectinfo() const;
@@ -477,7 +478,16 @@ class Player final :
       ::Protocol::ObjectInfo* objectinfo);
   ::Protocol::ObjectInfo* unsafe_arena_release_objectinfo();
 
-  // .Protocol.CreatureState state = 2;
+  // .Protocol.PlayerType playerType = 1;
+  void clear_playertype();
+  ::Protocol::PlayerType playertype() const;
+  void set_playertype(::Protocol::PlayerType value);
+  private:
+  ::Protocol::PlayerType _internal_playertype() const;
+  void _internal_set_playertype(::Protocol::PlayerType value);
+  public:
+
+  // .Protocol.CreatureState state = 3;
   void clear_state();
   ::Protocol::CreatureState state() const;
   void set_state(::Protocol::CreatureState value);
@@ -494,6 +504,7 @@ class Player final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::Protocol::ObjectInfo* objectinfo_;
+  int playertype_;
   int state_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
@@ -1169,7 +1180,27 @@ inline void PosInfo::set_isinair(bool value) {
 
 // Player
 
-// .Protocol.ObjectInfo objectInfo = 1;
+// .Protocol.PlayerType playerType = 1;
+inline void Player::clear_playertype() {
+  playertype_ = 0;
+}
+inline ::Protocol::PlayerType Player::_internal_playertype() const {
+  return static_cast< ::Protocol::PlayerType >(playertype_);
+}
+inline ::Protocol::PlayerType Player::playertype() const {
+  // @@protoc_insertion_point(field_get:Protocol.Player.playerType)
+  return _internal_playertype();
+}
+inline void Player::_internal_set_playertype(::Protocol::PlayerType value) {
+  
+  playertype_ = value;
+}
+inline void Player::set_playertype(::Protocol::PlayerType value) {
+  _internal_set_playertype(value);
+  // @@protoc_insertion_point(field_set:Protocol.Player.playerType)
+}
+
+// .Protocol.ObjectInfo objectInfo = 2;
 inline bool Player::_internal_has_objectinfo() const {
   return this != internal_default_instance() && objectinfo_ != nullptr;
 }
@@ -1259,7 +1290,7 @@ inline void Player::set_allocated_objectinfo(::Protocol::ObjectInfo* objectinfo)
   // @@protoc_insertion_point(field_set_allocated:Protocol.Player.objectInfo)
 }
 
-// .Protocol.CreatureState state = 2;
+// .Protocol.CreatureState state = 3;
 inline void Player::clear_state() {
   state_ = 0;
 }

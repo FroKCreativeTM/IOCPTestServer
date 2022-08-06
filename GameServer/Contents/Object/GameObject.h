@@ -15,9 +15,6 @@ namespace FrokEngine
 		Protocol::StatInfo GetStat();
 		void SetStat(const Protocol::StatInfo& stat);
 
-		Protocol::PositionInfo GetPosInfo();
-		void SetPosInfo(const Protocol::PositionInfo& posInfo);
-
 		Protocol::GameObjectType GetGameObjectType() const;
 		void SetGameObjectType(const Protocol::GameObjectType& objectType);
 
@@ -36,24 +33,22 @@ namespace FrokEngine
 		GameSessionRef GetOwnerSession();
 		void SetOwnerSession(GameSessionRef ref);
 
-		virtual void OnDamaged(GameObjectPtr attacker, int damage);
-		virtual void OnDead(GameObjectPtr attacker);
+		virtual void OnDamaged(GameObjectRef attacker, int damage);
+		virtual void OnDead(GameObjectRef attacker);
 
 	protected : 
 		int _objectId;
 
 		// 오브젝트에 대한 정보가 담겨있음
-		Protocol::ObjectInfo			_objInfo;
+		Protocol::ObjectInfo			_objectInfo;
 		Protocol::StatInfo				_statInfo;
-		Protocol::GameObjectType		_objectType;
+		Protocol::GameObjectType		_objectType = Protocol::GameObjectType::GAME_OBJECT_TYPE_NONE;
 
 		float							_speed;
 		int32							_hp;
 		Protocol::CreatureState			_state;
 
 		GameSessionRef			_ownerSession; // Cycle
-
-		Protocol::GameObjectType _objectType = Protocol::GameObjectType::GAME_OBJECT_TYPE_NONE;
 	};
 }
 

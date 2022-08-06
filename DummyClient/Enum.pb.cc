@@ -25,19 +25,19 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nEnum.proto\022\010Protocol*h\n\nPlayerType\022\024\n\020"
-  "PLAYER_TYPE_NONE\020\000\022\026\n\022PLAYER_TYPE_KNIGHT"
-  "\020\001\022\024\n\020PLAYER_TYPE_MAGE\020\002\022\026\n\022PLAYER_TYPE_"
-  "ARCHER\020\003*\207\001\n\016GameObjectType\022\031\n\025GAME_OBJE"
-  "CT_TYPE_NONE\020\000\022\033\n\027GAME_OBJECT_TYPE_PLAYE"
-  "R\020\001\022\034\n\030GAME_OBJECT_TYPE_MONSTER\020\002\022\037\n\033GAM"
-  "E_OBJECT_TYPE_PROJECTILE\020\003*:\n\rCreatureSt"
-  "ate\022\010\n\004IDLE\020\000\022\n\n\006MOVING\020\001\022\t\n\005SKILL\020\002\022\010\n\004"
-  "DEAD\020\003b\006proto3"
+  "\n\nEnum.proto\022\010Protocol*P\n\nPlayerType\022\024\n\020"
+  "PLAYER_TYPE_NONE\020\000\022\026\n\022PLAYER_TYPE_SERANA"
+  "\020\001\022\024\n\020PLAYER_TYPE_LUKE\020\002*\207\001\n\016GameObjectT"
+  "ype\022\031\n\025GAME_OBJECT_TYPE_NONE\020\000\022\033\n\027GAME_O"
+  "BJECT_TYPE_PLAYER\020\001\022\034\n\030GAME_OBJECT_TYPE_"
+  "MONSTER\020\002\022\037\n\033GAME_OBJECT_TYPE_PROJECTILE"
+  "\020\003*_\n\rCreatureState\022\010\n\004IDLE\020\000\022\014\n\010RUN_LEF"
+  "T\020\001\022\r\n\tRUN_RIGHT\020\002\022\010\n\004JUMP\020\003\022\010\n\004FALL\020\004\022\t"
+  "\n\005SKILL\020\005\022\010\n\004DEAD\020\006b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Enum_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Enum_2eproto = {
-  false, false, 334, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
+  false, false, 347, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
   &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
   schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
   nullptr, file_level_enum_descriptors_Enum_2eproto, file_level_service_descriptors_Enum_2eproto,
@@ -58,7 +58,6 @@ bool PlayerType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
-    case 3:
       return true;
     default:
       return false;
@@ -91,6 +90,9 @@ bool CreatureState_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+    case 4:
+    case 5:
+    case 6:
       return true;
     default:
       return false;

@@ -1,6 +1,6 @@
 #pragma once
 #include "Session.h"
-#include "Contents/Object/Player.h"
+#include "Contents/Object/Player/Player.h"
 
 namespace FrokEngine
 {

@@ -7,7 +7,7 @@ import "Struct.proto";
 message C_ENTER_GAME
 {
 	// My infomation
-	ObjectInfo player = 1;
+	Player player = 1;
 	string token = 2;
 }
 
@@ -16,7 +16,7 @@ message S_ENTER_GAME
 	// already connected player
 	// TODO : use repeated keyword to read all connected players data
 	// and send to connect player immediatly
-	ObjectInfo player = 1;
+	Player player = 1;
 }
 
 message C_CHAT
@@ -40,22 +40,21 @@ message C_SPAWN
 
 message S_SPAWN
 {
-	uint64 playerId = 1;
-	ObjectInfo object = 2;
+	Player object = 2;
 }
 
 // ????? ??? ??? ??
 message C_LEAVE_GAME
 {
 	// ?? ??? ???.
-	ObjectInfo leavePlayer = 1;
+	Player leavePlayer = 1;
 }
 
 message S_DESPAWN
 {
 	// ?? ??? ?? ??? ??? ?? ???? ????.
 	uint64 playerId = 1;
-	ObjectInfo player = 2;
+	Player player = 2;
 }
 
 message C_MOVE

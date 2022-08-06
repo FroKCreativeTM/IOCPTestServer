@@ -25,6 +25,9 @@
     <Filter Include="GameContents\Manager">
       <UniqueIdentifier>{503ad3ad-ab03-4c1c-b346-e34b39d26d97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameContents\Object\Player">
+      <UniqueIdentifier>{29b2c0a0-1b3d-4617-962a-76528197a200}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
@@ -60,9 +63,6 @@
     <ClCompile Include="Contents\Object\ObjectManager.cpp">
       <Filter>GameContents\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Contents\Object\Player.cpp">
-      <Filter>GameContents\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Contents\Object\GameObject.cpp">
       <Filter>GameContents\Object</Filter>
     </ClCompile>
@@ -74,6 +74,15 @@
     </ClCompile>
     <ClCompile Include="ConfigManager.cpp">
       <Filter>GameContents\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\Object\Player\Luke.cpp">
+      <Filter>GameContents\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\Object\Player\Serana.cpp">
+      <Filter>GameContents\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\Object\Player\Player.cpp">
+      <Filter>GameContents\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +116,6 @@
     <ClInclude Include="Contents\Object\ObjectManager.h">
       <Filter>GameContents\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Contents\Object\Player.h">
-      <Filter>GameContents\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Contents\Object\GameObject.h">
       <Filter>GameContents\Object</Filter>
     </ClInclude>
@@ -121,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="ConfigManager.h">
       <Filter>GameContents\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\Object\Player\Luke.h">
+      <Filter>GameContents\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\Object\Player\Serana.h">
+      <Filter>GameContents\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\Object\Player\Player.h">
+      <Filter>GameContents\Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

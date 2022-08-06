@@ -24,8 +24,9 @@ message PosInfo
 
 message Player
 {
-	ObjectInfo objectInfo = 1;
-	CreatureState state = 2;
+	PlayerType playerType = 1;
+	ObjectInfo objectInfo = 2;
+	CreatureState state = 3;
 
 	// bool		isAlive = 2;
 	// int32	health = 3;	
