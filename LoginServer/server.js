@@ -7,6 +7,7 @@ const sequelize = db.sequelize;
 const Account = db.Account;
 const ServerInfo = db.ServerInfo;
 const Token = db.Token;
+const Character = db.Character;
 
 const clients = new Map(); // has to be a Map instead of {} due to non-string keys
 const wss = new WebSocketServer({ port: 7776 }); //로그인 서버 포트 번호는 7776입니다.

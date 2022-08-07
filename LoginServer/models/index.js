@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import { Account } from './account.js';
 import { Token } from './token.js';
+import { Character } from './character.js';
 import { ServerInfo } from './serverInfo.js';
 
 const env = process.env.NODE_ENV || 'development';
@@ -16,11 +17,13 @@ db.Sequelize = Sequelize;
 
 db.Account = Account;
 db.Token = Token;
+db.Character = Character;
 db.ServerInfo = ServerInfo;
 
 Account.init(sequelize);
 Token.init(sequelize);
 ServerInfo.init(sequelize);
+Character.init(sequelize);
 
 // Account.associate(db);
 // Token.associate(db);
