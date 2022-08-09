@@ -17,6 +17,7 @@ namespace FrokEngine
 
 	private:
 		map<uint64, PlayerRef> _players;
+		map<uint64, MonsterRef> _monsters;
 	};
 
 	extern shared_ptr<GameRoom> GRoom;

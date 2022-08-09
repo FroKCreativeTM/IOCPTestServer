@@ -11,8 +11,3 @@
  - https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid
 
 2. 컨텐츠 부분
-이동 동기화) A 클라이언트는 움직임
-서버는 이 클라이언트가 어디로 가고 싶어 하는지에 대해 그리고 지금 어디고 어떤 방향으로 가고 있는지가 관심이 있음
-B 클라이언트는 A의 모든걸 관심있지 않음. 
-단지 A의 현재 위치, 회전값 그리고 이동중인가만 관심이 있음
-참고 : https://www.inflearn.com/questions/56075

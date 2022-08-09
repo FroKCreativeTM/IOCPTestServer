@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\user\Desktop\Game\IOCPTestServer\Binary\Debug\GameServer.exe</FullPath>
+      <FullPath>C:\UnrealProject\IOCPTestServer\Binary\Debug\GameServer.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

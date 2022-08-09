@@ -33,6 +33,7 @@ namespace FrokEngine
 	using GameSessionRef = shared_ptr<class GameSession>;
 	using GameObjectRef = shared_ptr<class GameObject>;
 	using PlayerRef = shared_ptr<class Player>;
+	using MonsterRef = shared_ptr<class Monster>;
 	using SeranaRef = shared_ptr<class Serana>;
 	using LukeRef = shared_ptr<class Luke>;
 }

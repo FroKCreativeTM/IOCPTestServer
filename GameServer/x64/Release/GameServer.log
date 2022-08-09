@@ -273,9 +273,9 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
   PlayerManager.cpp
   GameObject.cpp
   ObjectManager.cpp
-  Luke.cpp
+  Monster.cpp
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(13,14): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Player.cpp
-  Serana.cpp
   Enum.pb.cc
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
@@ -442,8 +442,8 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   코드를 생성하고 있습니다.
-  20 of 3318 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
-    4 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  31 of 3359 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   GameServer.vcxproj -> C:\UnrealProject\IOCPTestServer\Binary\Release\GameServer.exe

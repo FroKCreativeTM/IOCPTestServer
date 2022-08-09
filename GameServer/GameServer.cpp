@@ -19,7 +19,7 @@
 
 enum
 {
-	WORKER_TICK = 16
+	WORKER_TICK = 64
 };
 
 void DoWorkerJob(ServerServiceRef& service)
