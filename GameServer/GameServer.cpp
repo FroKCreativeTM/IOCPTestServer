@@ -56,6 +56,9 @@ int main(int argc, char* argv[])
 	GRoom->DoTimer(2000, [] { cout << "Hello 2000" << endl; });
 	GRoom->DoTimer(3000, [] { cout << "Hello 3000" << endl; });
 
+	// 몬스터를 스폰한다.
+	GRoom->InitMonsterSet();
+
 	ClientPacketHandler::Init();
 
 	string IP;

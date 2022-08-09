@@ -11,7 +11,7 @@ namespace FrokEngine
 		Monster();
 		virtual ~Monster();
 
-		void MoveTo();
+		void MoveTo(class Player& target);
 		void HitPlayer(class Player& target);
 		void Damaged(float damage);
 		bool IsAlive();
