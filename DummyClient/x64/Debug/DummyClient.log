@@ -1,5 +1,4 @@
-﻿Protocol.proto(4,1): warning G1A4DC0EC: Import Enum.proto is unused.
-  #pragma once
+﻿  #pragma once
   #include "Protocol.pb.h"
   
   namespace FrokEngine
@@ -15,8 +14,10 @@
   		PKT_S_CHAT = 3,
   		PKT_C_SPAWN = 4,
   		PKT_S_SPAWN = 5,
-  		PKT_C_MOVE = 6,
-  		PKT_S_MOVE = 7,
+  		PKT_C_LEAVE_GAME = 6,
+  		PKT_S_DESPAWN = 7,
+  		PKT_C_MOVE = 8,
+  		PKT_S_MOVE = 9,
   	};
   
   	// Custom Handlers
@@ -24,6 +25,7 @@
   	bool Handle_C_ENTER_GAME(PacketSessionRef& session, Protocol::C_ENTER_GAME& pkt);
   	bool Handle_C_CHAT(PacketSessionRef& session, Protocol::C_CHAT& pkt);
   	bool Handle_C_SPAWN(PacketSessionRef& session, Protocol::C_SPAWN& pkt);
+  	bool Handle_C_LEAVE_GAME(PacketSessionRef& session, Protocol::C_LEAVE_GAME& pkt);
   	bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt);
   
   	class ClientPacketHandler
@@ -36,6 +38,7 @@
   			GPacketHandler[PKT_C_ENTER_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_ENTER_GAME > (Handle_C_ENTER_GAME, session, buffer, len); };
   			GPacketHandler[PKT_C_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_CHAT > (Handle_C_CHAT, session, buffer, len); };
   			GPacketHandler[PKT_C_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_SPAWN > (Handle_C_SPAWN, session, buffer, len); };
+  			GPacketHandler[PKT_C_LEAVE_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_LEAVE_GAME > (Handle_C_LEAVE_GAME, session, buffer, len); };
   			GPacketHandler[PKT_C_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_MOVE > (Handle_C_MOVE, session, buffer, len); };
   		}
   
@@ -47,6 +50,7 @@
   		static SendBufferRef MakeSendBuffer(Protocol::S_ENTER_GAME&pkt) { return MakeSendBuffer(pkt, PKT_S_ENTER_GAME); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_CHAT&pkt) { return MakeSendBuffer(pkt, PKT_S_CHAT); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_SPAWN); }
+  		static SendBufferRef MakeSendBuffer(Protocol::S_DESPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_DESPAWN); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
   
   	private:
@@ -93,8 +97,10 @@
   		PKT_S_CHAT = 3,
   		PKT_C_SPAWN = 4,
   		PKT_S_SPAWN = 5,
-  		PKT_C_MOVE = 6,
-  		PKT_S_MOVE = 7,
+  		PKT_C_LEAVE_GAME = 6,
+  		PKT_S_DESPAWN = 7,
+  		PKT_C_MOVE = 8,
+  		PKT_S_MOVE = 9,
   	};
   
   	// Custom Handlers
@@ -102,6 +108,7 @@
   	bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt);
   	bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt);
   	bool Handle_S_SPAWN(PacketSessionRef& session, Protocol::S_SPAWN& pkt);
+  	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
   	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
   
   	class ServerPacketHandler
@@ -114,6 +121,7 @@
   			GPacketHandler[PKT_S_ENTER_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ENTER_GAME > (Handle_S_ENTER_GAME, session, buffer, len); };
   			GPacketHandler[PKT_S_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_CHAT > (Handle_S_CHAT, session, buffer, len); };
   			GPacketHandler[PKT_S_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_SPAWN > (Handle_S_SPAWN, session, buffer, len); };
+  			GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DESPAWN > (Handle_S_DESPAWN, session, buffer, len); };
   			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
   		}
   
@@ -125,6 +133,7 @@
   		static SendBufferRef MakeSendBuffer(Protocol::C_ENTER_GAME&pkt) { return MakeSendBuffer(pkt, PKT_C_ENTER_GAME); }
   		static SendBufferRef MakeSendBuffer(Protocol::C_CHAT&pkt) { return MakeSendBuffer(pkt, PKT_C_CHAT); }
   		static SendBufferRef MakeSendBuffer(Protocol::C_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_C_SPAWN); }
+  		static SendBufferRef MakeSendBuffer(Protocol::C_LEAVE_GAME&pkt) { return MakeSendBuffer(pkt, PKT_C_LEAVE_GAME); }
   		static SendBufferRef MakeSendBuffer(Protocol::C_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
   
   	private:
@@ -181,65 +190,24 @@
   1개 파일이 복사되었습니다.
   C:Protocol.pb.cc
   1개 파일이 복사되었습니다.
+  C:ClientPacketHandler.h
+  1개 파일이 복사되었습니다.
+  C:Enum.pb.h
+  1개 파일이 복사되었습니다.
+  C:Enum.pb.cc
+  1개 파일이 복사되었습니다.
+  C:Struct.pb.h
+  1개 파일이 복사되었습니다.
+  C:Struct.pb.cc
+  1개 파일이 복사되었습니다.
+  C:Protocol.pb.h
+  1개 파일이 복사되었습니다.
+  C:Protocol.pb.cc
+  1개 파일이 복사되었습니다.
   C:ServerPacketHandler.h
   1개 파일이 복사되었습니다.
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
-  ServerPacketHandler.cpp
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\logging.h(100,15): warning C4251: 'google::protobuf::internal::LogMessage::message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::LogMessage'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\coded_stream.h(1282,28): warning C4251: 'google::protobuf::io::CodedOutputStream::default_serialization_deterministic_': struct 'std::atomic<bool>'에서는 class 'google::protobuf::io::CodedOutputStream'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2686): message : 'std::atomic<bool>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(307,23): warning C4251: 'google::protobuf::internal::SerialArena::space_allocated_': struct 'std::atomic<unsigned __int64>'에서는 class 'google::protobuf::internal::SerialArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2698): message : 'std::atomic<unsigned __int64>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(412,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::alloc_policy_': class 'google::protobuf::internal::TaggedAllocationPolicyPtr'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(112): message : 'google::protobuf::internal::TaggedAllocationPolicyPtr' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::threads_': struct 'std::atomic<google::protobuf::internal::SerialArena *>'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415): message : 'std::atomic<google::protobuf::internal::SerialArena *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(416,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::hint_': struct 'std::atomic<google::protobuf::internal::SerialArena *>'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415): message : 'std::atomic<google::protobuf::internal::SerialArena *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(77,43): warning C4251: 'google::protobuf::internal::LazyString::inited_': struct 'std::atomic<const std::string *>'에서는 class 'google::protobuf::internal::LazyString'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(77): message : 'std::atomic<const std::string *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(323,26): warning C4251: 'google::protobuf::internal::ArenaStringPtr::tagged_ptr_': class 'google::protobuf::internal::TaggedPtr<std::string>'에서는 struct 'google::protobuf::internal::ArenaStringPtr'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(118): message : 'google::protobuf::internal::TaggedPtr<std::string>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\metadata_lite.h(261,15): warning C4251: 'google::protobuf::internal::LiteUnknownFieldSetter::buffer_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::LiteUnknownFieldSetter'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\message_lite.h(445,30): warning C4251: 'google::protobuf::MessageLite::_internal_metadata_': class 'google::protobuf::internal::InternalMetadata'에서는 class 'google::protobuf::MessageLite'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\metadata_lite.h(62): message : 'google::protobuf::internal::InternalMetadata' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\implicit_weak_message.h(93,15): warning C4251: 'google::protobuf::internal::ImplicitWeakMessage::data_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::ImplicitWeakMessage'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243,30): warning C4251: 'google::protobuf::io::CopyingInputStreamAdaptor::buffer_': class 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>'에서는 class 'google::protobuf::io::CopyingInputStreamAdaptor'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243): message : 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(334,30): warning C4251: 'google::protobuf::io::CopyingOutputStreamAdaptor::buffer_': class 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>'에서는 class 'google::protobuf::io::CopyingOutputStreamAdaptor'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243): message : 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\generated_message_util.h(193,20): warning C4251: 'google::protobuf::internal::CachedSize::size_': struct 'std::atomic<int>'에서는 class 'google::protobuf::internal::CachedSize'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2693): message : 'std::atomic<int>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\mutex.h(136,40): warning C4251: 'google::protobuf::internal::WrappedMutex::mu_': class 'google::protobuf::internal::CallOnceInitializedMutex<std::mutex>'에서는 class 'google::protobuf::internal::WrappedMutex'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\mutex.h(136): message : 'google::protobuf::internal::CallOnceInitializedMutex<std::mutex>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(1627,25): warning C4251: 'google::protobuf::FileDescriptor::LazyInitData::once': struct 'std::once_flag'에서는 struct 'google::protobuf::FileDescriptor::LazyInitData'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xcall_once.h(20): message : 'std::once_flag' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2041,27): warning C4251: 'google::protobuf::DescriptorPool::tables_': class 'std::unique_ptr<google::protobuf::DescriptorPool::Tables,std::default_delete<google::protobuf::DescriptorPool::Tables>>'에서는 class 'google::protobuf::DescriptorPool'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2041): message : 'std::unique_ptr<google::protobuf::DescriptorPool::Tables,std::default_delete<google::protobuf::DescriptorPool::Tables>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051,31): warning C4251: 'google::protobuf::DescriptorPool::unused_import_track_files_': class 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>'에서는 class 'google::protobuf::DescriptorPool'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051): message : 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206,29): warning C4251: 'google::protobuf::UnknownFieldSet::fields_': class 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>'에서는 class 'google::protobuf::UnknownFieldSet'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206): message : 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1070,26): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_int32_t_': class 'google::protobuf::RepeatedField<int32_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1045): message : 'google::protobuf::RepeatedField<int32_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1071,26): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_int64_t_': class 'google::protobuf::RepeatedField<int64_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1047): message : 'google::protobuf::RepeatedField<int64_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1072,27): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_uint32_t_': class 'google::protobuf::RepeatedField<uint32_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1046): message : 'google::protobuf::RepeatedField<uint32_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1073,27): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_uint64_t_': class 'google::protobuf::RepeatedField<uint64_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1048): message : 'google::protobuf::RepeatedField<uint64_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1074,25): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_double_': class 'google::protobuf::RepeatedField<double>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1050): message : 'google::protobuf::RepeatedField<double>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1075,24): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_float_': class 'google::protobuf::RepeatedField<float>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1049): message : 'google::protobuf::RepeatedField<float>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   DummyClient.cpp
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
@@ -295,63 +263,16 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1049): message : 'google::protobuf::RepeatedField<float>' 선언을 참조하십시오.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
-  코드를 생성하고 있습니다...
-  Enum.pb.cc
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\logging.h(100,15): warning C4251: 'google::protobuf::internal::LogMessage::message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::LogMessage'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\coded_stream.h(1282,28): warning C4251: 'google::protobuf::io::CodedOutputStream::default_serialization_deterministic_': struct 'std::atomic<bool>'에서는 class 'google::protobuf::io::CodedOutputStream'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2686): message : 'std::atomic<bool>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(307,23): warning C4251: 'google::protobuf::internal::SerialArena::space_allocated_': struct 'std::atomic<unsigned __int64>'에서는 class 'google::protobuf::internal::SerialArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2698): message : 'std::atomic<unsigned __int64>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(412,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::alloc_policy_': class 'google::protobuf::internal::TaggedAllocationPolicyPtr'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(112): message : 'google::protobuf::internal::TaggedAllocationPolicyPtr' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::threads_': struct 'std::atomic<google::protobuf::internal::SerialArena *>'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415): message : 'std::atomic<google::protobuf::internal::SerialArena *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(416,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::hint_': struct 'std::atomic<google::protobuf::internal::SerialArena *>'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415): message : 'std::atomic<google::protobuf::internal::SerialArena *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(77,43): warning C4251: 'google::protobuf::internal::LazyString::inited_': struct 'std::atomic<const std::string *>'에서는 class 'google::protobuf::internal::LazyString'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(77): message : 'std::atomic<const std::string *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(323,26): warning C4251: 'google::protobuf::internal::ArenaStringPtr::tagged_ptr_': class 'google::protobuf::internal::TaggedPtr<std::string>'에서는 struct 'google::protobuf::internal::ArenaStringPtr'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(118): message : 'google::protobuf::internal::TaggedPtr<std::string>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\metadata_lite.h(261,15): warning C4251: 'google::protobuf::internal::LiteUnknownFieldSetter::buffer_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::LiteUnknownFieldSetter'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\message_lite.h(445,30): warning C4251: 'google::protobuf::MessageLite::_internal_metadata_': class 'google::protobuf::internal::InternalMetadata'에서는 class 'google::protobuf::MessageLite'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\metadata_lite.h(62): message : 'google::protobuf::internal::InternalMetadata' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\implicit_weak_message.h(93,15): warning C4251: 'google::protobuf::internal::ImplicitWeakMessage::data_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::ImplicitWeakMessage'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\generated_message_util.h(193,20): warning C4251: 'google::protobuf::internal::CachedSize::size_': struct 'std::atomic<int>'에서는 class 'google::protobuf::internal::CachedSize'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2693): message : 'std::atomic<int>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\mutex.h(136,40): warning C4251: 'google::protobuf::internal::WrappedMutex::mu_': class 'google::protobuf::internal::CallOnceInitializedMutex<std::mutex>'에서는 class 'google::protobuf::internal::WrappedMutex'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\mutex.h(136): message : 'google::protobuf::internal::CallOnceInitializedMutex<std::mutex>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(1627,25): warning C4251: 'google::protobuf::FileDescriptor::LazyInitData::once': struct 'std::once_flag'에서는 struct 'google::protobuf::FileDescriptor::LazyInitData'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xcall_once.h(20): message : 'std::once_flag' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2041,27): warning C4251: 'google::protobuf::DescriptorPool::tables_': class 'std::unique_ptr<google::protobuf::DescriptorPool::Tables,std::default_delete<google::protobuf::DescriptorPool::Tables>>'에서는 class 'google::protobuf::DescriptorPool'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2041): message : 'std::unique_ptr<google::protobuf::DescriptorPool::Tables,std::default_delete<google::protobuf::DescriptorPool::Tables>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051,31): warning C4251: 'google::protobuf::DescriptorPool::unused_import_track_files_': class 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>'에서는 class 'google::protobuf::DescriptorPool'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051): message : 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243,30): warning C4251: 'google::protobuf::io::CopyingInputStreamAdaptor::buffer_': class 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>'에서는 class 'google::protobuf::io::CopyingInputStreamAdaptor'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243): message : 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(334,30): warning C4251: 'google::protobuf::io::CopyingOutputStreamAdaptor::buffer_': class 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>'에서는 class 'google::protobuf::io::CopyingOutputStreamAdaptor'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243): message : 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206,29): warning C4251: 'google::protobuf::UnknownFieldSet::fields_': class 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>'에서는 class 'google::protobuf::UnknownFieldSet'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206): message : 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1070,26): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_int32_t_': class 'google::protobuf::RepeatedField<int32_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1045): message : 'google::protobuf::RepeatedField<int32_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1071,26): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_int64_t_': class 'google::protobuf::RepeatedField<int64_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1047): message : 'google::protobuf::RepeatedField<int64_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1072,27): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_uint32_t_': class 'google::protobuf::RepeatedField<uint32_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1046): message : 'google::protobuf::RepeatedField<uint32_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1073,27): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_uint64_t_': class 'google::protobuf::RepeatedField<uint64_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1048): message : 'google::protobuf::RepeatedField<uint64_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1074,25): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_double_': class 'google::protobuf::RepeatedField<double>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1050): message : 'google::protobuf::RepeatedField<double>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1075,24): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_float_': class 'google::protobuf::RepeatedField<float>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1049): message : 'google::protobuf::RepeatedField<float>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
-  Protocol.pb.cc
+C:\UnrealProject\IOCPTestServer\ServerCore\Memory.h(47,1): error C2248: 'ServerSession::~ServerSession': private 멤버('ServerSession' 클래스에서 선언)에 액세스할 수 없습니다.
+C:\UnrealProject\IOCPTestServer\DummyClient\DummyClient.cpp(46): message : 컴파일러에서 여기에 'ServerSession::~ServerSession'을(를) 생성했습니다.
+C:\UnrealProject\IOCPTestServer\DummyClient\DummyClient.cpp(10): message : 'ServerSession' 선언을 참조하십시오.
+C:\UnrealProject\IOCPTestServer\ServerCore\Memory.h(54): message : 컴파일되는 함수 템플릿 인스턴스화 'void FrokEngine::xdelete<ServerSession>(Type *)'에 대한 참조를 확인하세요.
+          with
+          [
+              Type=ServerSession
+          ]
+C:\UnrealProject\IOCPTestServer\DummyClient\DummyClient.cpp(79): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<ServerSession> FrokEngine::MakeShared<ServerSession,>(void)'에 대한 참조를 확인하세요.
+  ServerPacketHandler.cpp
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\logging.h(100,15): warning C4251: 'google::protobuf::internal::LogMessage::message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::LogMessage'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
@@ -390,61 +311,6 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2041): message : 'std::unique_ptr<google::protobuf::DescriptorPool::Tables,std::default_delete<google::protobuf::DescriptorPool::Tables>>' 선언을 참조하십시오.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051,31): warning C4251: 'google::protobuf::DescriptorPool::unused_import_track_files_': class 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>'에서는 class 'google::protobuf::DescriptorPool'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051): message : 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206,29): warning C4251: 'google::protobuf::UnknownFieldSet::fields_': class 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>'에서는 class 'google::protobuf::UnknownFieldSet'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206): message : 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1070,26): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_int32_t_': class 'google::protobuf::RepeatedField<int32_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1045): message : 'google::protobuf::RepeatedField<int32_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1071,26): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_int64_t_': class 'google::protobuf::RepeatedField<int64_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1047): message : 'google::protobuf::RepeatedField<int64_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1072,27): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_uint32_t_': class 'google::protobuf::RepeatedField<uint32_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1046): message : 'google::protobuf::RepeatedField<uint32_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1073,27): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_uint64_t_': class 'google::protobuf::RepeatedField<uint64_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1048): message : 'google::protobuf::RepeatedField<uint64_t>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1074,25): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_double_': class 'google::protobuf::RepeatedField<double>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1050): message : 'google::protobuf::RepeatedField<double>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1075,24): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_float_': class 'google::protobuf::RepeatedField<float>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1049): message : 'google::protobuf::RepeatedField<float>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
-  Struct.pb.cc
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\logging.h(100,15): warning C4251: 'google::protobuf::internal::LogMessage::message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::LogMessage'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\coded_stream.h(1282,28): warning C4251: 'google::protobuf::io::CodedOutputStream::default_serialization_deterministic_': struct 'std::atomic<bool>'에서는 class 'google::protobuf::io::CodedOutputStream'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2686): message : 'std::atomic<bool>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(307,23): warning C4251: 'google::protobuf::internal::SerialArena::space_allocated_': struct 'std::atomic<unsigned __int64>'에서는 class 'google::protobuf::internal::SerialArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2698): message : 'std::atomic<unsigned __int64>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(412,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::alloc_policy_': class 'google::protobuf::internal::TaggedAllocationPolicyPtr'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(112): message : 'google::protobuf::internal::TaggedAllocationPolicyPtr' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::threads_': struct 'std::atomic<google::protobuf::internal::SerialArena *>'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415): message : 'std::atomic<google::protobuf::internal::SerialArena *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(416,29): warning C4251: 'google::protobuf::internal::ThreadSafeArena::hint_': struct 'std::atomic<google::protobuf::internal::SerialArena *>'에서는 class 'google::protobuf::internal::ThreadSafeArena'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arena_impl.h(415): message : 'std::atomic<google::protobuf::internal::SerialArena *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(77,43): warning C4251: 'google::protobuf::internal::LazyString::inited_': struct 'std::atomic<const std::string *>'에서는 class 'google::protobuf::internal::LazyString'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(77): message : 'std::atomic<const std::string *>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(323,26): warning C4251: 'google::protobuf::internal::ArenaStringPtr::tagged_ptr_': class 'google::protobuf::internal::TaggedPtr<std::string>'에서는 struct 'google::protobuf::internal::ArenaStringPtr'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\arenastring.h(118): message : 'google::protobuf::internal::TaggedPtr<std::string>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\metadata_lite.h(261,15): warning C4251: 'google::protobuf::internal::LiteUnknownFieldSetter::buffer_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::LiteUnknownFieldSetter'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\message_lite.h(445,30): warning C4251: 'google::protobuf::MessageLite::_internal_metadata_': class 'google::protobuf::internal::InternalMetadata'에서는 class 'google::protobuf::MessageLite'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\metadata_lite.h(62): message : 'google::protobuf::internal::InternalMetadata' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\implicit_weak_message.h(93,15): warning C4251: 'google::protobuf::internal::ImplicitWeakMessage::data_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::internal::ImplicitWeakMessage'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xstring(4919): message : 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\generated_message_util.h(193,20): warning C4251: 'google::protobuf::internal::CachedSize::size_': struct 'std::atomic<int>'에서는 class 'google::protobuf::internal::CachedSize'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\atomic(2693): message : 'std::atomic<int>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\mutex.h(136,40): warning C4251: 'google::protobuf::internal::WrappedMutex::mu_': class 'google::protobuf::internal::CallOnceInitializedMutex<std::mutex>'에서는 class 'google::protobuf::internal::WrappedMutex'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\mutex.h(136): message : 'google::protobuf::internal::CallOnceInitializedMutex<std::mutex>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(1627,25): warning C4251: 'google::protobuf::FileDescriptor::LazyInitData::once': struct 'std::once_flag'에서는 struct 'google::protobuf::FileDescriptor::LazyInitData'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\xcall_once.h(20): message : 'std::once_flag' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2041,27): warning C4251: 'google::protobuf::DescriptorPool::tables_': class 'std::unique_ptr<google::protobuf::DescriptorPool::Tables,std::default_delete<google::protobuf::DescriptorPool::Tables>>'에서는 class 'google::protobuf::DescriptorPool'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2041): message : 'std::unique_ptr<google::protobuf::DescriptorPool::Tables,std::default_delete<google::protobuf::DescriptorPool::Tables>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051,31): warning C4251: 'google::protobuf::DescriptorPool::unused_import_track_files_': class 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>'에서는 class 'google::protobuf::DescriptorPool'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\descriptor.h(2051): message : 'std::map<std::string,bool,std::less<std::string>,std::allocator<std::pair<const std::string,bool>>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243,30): warning C4251: 'google::protobuf::io::CopyingInputStreamAdaptor::buffer_': class 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>'에서는 class 'google::protobuf::io::CopyingInputStreamAdaptor'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243): message : 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>' 선언을 참조하십시오.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(334,30): warning C4251: 'google::protobuf::io::CopyingOutputStreamAdaptor::buffer_': class 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>'에서는 class 'google::protobuf::io::CopyingOutputStreamAdaptor'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
-C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\io\zero_copy_stream_impl_lite.h(243): message : 'std::unique_ptr<uint8_t [],std::default_delete<uint8_t []>>' 선언을 참조하십시오.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206,29): warning C4251: 'google::protobuf::UnknownFieldSet::fields_': class 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>'에서는 class 'google::protobuf::UnknownFieldSet'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\unknown_field_set.h(206): message : 'std::vector<google::protobuf::UnknownField,std::allocator<google::protobuf::UnknownField>>' 선언을 참조하십시오.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1070,26): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_int32_t_': class 'google::protobuf::RepeatedField<int32_t>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
@@ -462,6 +328,3 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   코드를 생성하고 있습니다...
-  LINK : C:\UnrealProject\IOCPTestServer\Binary\Debug\DummyClient.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
-LINK : warning LNK4098: 'MSVCRT' defaultlib가 다른 라이브러리와 충돌합니다. /NODEFAULTLIB:library를 사용하십시오.
-  DummyClient.vcxproj -> C:\UnrealProject\IOCPTestServer\Binary\Debug\DummyClient.exe

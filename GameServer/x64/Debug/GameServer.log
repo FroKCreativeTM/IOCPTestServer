@@ -1,5 +1,4 @@
-﻿Protocol.proto(4,1): warning G1A4DC0EC: Import Enum.proto is unused.
-  #pragma once
+﻿  #pragma once
   #include "Protocol.pb.h"
   
   namespace FrokEngine
@@ -266,15 +265,19 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
   ClientPacketHandler.cpp
   ConfigManager.cpp
   MapData.cpp
-  PlayerManager.cpp
-  GameObject.cpp
-  ObjectManager.cpp
-  Player.cpp
   GameRoom.cpp
   GameServer.cpp
   GameSession.cpp
   GameSessionManager.cpp
   UsageManager.cpp
+  코드를 생성하고 있습니다...
+  PlayerManager.cpp
+  GameObject.cpp
+  ObjectManager.cpp
+  코드를 생성하고 있습니다...
+  Monster.cpp
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(42,83): warning C4244: '인수': 'float'에서 'int32_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Player.cpp
   코드를 생성하고 있습니다...
   Enum.pb.cc
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
@@ -442,4 +445,5 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   코드를 생성하고 있습니다...
+LINK : warning LNK4098: 'MSVCRT' defaultlib가 다른 라이브러리와 충돌합니다. /NODEFAULTLIB:library를 사용하십시오.
   GameServer.vcxproj -> C:\UnrealProject\IOCPTestServer\Binary\Debug\GameServer.exe
