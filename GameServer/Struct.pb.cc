@@ -42,6 +42,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PosInfoDefaultTypeInternal _Pos
 constexpr Player::Player(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : objectinfo_(nullptr)
+  , stat_(nullptr)
+  , gameobjecttype_(0)
+
   , playertype_(0)
 
   , state_(0)
@@ -55,6 +58,29 @@ struct PlayerDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PlayerDefaultTypeInternal _Player_default_instance_;
+constexpr Monster::Monster(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : objectinfo_(nullptr)
+  , stat_(nullptr)
+  , gameobjecttype_(0)
+
+  , state_(0)
+
+  , movepoint_(0)
+  , hitpoint_(0)
+  , tracerange_(0)
+  , hitrange_(0)
+  , isattack_(false)
+  , istracing_(false){}
+struct MonsterDefaultTypeInternal {
+  constexpr MonsterDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~MonsterDefaultTypeInternal() {}
+  union {
+    Monster _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MonsterDefaultTypeInternal _Monster_default_instance_;
 constexpr StatInfo::StatInfo(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : level_(0)
@@ -91,7 +117,7 @@ struct ObjectInfoDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ObjectInfoDefaultTypeInternal _ObjectInfo_default_instance_;
 }  // namespace Protocol
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Struct_2eproto[4];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Struct_2eproto[5];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_Struct_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Struct_2eproto = nullptr;
 
@@ -119,9 +145,27 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::Player, gameobjecttype_),
   PROTOBUF_FIELD_OFFSET(::Protocol::Player, playertype_),
   PROTOBUF_FIELD_OFFSET(::Protocol::Player, objectinfo_),
   PROTOBUF_FIELD_OFFSET(::Protocol::Player, state_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Player, stat_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, gameobjecttype_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, objectinfo_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, state_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, stat_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, movepoint_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, hitpoint_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, tracerange_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, hitrange_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, isattack_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::Monster, istracing_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::StatInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -151,13 +195,15 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::PosInfo)},
   { 17, -1, -1, sizeof(::Protocol::Player)},
-  { 26, -1, -1, sizeof(::Protocol::StatInfo)},
-  { 41, -1, -1, sizeof(::Protocol::ObjectInfo)},
+  { 28, -1, -1, sizeof(::Protocol::Monster)},
+  { 44, -1, -1, sizeof(::Protocol::StatInfo)},
+  { 59, -1, -1, sizeof(::Protocol::ObjectInfo)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Protocol::_PosInfo_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Protocol::_Player_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Protocol::_Monster_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Protocol::_StatInfo_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Protocol::_ObjectInfo_default_instance_),
 };
@@ -168,25 +214,34 @@ const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "posZ\030\003 \001(\002\022\013\n\003yaw\030\004 \001(\002\022\014\n\004roll\030\005 \001(\002\022\r\n"
   "\005pitch\030\006 \001(\002\022\r\n\005veloX\030\007 \001(\002\022\r\n\005veloY\030\010 \001"
   "(\002\022\r\n\005veloZ\030\t \001(\002\022\r\n\005speed\030\n \001(\002\022\017\n\007isIn"
-  "Air\030\013 \001(\010\"\204\001\n\006Player\022(\n\nplayerType\030\001 \001(\016"
-  "2\024.Protocol.PlayerType\022(\n\nobjectInfo\030\002 \001"
-  "(\0132\024.Protocol.ObjectInfo\022&\n\005state\030\003 \001(\0162"
-  "\027.Protocol.CreatureState\"\215\001\n\010StatInfo\022\r\n"
-  "\005level\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\n\n\002mp\030\003 \001(\005\022\r\n\005"
-  "maxHp\030\004 \001(\005\022\r\n\005maxMp\030\005 \001(\005\022\016\n\006attack\030\006 \001"
-  "(\005\022\r\n\005speed\030\007 \001(\002\022\013\n\003exp\030\010 \001(\005\022\020\n\010totalE"
-  "xp\030\t \001(\005\"v\n\nObjectInfo\022\020\n\010objectId\030\001 \001(\005"
-  "\022\014\n\004name\030\002 \001(\t\022\"\n\007posInfo\030\003 \001(\0132\021.Protoc"
-  "ol.PosInfo\022$\n\010statInfo\030\004 \001(\0132\022.Protocol."
-  "StatInfob\006proto3"
+  "Air\030\013 \001(\010\"\330\001\n\006Player\0220\n\016gameObjectType\030\001"
+  " \001(\0162\030.Protocol.GameObjectType\022(\n\nplayer"
+  "Type\030\002 \001(\0162\024.Protocol.PlayerType\022(\n\nobje"
+  "ctInfo\030\003 \001(\0132\024.Protocol.ObjectInfo\022&\n\005st"
+  "ate\030\004 \001(\0162\027.Protocol.CreatureState\022 \n\004st"
+  "at\030\005 \001(\0132\022.Protocol.StatInfo\"\237\002\n\007Monster"
+  "\0220\n\016gameObjectType\030\001 \001(\0162\030.Protocol.Game"
+  "ObjectType\022(\n\nobjectInfo\030\002 \001(\0132\024.Protoco"
+  "l.ObjectInfo\022&\n\005state\030\003 \001(\0162\027.Protocol.C"
+  "reatureState\022 \n\004stat\030\004 \001(\0132\022.Protocol.St"
+  "atInfo\022\021\n\tmovePoint\030\005 \001(\002\022\020\n\010hitPoint\030\006 "
+  "\001(\002\022\022\n\ntraceRange\030\007 \001(\005\022\020\n\010hitRange\030\010 \001("
+  "\005\022\020\n\010isAttack\030\t \001(\010\022\021\n\tisTracing\030\n \001(\010\"\215"
+  "\001\n\010StatInfo\022\r\n\005level\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\n"
+  "\n\002mp\030\003 \001(\005\022\r\n\005maxHp\030\004 \001(\005\022\r\n\005maxMp\030\005 \001(\005"
+  "\022\016\n\006attack\030\006 \001(\005\022\r\n\005speed\030\007 \001(\002\022\013\n\003exp\030\010"
+  " \001(\005\022\020\n\010totalExp\030\t \001(\005\"v\n\nObjectInfo\022\020\n\010"
+  "objectId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\"\n\007posInfo\030"
+  "\003 \001(\0132\021.Protocol.PosInfo\022$\n\010statInfo\030\004 \001"
+  "(\0132\022.Protocol.StatInfob\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Struct_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Struct_2eproto = {
-  false, false, 616, descriptor_table_protodef_Struct_2eproto, "Struct.proto", 
-  &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 4,
+  false, false, 990, descriptor_table_protodef_Struct_2eproto, "Struct.proto", 
+  &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 5,
   schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
   file_level_metadata_Struct_2eproto, file_level_enum_descriptors_Struct_2eproto, file_level_service_descriptors_Struct_2eproto,
 };
@@ -733,11 +788,16 @@ void PosInfo::InternalSwap(PosInfo* other) {
 class Player::_Internal {
  public:
   static const ::Protocol::ObjectInfo& objectinfo(const Player* msg);
+  static const ::Protocol::StatInfo& stat(const Player* msg);
 };
 
 const ::Protocol::ObjectInfo&
 Player::_Internal::objectinfo(const Player* msg) {
   return *msg->objectinfo_;
+}
+const ::Protocol::StatInfo&
+Player::_Internal::stat(const Player* msg) {
+  return *msg->stat_;
 }
 Player::Player(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -756,9 +816,14 @@ Player::Player(const Player& from)
   } else {
     objectinfo_ = nullptr;
   }
-  ::memcpy(&playertype_, &from.playertype_,
+  if (from._internal_has_stat()) {
+    stat_ = new ::Protocol::StatInfo(*from.stat_);
+  } else {
+    stat_ = nullptr;
+  }
+  ::memcpy(&gameobjecttype_, &from.gameobjecttype_,
     static_cast<size_t>(reinterpret_cast<char*>(&state_) -
-    reinterpret_cast<char*>(&playertype_)) + sizeof(state_));
+    reinterpret_cast<char*>(&gameobjecttype_)) + sizeof(state_));
   // @@protoc_insertion_point(copy_constructor:Protocol.Player)
 }
 
@@ -779,6 +844,7 @@ Player::~Player() {
 inline void Player::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   if (this != internal_default_instance()) delete objectinfo_;
+  if (this != internal_default_instance()) delete stat_;
 }
 
 void Player::ArenaDtor(void* object) {
@@ -801,9 +867,13 @@ void Player::Clear() {
     delete objectinfo_;
   }
   objectinfo_ = nullptr;
-  ::memset(&playertype_, 0, static_cast<size_t>(
+  if (GetArenaForAllocation() == nullptr && stat_ != nullptr) {
+    delete stat_;
+  }
+  stat_ = nullptr;
+  ::memset(&gameobjecttype_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&state_) -
-      reinterpret_cast<char*>(&playertype_)) + sizeof(state_));
+      reinterpret_cast<char*>(&gameobjecttype_)) + sizeof(state_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -813,29 +883,46 @@ const char* Player::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::int
     uint32_t tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.PlayerType playerType = 1;
+      // .Protocol.GameObjectType gameObjectType = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_gameobjecttype(static_cast<::Protocol::GameObjectType>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.PlayerType playerType = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_playertype(static_cast<::Protocol::PlayerType>(val));
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.ObjectInfo objectInfo = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+      // .Protocol.ObjectInfo objectInfo = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_objectinfo(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.CreatureState state = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+      // .Protocol.CreatureState state = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_state(static_cast<::Protocol::CreatureState>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.StatInfo stat = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          ptr = ctx->ParseMessage(_internal_mutable_stat(), ptr);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -868,26 +955,41 @@ uint8_t* Player::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.PlayerType playerType = 1;
+  // .Protocol.GameObjectType gameObjectType = 1;
+  if (this->_internal_gameobjecttype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_gameobjecttype(), target);
+  }
+
+  // .Protocol.PlayerType playerType = 2;
   if (this->_internal_playertype() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      1, this->_internal_playertype(), target);
+      2, this->_internal_playertype(), target);
   }
 
-  // .Protocol.ObjectInfo objectInfo = 2;
+  // .Protocol.ObjectInfo objectInfo = 3;
   if (this->_internal_has_objectinfo()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        2, _Internal::objectinfo(this), target, stream);
+        3, _Internal::objectinfo(this), target, stream);
   }
 
-  // .Protocol.CreatureState state = 3;
+  // .Protocol.CreatureState state = 4;
   if (this->_internal_state() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      3, this->_internal_state(), target);
+      4, this->_internal_state(), target);
+  }
+
+  // .Protocol.StatInfo stat = 5;
+  if (this->_internal_has_stat()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        5, _Internal::stat(this), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -906,20 +1008,33 @@ size_t Player::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.ObjectInfo objectInfo = 2;
+  // .Protocol.ObjectInfo objectInfo = 3;
   if (this->_internal_has_objectinfo()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *objectinfo_);
   }
 
-  // .Protocol.PlayerType playerType = 1;
+  // .Protocol.StatInfo stat = 5;
+  if (this->_internal_has_stat()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *stat_);
+  }
+
+  // .Protocol.GameObjectType gameObjectType = 1;
+  if (this->_internal_gameobjecttype() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_gameobjecttype());
+  }
+
+  // .Protocol.PlayerType playerType = 2;
   if (this->_internal_playertype() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_playertype());
   }
 
-  // .Protocol.CreatureState state = 3;
+  // .Protocol.CreatureState state = 4;
   if (this->_internal_state() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_state());
@@ -949,6 +1064,12 @@ void Player::MergeFrom(const Player& from) {
 
   if (from._internal_has_objectinfo()) {
     _internal_mutable_objectinfo()->::Protocol::ObjectInfo::MergeFrom(from._internal_objectinfo());
+  }
+  if (from._internal_has_stat()) {
+    _internal_mutable_stat()->::Protocol::StatInfo::MergeFrom(from._internal_stat());
+  }
+  if (from._internal_gameobjecttype() != 0) {
+    _internal_set_gameobjecttype(from._internal_gameobjecttype());
   }
   if (from._internal_playertype() != 0) {
     _internal_set_playertype(from._internal_playertype());
@@ -985,6 +1106,462 @@ void Player::InternalSwap(Player* other) {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
       file_level_metadata_Struct_2eproto[1]);
+}
+
+// ===================================================================
+
+class Monster::_Internal {
+ public:
+  static const ::Protocol::ObjectInfo& objectinfo(const Monster* msg);
+  static const ::Protocol::StatInfo& stat(const Monster* msg);
+};
+
+const ::Protocol::ObjectInfo&
+Monster::_Internal::objectinfo(const Monster* msg) {
+  return *msg->objectinfo_;
+}
+const ::Protocol::StatInfo&
+Monster::_Internal::stat(const Monster* msg) {
+  return *msg->stat_;
+}
+Monster::Monster(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:Protocol.Monster)
+}
+Monster::Monster(const Monster& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_objectinfo()) {
+    objectinfo_ = new ::Protocol::ObjectInfo(*from.objectinfo_);
+  } else {
+    objectinfo_ = nullptr;
+  }
+  if (from._internal_has_stat()) {
+    stat_ = new ::Protocol::StatInfo(*from.stat_);
+  } else {
+    stat_ = nullptr;
+  }
+  ::memcpy(&gameobjecttype_, &from.gameobjecttype_,
+    static_cast<size_t>(reinterpret_cast<char*>(&istracing_) -
+    reinterpret_cast<char*>(&gameobjecttype_)) + sizeof(istracing_));
+  // @@protoc_insertion_point(copy_constructor:Protocol.Monster)
+}
+
+inline void Monster::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&objectinfo_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&istracing_) -
+    reinterpret_cast<char*>(&objectinfo_)) + sizeof(istracing_));
+}
+
+Monster::~Monster() {
+  // @@protoc_insertion_point(destructor:Protocol.Monster)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+inline void Monster::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete objectinfo_;
+  if (this != internal_default_instance()) delete stat_;
+}
+
+void Monster::ArenaDtor(void* object) {
+  Monster* _this = reinterpret_cast< Monster* >(object);
+  (void)_this;
+}
+void Monster::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Monster::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void Monster::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.Monster)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && objectinfo_ != nullptr) {
+    delete objectinfo_;
+  }
+  objectinfo_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && stat_ != nullptr) {
+    delete stat_;
+  }
+  stat_ = nullptr;
+  ::memset(&gameobjecttype_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&istracing_) -
+      reinterpret_cast<char*>(&gameobjecttype_)) + sizeof(istracing_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* Monster::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .Protocol.GameObjectType gameObjectType = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_gameobjecttype(static_cast<::Protocol::GameObjectType>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.ObjectInfo objectInfo = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_objectinfo(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.CreatureState state = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_state(static_cast<::Protocol::CreatureState>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.StatInfo stat = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_stat(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // float movePoint = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
+          movepoint_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // float hitPoint = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 53)) {
+          hitpoint_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 traceRange = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+          tracerange_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 hitRange = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
+          hitrange_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool isAttack = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          isattack_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool isTracing = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
+          istracing_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* Monster::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.Monster)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .Protocol.GameObjectType gameObjectType = 1;
+  if (this->_internal_gameobjecttype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_gameobjecttype(), target);
+  }
+
+  // .Protocol.ObjectInfo objectInfo = 2;
+  if (this->_internal_has_objectinfo()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        2, _Internal::objectinfo(this), target, stream);
+  }
+
+  // .Protocol.CreatureState state = 3;
+  if (this->_internal_state() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      3, this->_internal_state(), target);
+  }
+
+  // .Protocol.StatInfo stat = 4;
+  if (this->_internal_has_stat()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        4, _Internal::stat(this), target, stream);
+  }
+
+  // float movePoint = 5;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_movepoint = this->_internal_movepoint();
+  uint32_t raw_movepoint;
+  memcpy(&raw_movepoint, &tmp_movepoint, sizeof(tmp_movepoint));
+  if (raw_movepoint != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_movepoint(), target);
+  }
+
+  // float hitPoint = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_hitpoint = this->_internal_hitpoint();
+  uint32_t raw_hitpoint;
+  memcpy(&raw_hitpoint, &tmp_hitpoint, sizeof(tmp_hitpoint));
+  if (raw_hitpoint != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_hitpoint(), target);
+  }
+
+  // int32 traceRange = 7;
+  if (this->_internal_tracerange() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_tracerange(), target);
+  }
+
+  // int32 hitRange = 8;
+  if (this->_internal_hitrange() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_hitrange(), target);
+  }
+
+  // bool isAttack = 9;
+  if (this->_internal_isattack() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(9, this->_internal_isattack(), target);
+  }
+
+  // bool isTracing = 10;
+  if (this->_internal_istracing() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(10, this->_internal_istracing(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.Monster)
+  return target;
+}
+
+size_t Monster::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.Monster)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .Protocol.ObjectInfo objectInfo = 2;
+  if (this->_internal_has_objectinfo()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *objectinfo_);
+  }
+
+  // .Protocol.StatInfo stat = 4;
+  if (this->_internal_has_stat()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *stat_);
+  }
+
+  // .Protocol.GameObjectType gameObjectType = 1;
+  if (this->_internal_gameobjecttype() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_gameobjecttype());
+  }
+
+  // .Protocol.CreatureState state = 3;
+  if (this->_internal_state() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_state());
+  }
+
+  // float movePoint = 5;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_movepoint = this->_internal_movepoint();
+  uint32_t raw_movepoint;
+  memcpy(&raw_movepoint, &tmp_movepoint, sizeof(tmp_movepoint));
+  if (raw_movepoint != 0) {
+    total_size += 1 + 4;
+  }
+
+  // float hitPoint = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_hitpoint = this->_internal_hitpoint();
+  uint32_t raw_hitpoint;
+  memcpy(&raw_hitpoint, &tmp_hitpoint, sizeof(tmp_hitpoint));
+  if (raw_hitpoint != 0) {
+    total_size += 1 + 4;
+  }
+
+  // int32 traceRange = 7;
+  if (this->_internal_tracerange() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_tracerange());
+  }
+
+  // int32 hitRange = 8;
+  if (this->_internal_hitrange() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_hitrange());
+  }
+
+  // bool isAttack = 9;
+  if (this->_internal_isattack() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool isTracing = 10;
+  if (this->_internal_istracing() != 0) {
+    total_size += 1 + 1;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Monster::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    Monster::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Monster::GetClassData() const { return &_class_data_; }
+
+void Monster::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<Monster *>(to)->MergeFrom(
+      static_cast<const Monster &>(from));
+}
+
+
+void Monster::MergeFrom(const Monster& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Protocol.Monster)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_objectinfo()) {
+    _internal_mutable_objectinfo()->::Protocol::ObjectInfo::MergeFrom(from._internal_objectinfo());
+  }
+  if (from._internal_has_stat()) {
+    _internal_mutable_stat()->::Protocol::StatInfo::MergeFrom(from._internal_stat());
+  }
+  if (from._internal_gameobjecttype() != 0) {
+    _internal_set_gameobjecttype(from._internal_gameobjecttype());
+  }
+  if (from._internal_state() != 0) {
+    _internal_set_state(from._internal_state());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_movepoint = from._internal_movepoint();
+  uint32_t raw_movepoint;
+  memcpy(&raw_movepoint, &tmp_movepoint, sizeof(tmp_movepoint));
+  if (raw_movepoint != 0) {
+    _internal_set_movepoint(from._internal_movepoint());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_hitpoint = from._internal_hitpoint();
+  uint32_t raw_hitpoint;
+  memcpy(&raw_hitpoint, &tmp_hitpoint, sizeof(tmp_hitpoint));
+  if (raw_hitpoint != 0) {
+    _internal_set_hitpoint(from._internal_hitpoint());
+  }
+  if (from._internal_tracerange() != 0) {
+    _internal_set_tracerange(from._internal_tracerange());
+  }
+  if (from._internal_hitrange() != 0) {
+    _internal_set_hitrange(from._internal_hitrange());
+  }
+  if (from._internal_isattack() != 0) {
+    _internal_set_isattack(from._internal_isattack());
+  }
+  if (from._internal_istracing() != 0) {
+    _internal_set_istracing(from._internal_istracing());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Monster::CopyFrom(const Monster& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.Monster)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Monster::IsInitialized() const {
+  return true;
+}
+
+void Monster::InternalSwap(Monster* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Monster, istracing_)
+      + sizeof(Monster::istracing_)
+      - PROTOBUF_FIELD_OFFSET(Monster, objectinfo_)>(
+          reinterpret_cast<char*>(&objectinfo_),
+          reinterpret_cast<char*>(&other->objectinfo_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata Monster::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
+      file_level_metadata_Struct_2eproto[2]);
 }
 
 // ===================================================================
@@ -1362,7 +1939,7 @@ void StatInfo::InternalSwap(StatInfo* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata StatInfo::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
-      file_level_metadata_Struct_2eproto[2]);
+      file_level_metadata_Struct_2eproto[3]);
 }
 
 // ===================================================================
@@ -1681,7 +2258,7 @@ void ObjectInfo::InternalSwap(ObjectInfo* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ObjectInfo::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
-      file_level_metadata_Struct_2eproto[3]);
+      file_level_metadata_Struct_2eproto[4]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -1692,6 +2269,9 @@ template<> PROTOBUF_NOINLINE ::Protocol::PosInfo* Arena::CreateMaybeMessage< ::P
 }
 template<> PROTOBUF_NOINLINE ::Protocol::Player* Arena::CreateMaybeMessage< ::Protocol::Player >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::Player >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::Monster* Arena::CreateMaybeMessage< ::Protocol::Monster >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::Monster >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Protocol::StatInfo* Arena::CreateMaybeMessage< ::Protocol::StatInfo >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::StatInfo >(arena);

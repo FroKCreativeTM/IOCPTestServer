@@ -98,6 +98,13 @@ int main(int argc, char* argv[])
 		GThreadManager->Launch([&service]()
 			{
 				DoWorkerJob(service);
+				
+				// 만약 서버 상에 플레이어 수가 1명이라도 있으면
+				if (GRoom->GetPlayerNum() > 0)
+				{
+					// 몬스터의 트레이싱 기능을 켠다.
+					GRoom->DoTimer(16, &GameRoom::CheckNearMonster);
+				}
 			});
 	}
 

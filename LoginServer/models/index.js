@@ -6,11 +6,7 @@ import { ServerInfo } from './serverInfo.js';
 
 const env = process.env.NODE_ENV || 'development';
 
-<<<<<<< HEAD
-import jsonObject from "../config/config.json" // assert {type: "json"};
-=======
 import jsonObject from "../config/config.json" //assert {type: "json"};
->>>>>>> parent of 2e74f45 (todo 리스트 작성)
 const config = jsonObject[env];
 const db = {};
 

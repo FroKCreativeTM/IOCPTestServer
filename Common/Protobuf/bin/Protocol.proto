@@ -40,20 +40,25 @@ message C_SPAWN
 
 message S_SPAWN
 {
-	CreatureState CreatureState = 1;
-	Player object = 2;
+	Player player = 1;
 }
 
-// ????? ??? ??? ??
+// 몬스터야 서버가 관리하는 거니까
+message S_MONSTERSPAWN
+{
+	Monster monster = 1;
+}
+
+// 플레이어가 나간다면
 message C_LEAVE_GAME
 {
-	// ?? ??? ???.
+	// 나간 플레이어에 대한 정보를 클라이언트가 전달한다.
 	Player leavePlayer = 1;
 }
 
 message S_DESPAWN
 {
-	// ?? ??? ?? ??? ??? ?? ???? ????.
+	// 나간 플레이어의 id를 broadcast한다.
 	uint64 playerId = 1;
 	Player player = 2;
 }
@@ -71,15 +76,3 @@ message S_MOVE
 	PosInfo posInfo = 2;
 	CreatureState CreatureState = 3;
 }
-
-// message C_JUMP
-// {
-// 	// who is jumping
-// 	uint64 playerId = 1;
-// }
-// 
-// message S_JUMP
-// {
-// 	// send all player for know jumping player
-// 	uint64 playerId = 1;
-// }

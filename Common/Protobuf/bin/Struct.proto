@@ -24,13 +24,30 @@ message PosInfo
 
 message Player
 {
-	PlayerType playerType = 1;
-	ObjectInfo objectInfo = 2;
-	CreatureState state = 3;
+	GameObjectType gameObjectType = 1;
+	PlayerType playerType = 2;
+	ObjectInfo objectInfo = 3;
+	CreatureState state = 4;
+	StatInfo stat = 5;
 
 	// bool		isAlive = 2;
 	// int32	health = 3;	
 	// bool		isAttack = 4;
+}
+
+message Monster
+{
+	GameObjectType gameObjectType = 1;
+	ObjectInfo objectInfo = 2;
+	CreatureState state = 3;
+	StatInfo stat = 4;
+
+	float movePoint = 5;
+	float hitPoint = 6;
+	int32 traceRange = 7;
+	int32 hitRange = 8;
+	bool isAttack = 9;
+	bool isTracing = 10;
 }
 
 message StatInfo {

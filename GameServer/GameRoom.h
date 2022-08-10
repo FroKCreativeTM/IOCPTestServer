@@ -9,13 +9,17 @@ namespace FrokEngine
 	class GameRoom : public JobQueue
 	{
 	public:
+		// 플레이어 관련
 		void Enter(PlayerRef player);
 		void Leave(PlayerRef player);
 		void Broadcast(SendBufferRef sendBuffer);
-
 		void SetPlayerPos(uint64 networkID, Protocol::PosInfo posInfo, Protocol::CreatureState animState);
+		int GetPlayerNum() const { return _players.size(); }
 
+		// 몬스터 관련
 		void InitMonsterSet();
+		void CheckNearMonster();
+		int GetMonsterNum() const { return _monsters.size(); }
 
 	private:
 		map<uint64, PlayerRef> _players;

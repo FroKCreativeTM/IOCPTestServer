@@ -14,10 +14,11 @@ namespace FrokEngine
 		PKT_S_CHAT = 3,
 		PKT_C_SPAWN = 4,
 		PKT_S_SPAWN = 5,
-		PKT_C_LEAVE_GAME = 6,
-		PKT_S_DESPAWN = 7,
-		PKT_C_MOVE = 8,
-		PKT_S_MOVE = 9,
+		PKT_S_MONSTERSPAWN = 6,
+		PKT_C_LEAVE_GAME = 7,
+		PKT_S_DESPAWN = 8,
+		PKT_C_MOVE = 9,
+		PKT_S_MOVE = 10,
 	};
 
 	// Custom Handlers
@@ -25,6 +26,7 @@ namespace FrokEngine
 	bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt);
 	bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt);
 	bool Handle_S_SPAWN(PacketSessionRef& session, Protocol::S_SPAWN& pkt);
+	bool Handle_S_MONSTERSPAWN(PacketSessionRef& session, Protocol::S_MONSTERSPAWN& pkt);
 	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
 	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
 
@@ -38,6 +40,7 @@ namespace FrokEngine
 			GPacketHandler[PKT_S_ENTER_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ENTER_GAME > (Handle_S_ENTER_GAME, session, buffer, len); };
 			GPacketHandler[PKT_S_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_CHAT > (Handle_S_CHAT, session, buffer, len); };
 			GPacketHandler[PKT_S_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_SPAWN > (Handle_S_SPAWN, session, buffer, len); };
+			GPacketHandler[PKT_S_MONSTERSPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MONSTERSPAWN > (Handle_S_MONSTERSPAWN, session, buffer, len); };
 			GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DESPAWN > (Handle_S_DESPAWN, session, buffer, len); };
 			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
 		}

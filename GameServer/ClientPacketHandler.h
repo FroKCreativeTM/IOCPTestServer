@@ -14,10 +14,11 @@ namespace FrokEngine
 		PKT_S_CHAT = 3,
 		PKT_C_SPAWN = 4,
 		PKT_S_SPAWN = 5,
-		PKT_C_LEAVE_GAME = 6,
-		PKT_S_DESPAWN = 7,
-		PKT_C_MOVE = 8,
-		PKT_S_MOVE = 9,
+		PKT_S_MONSTERSPAWN = 6,
+		PKT_C_LEAVE_GAME = 7,
+		PKT_S_DESPAWN = 8,
+		PKT_C_MOVE = 9,
+		PKT_S_MOVE = 10,
 	};
 
 	// Custom Handlers
@@ -50,6 +51,7 @@ namespace FrokEngine
 		static SendBufferRef MakeSendBuffer(Protocol::S_ENTER_GAME&pkt) { return MakeSendBuffer(pkt, PKT_S_ENTER_GAME); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_CHAT&pkt) { return MakeSendBuffer(pkt, PKT_S_CHAT); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_SPAWN); }
+		static SendBufferRef MakeSendBuffer(Protocol::S_MONSTERSPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_MONSTERSPAWN); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_DESPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_DESPAWN); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
 

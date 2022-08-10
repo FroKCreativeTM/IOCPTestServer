@@ -1,19 +1,16 @@
 #pragma once
 
-#include "../GameObject.h"
-
 namespace FrokEngine
 {
-	class Player : 
-		public GameObject
+	class Player 
 	{
 	public:
-		// id(토큰으로 대체 예정), character name
-		// posInfo, statInfo
+		// Protobuf 상에 있는 프로토콜과 통일
+		Protocol::GameObjectType gameObjectType;
+		Protocol::PlayerType playerType;
 		Protocol::ObjectInfo		objectInfo;
-
-		// 애니메이션 상태(이거에 맞춰서 애니메이션을 실행한다.)
 		Protocol::CreatureState		creatureState;
+		Protocol::StatInfo statInfo;
 
 		GameSessionRef			ownerSession; // Cycle
 	};
