@@ -16,12 +16,16 @@ namespace FrokEngine
 		void SetPlayerPos(uint64 networkID, Protocol::PosInfo posInfo, Protocol::CreatureState animState);
 		int GetPlayerNum() const { return _players.size(); }
 
+	public : 
+		void Update();
+
 		// 몬스터 관련
 		void InitMonsterSet();
 		void CheckNearMonster();
 		int GetMonsterNum() const { return _monsters.size(); }
 
 	private:
+		USE_LOCK;
 		map<uint64, PlayerRef> _players;
 		map<uint64, MonsterRef> _monsters;
 	};
