@@ -1,4 +1,6 @@
 #include "../../../pch.h"
+
+#include <ConsoleLog.h>
 #include "Monster.h"
 #include "../Player/Player.h"
 
@@ -6,7 +8,7 @@ namespace FrokEngine
 {
 	Monster::Monster()
 		: movePoint(5), hitPoint(0.1f),
-		traceRange(700), hitRange(180),
+		traceRange(350), hitRange(180),
 		isAttack(false),
 		isTracing(false)
 	{
@@ -38,6 +40,10 @@ namespace FrokEngine
 			objectInfo.mutable_posinfo()->set_posz(monsterPos.posz() + movePoint);
 		if (targetPos.posz() < monsterPos.posz())
 			objectInfo.mutable_posinfo()->set_posz(monsterPos.posz() - movePoint);
+
+		GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"[Monster ID : %d, X : %f / Y : %f / Z : %f\n]", 
+			objectInfo.objectid(),
+			monsterPos.posx(), monsterPos.posy(), monsterPos.posz());
 	}
 
 	void Monster::HitPlayer(PlayerRef target)
@@ -82,7 +88,10 @@ namespace FrokEngine
 	{
 		if (abs(target->objectInfo.posinfo().posx() - objectInfo.posinfo().posx()) < hitRange
 			&& abs(target->objectInfo.posinfo().posy() - objectInfo.posinfo().posy()) < hitRange)
+		{
+			GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"FIND PLAYER!~!!\n");
 			return true;
+		}
 
 		return false;
 	}

@@ -269,18 +269,18 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   ClientPacketHandler.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(22,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ConfigManager.cpp
   MapData.cpp
   GameRoom.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(22,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameServer.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(22,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSession.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(22,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSessionManager.cpp
   UsageManager.cpp
   코드를 생성하고 있습니다...
@@ -289,9 +289,9 @@ C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(22,29): warning C4267: 're
   ObjectManager.cpp
   코드를 생성하고 있습니다...
   Monster.cpp
-C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(49,85): warning C4244: '인수': 'float'에서 'int32_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(58,25): warning C4244: '인수': 'float'에서 'int32_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(59,12): warning C4477: 'printf_s' : 서식 문자열 '%f'에 'double' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int32_t'입니다.
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(55,85): warning C4244: '인수': 'float'에서 'int32_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(64,25): warning C4244: '인수': 'float'에서 'int32_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(65,12): warning C4477: 'printf_s' : 서식 문자열 '%f'에 'double' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int32_t'입니다.
   Player.cpp
   코드를 생성하고 있습니다...
   Enum.pb.cc

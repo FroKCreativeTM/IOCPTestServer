@@ -5,17 +5,17 @@
 #include "GameSession.h"
 #include "GameSessionManager.h"
 #include "BufferWriter.h"
+#include "ConsoleLog.h"
+
+#include <DBBind.h>
+
 #include "ClientPacketHandler.h"
 #include <tchar.h>
 #include "Protocol.pb.h"
 #include "Job.h"
 #include "GameRoom.h"
 #include "Contents/Object/Player/Player.h"
-
 #include "ConfigManager.h"
-
-#include <DBBind.h>
-#include <Timer.h>
 
 enum
 {
@@ -27,6 +27,8 @@ void DoWorkerJob(ServerServiceRef& service)
 	while (true)
 	{
 		LEndTickCount = ::GetTickCount64() + WORKER_TICK;
+
+		GRoom->Update();
 
 		// 네트워크 입출력 처리 -> 인게임 로직까지 (패킷 핸들러에 의해)
 		service->GetIocpCore()->Dispatch(10);
@@ -52,12 +54,9 @@ int main(int argc, char* argv[])
 	// ASSERT_CRASH(GDBConnectionPool->Connect(1, ConfigManager::GetInst()->GetServerConfig().DBConnectionString.c_str()));
 	// TODO : SharedDB를 관리하기 위한 풀도!
 
-	GRoom->DoTimer(1000, [] { cout << "Hello 1000" << endl; });
-	GRoom->DoTimer(2000, [] { cout << "Hello 2000" << endl; });
-	GRoom->DoTimer(3000, [] { cout << "Hello 3000" << endl; });
-
-	// 몬스터를 스폰한다.
-	GRoom->InitMonsterSet();
+	GRoom->DoTimer(1000, [] { GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"Hello 1000\n"); });
+	GRoom->DoTimer(2000, [] { GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"Hello 2000\n"); });
+	GRoom->DoTimer(3000, [] { GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"Hello 3000\n"); });
 
 	ClientPacketHandler::Init();
 
@@ -79,9 +78,9 @@ int main(int argc, char* argv[])
 	wstring wIP;
 	wIP.assign(IP.begin(), IP.end());
 
-	cout << "[Server INFO]" << endl;
-	wcout << L"IP : " << wIP << endl;
-	cout << "port : " << port << endl;
+	GConsoleLogger->WriteStdOut(FrokEngine::Color::WHITE, L"[Server INFO]\n");
+	GConsoleLogger->WriteStdOut(FrokEngine::Color::WHITE, L"[IP : %s]\n", wIP.c_str());
+	GConsoleLogger->WriteStdOut(FrokEngine::Color::WHITE, L"[PORT : %d]\n", port);
 
 	// 로그인 서버 포트 번호 : 7776
 	// 게임 컨텐츠 서버 포트 번호 : 7777
@@ -98,7 +97,6 @@ int main(int argc, char* argv[])
 	{
 		GThreadManager->Launch([&service]()
 			{
-				GRoom->Update();
 				DoWorkerJob(service);
 			});
 	}

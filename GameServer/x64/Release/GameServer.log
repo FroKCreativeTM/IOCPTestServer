@@ -14,10 +14,11 @@
   		PKT_S_CHAT = 3,
   		PKT_C_SPAWN = 4,
   		PKT_S_SPAWN = 5,
-  		PKT_C_LEAVE_GAME = 6,
-  		PKT_S_DESPAWN = 7,
-  		PKT_C_MOVE = 8,
-  		PKT_S_MOVE = 9,
+  		PKT_S_MONSTERSPAWN = 6,
+  		PKT_C_LEAVE_GAME = 7,
+  		PKT_S_DESPAWN = 8,
+  		PKT_C_MOVE = 9,
+  		PKT_S_MOVE = 10,
   	};
   
   	// Custom Handlers
@@ -50,6 +51,7 @@
   		static SendBufferRef MakeSendBuffer(Protocol::S_ENTER_GAME&pkt) { return MakeSendBuffer(pkt, PKT_S_ENTER_GAME); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_CHAT&pkt) { return MakeSendBuffer(pkt, PKT_S_CHAT); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_SPAWN); }
+  		static SendBufferRef MakeSendBuffer(Protocol::S_MONSTERSPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_MONSTERSPAWN); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_DESPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_DESPAWN); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
   
@@ -97,10 +99,11 @@
   		PKT_S_CHAT = 3,
   		PKT_C_SPAWN = 4,
   		PKT_S_SPAWN = 5,
-  		PKT_C_LEAVE_GAME = 6,
-  		PKT_S_DESPAWN = 7,
-  		PKT_C_MOVE = 8,
-  		PKT_S_MOVE = 9,
+  		PKT_S_MONSTERSPAWN = 6,
+  		PKT_C_LEAVE_GAME = 7,
+  		PKT_S_DESPAWN = 8,
+  		PKT_C_MOVE = 9,
+  		PKT_S_MOVE = 10,
   	};
   
   	// Custom Handlers
@@ -108,6 +111,7 @@
   	bool Handle_S_ENTER_GAME(PacketSessionRef& session, Protocol::S_ENTER_GAME& pkt);
   	bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt);
   	bool Handle_S_SPAWN(PacketSessionRef& session, Protocol::S_SPAWN& pkt);
+  	bool Handle_S_MONSTERSPAWN(PacketSessionRef& session, Protocol::S_MONSTERSPAWN& pkt);
   	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
   	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
   
@@ -121,6 +125,7 @@
   			GPacketHandler[PKT_S_ENTER_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ENTER_GAME > (Handle_S_ENTER_GAME, session, buffer, len); };
   			GPacketHandler[PKT_S_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_CHAT > (Handle_S_CHAT, session, buffer, len); };
   			GPacketHandler[PKT_S_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_SPAWN > (Handle_S_SPAWN, session, buffer, len); };
+  			GPacketHandler[PKT_S_MONSTERSPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MONSTERSPAWN > (Handle_S_MONSTERSPAWN, session, buffer, len); };
   			GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DESPAWN > (Handle_S_DESPAWN, session, buffer, len); };
   			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
   		}
@@ -263,18 +268,28 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   ClientPacketHandler.cpp
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ConfigManager.cpp
   MapData.cpp
   GameRoom.cpp
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameServer.cpp
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSession.cpp
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSessionManager.cpp
   UsageManager.cpp
   PlayerManager.cpp
   GameObject.cpp
   ObjectManager.cpp
   Monster.cpp
-C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(13,14): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(49,85): warning C4244: '인수': 'float'에서 'int32_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(58,25): warning C4244: '인수': 'float'에서 'int32_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\Contents\Object\Monster\Monster.cpp(59,12): warning C4477: 'printf_s' : 서식 문자열 '%f'에 'double' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int32_t'입니다.
   Player.cpp
   Enum.pb.cc
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\stubs\status.h(97,15): warning C4251: 'google::protobuf::util::status_internal::Status::error_message_': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'google::protobuf::util::status_internal::Status'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
@@ -442,8 +457,8 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   코드를 생성하고 있습니다.
-  31 of 3359 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  660 of 3606 functions (18.3%) were compiled, the rest were copied from previous compilation.
+    266 functions were new in current compilation
+    464 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   GameServer.vcxproj -> C:\UnrealProject\IOCPTestServer\Binary\Release\GameServer.exe
