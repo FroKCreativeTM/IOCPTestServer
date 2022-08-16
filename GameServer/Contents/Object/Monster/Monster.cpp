@@ -48,14 +48,17 @@ namespace FrokEngine
 
 	void Monster::HitPlayer(PlayerRef target)
 	{
-		std::thread t([&]() {
-			// 1초에 한번씩 때리도록		
+		// 스레드 하나 생성하고 이를 detach한다.
+		std::thread t([&]() 
+		{
 			isAttack = true;
-			printf_s("때림\n");
 			target->objectInfo.mutable_statinfo()->set_hp(target->objectInfo.statinfo().hp() - hitPoint);
+			GConsoleLogger->WriteStdOut(FrokEngine::Color::RED, L"플레이어 때림\n");
+			GConsoleLogger->WriteStdOut(FrokEngine::Color::RED, L"플레이어 HP : %d\n", target->objectInfo.statinfo().hp());
+			// 1초에 한번씩 때리도록		
 			std::this_thread::sleep_for(1s);
 			isAttack = false;
-			});
+		});
 		t.detach();
 	}
 

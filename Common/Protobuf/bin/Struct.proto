@@ -52,14 +52,14 @@ message Monster
 
 message StatInfo {
   int32 level = 1;
-  int32 hp = 2;
-  int32 mp = 3;
-  int32 maxHp = 4;
-  int32 maxMp = 5;
-  int32 attack = 6;
+  float hp = 2;
+  float mp = 3;
+  float maxHp = 4;
+  float maxMp = 5;
+  float attack = 6;
   float speed = 7;
-  int32 exp = 8;
-  int32 totalExp = 9;
+  float exp = 8;
+  float totalExp = 9;
 }
 
 message ObjectInfo {

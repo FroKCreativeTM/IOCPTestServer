@@ -227,10 +227,10 @@ const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "atInfo\022\021\n\tmovePoint\030\005 \001(\002\022\020\n\010hitPoint\030\006 "
   "\001(\002\022\022\n\ntraceRange\030\007 \001(\005\022\020\n\010hitRange\030\010 \001("
   "\005\022\020\n\010isAttack\030\t \001(\010\022\021\n\tisTracing\030\n \001(\010\"\215"
-  "\001\n\010StatInfo\022\r\n\005level\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\n"
-  "\n\002mp\030\003 \001(\005\022\r\n\005maxHp\030\004 \001(\005\022\r\n\005maxMp\030\005 \001(\005"
-  "\022\016\n\006attack\030\006 \001(\005\022\r\n\005speed\030\007 \001(\002\022\013\n\003exp\030\010"
-  " \001(\005\022\020\n\010totalExp\030\t \001(\005\"v\n\nObjectInfo\022\020\n\010"
+  "\001\n\010StatInfo\022\r\n\005level\030\001 \001(\005\022\n\n\002hp\030\002 \001(\002\022\n"
+  "\n\002mp\030\003 \001(\002\022\r\n\005maxHp\030\004 \001(\002\022\r\n\005maxMp\030\005 \001(\002"
+  "\022\016\n\006attack\030\006 \001(\002\022\r\n\005speed\030\007 \001(\002\022\013\n\003exp\030\010"
+  " \001(\002\022\020\n\010totalExp\030\t \001(\002\"v\n\nObjectInfo\022\020\n\010"
   "objectId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\"\n\007posInfo\030"
   "\003 \001(\0132\021.Protocol.PosInfo\022$\n\010statInfo\030\004 \001"
   "(\0132\022.Protocol.StatInfob\006proto3"
@@ -1642,43 +1642,43 @@ const char* StatInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
         } else
           goto handle_unusual;
         continue;
-      // int32 hp = 2;
+      // float hp = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 21)) {
+          hp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // int32 mp = 3;
+      // float mp = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          mp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
+          mp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // int32 maxHp = 4;
+      // float maxHp = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
-          maxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
+          maxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // int32 maxMp = 5;
+      // float maxMp = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          maxmp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
+          maxmp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // int32 attack = 6;
+      // float attack = 6;
       case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
-          attack_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 53)) {
+          attack_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
@@ -1690,19 +1690,19 @@ const char* StatInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
         } else
           goto handle_unusual;
         continue;
-      // int32 exp = 8;
+      // float exp = 8;
       case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
-          exp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 69)) {
+          exp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // int32 totalExp = 9;
+      // float totalExp = 9;
       case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
-          totalexp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 77)) {
+          totalexp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
@@ -1741,34 +1741,54 @@ uint8_t* StatInfo::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_level(), target);
   }
 
-  // int32 hp = 2;
-  if (this->_internal_hp() != 0) {
+  // float hp = 2;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_hp = this->_internal_hp();
+  uint32_t raw_hp;
+  memcpy(&raw_hp, &tmp_hp, sizeof(tmp_hp));
+  if (raw_hp != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_hp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_hp(), target);
   }
 
-  // int32 mp = 3;
-  if (this->_internal_mp() != 0) {
+  // float mp = 3;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_mp = this->_internal_mp();
+  uint32_t raw_mp;
+  memcpy(&raw_mp, &tmp_mp, sizeof(tmp_mp));
+  if (raw_mp != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_mp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_mp(), target);
   }
 
-  // int32 maxHp = 4;
-  if (this->_internal_maxhp() != 0) {
+  // float maxHp = 4;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_maxhp = this->_internal_maxhp();
+  uint32_t raw_maxhp;
+  memcpy(&raw_maxhp, &tmp_maxhp, sizeof(tmp_maxhp));
+  if (raw_maxhp != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_maxhp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_maxhp(), target);
   }
 
-  // int32 maxMp = 5;
-  if (this->_internal_maxmp() != 0) {
+  // float maxMp = 5;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_maxmp = this->_internal_maxmp();
+  uint32_t raw_maxmp;
+  memcpy(&raw_maxmp, &tmp_maxmp, sizeof(tmp_maxmp));
+  if (raw_maxmp != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_maxmp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_maxmp(), target);
   }
 
-  // int32 attack = 6;
-  if (this->_internal_attack() != 0) {
+  // float attack = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_attack = this->_internal_attack();
+  uint32_t raw_attack;
+  memcpy(&raw_attack, &tmp_attack, sizeof(tmp_attack));
+  if (raw_attack != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_attack(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_attack(), target);
   }
 
   // float speed = 7;
@@ -1781,16 +1801,24 @@ uint8_t* StatInfo::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(7, this->_internal_speed(), target);
   }
 
-  // int32 exp = 8;
-  if (this->_internal_exp() != 0) {
+  // float exp = 8;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_exp = this->_internal_exp();
+  uint32_t raw_exp;
+  memcpy(&raw_exp, &tmp_exp, sizeof(tmp_exp));
+  if (raw_exp != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_exp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(8, this->_internal_exp(), target);
   }
 
-  // int32 totalExp = 9;
-  if (this->_internal_totalexp() != 0) {
+  // float totalExp = 9;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_totalexp = this->_internal_totalexp();
+  uint32_t raw_totalexp;
+  memcpy(&raw_totalexp, &tmp_totalexp, sizeof(tmp_totalexp));
+  if (raw_totalexp != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_totalexp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(9, this->_internal_totalexp(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1814,29 +1842,49 @@ size_t StatInfo::ByteSizeLong() const {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_level());
   }
 
-  // int32 hp = 2;
-  if (this->_internal_hp() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_hp());
+  // float hp = 2;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_hp = this->_internal_hp();
+  uint32_t raw_hp;
+  memcpy(&raw_hp, &tmp_hp, sizeof(tmp_hp));
+  if (raw_hp != 0) {
+    total_size += 1 + 4;
   }
 
-  // int32 mp = 3;
-  if (this->_internal_mp() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_mp());
+  // float mp = 3;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_mp = this->_internal_mp();
+  uint32_t raw_mp;
+  memcpy(&raw_mp, &tmp_mp, sizeof(tmp_mp));
+  if (raw_mp != 0) {
+    total_size += 1 + 4;
   }
 
-  // int32 maxHp = 4;
-  if (this->_internal_maxhp() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_maxhp());
+  // float maxHp = 4;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_maxhp = this->_internal_maxhp();
+  uint32_t raw_maxhp;
+  memcpy(&raw_maxhp, &tmp_maxhp, sizeof(tmp_maxhp));
+  if (raw_maxhp != 0) {
+    total_size += 1 + 4;
   }
 
-  // int32 maxMp = 5;
-  if (this->_internal_maxmp() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_maxmp());
+  // float maxMp = 5;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_maxmp = this->_internal_maxmp();
+  uint32_t raw_maxmp;
+  memcpy(&raw_maxmp, &tmp_maxmp, sizeof(tmp_maxmp));
+  if (raw_maxmp != 0) {
+    total_size += 1 + 4;
   }
 
-  // int32 attack = 6;
-  if (this->_internal_attack() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_attack());
+  // float attack = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_attack = this->_internal_attack();
+  uint32_t raw_attack;
+  memcpy(&raw_attack, &tmp_attack, sizeof(tmp_attack));
+  if (raw_attack != 0) {
+    total_size += 1 + 4;
   }
 
   // float speed = 7;
@@ -1848,14 +1896,22 @@ size_t StatInfo::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
-  // int32 exp = 8;
-  if (this->_internal_exp() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_exp());
+  // float exp = 8;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_exp = this->_internal_exp();
+  uint32_t raw_exp;
+  memcpy(&raw_exp, &tmp_exp, sizeof(tmp_exp));
+  if (raw_exp != 0) {
+    total_size += 1 + 4;
   }
 
-  // int32 totalExp = 9;
-  if (this->_internal_totalexp() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_totalexp());
+  // float totalExp = 9;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_totalexp = this->_internal_totalexp();
+  uint32_t raw_totalexp;
+  memcpy(&raw_totalexp, &tmp_totalexp, sizeof(tmp_totalexp));
+  if (raw_totalexp != 0) {
+    total_size += 1 + 4;
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1883,19 +1939,39 @@ void StatInfo::MergeFrom(const StatInfo& from) {
   if (from._internal_level() != 0) {
     _internal_set_level(from._internal_level());
   }
-  if (from._internal_hp() != 0) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_hp = from._internal_hp();
+  uint32_t raw_hp;
+  memcpy(&raw_hp, &tmp_hp, sizeof(tmp_hp));
+  if (raw_hp != 0) {
     _internal_set_hp(from._internal_hp());
   }
-  if (from._internal_mp() != 0) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_mp = from._internal_mp();
+  uint32_t raw_mp;
+  memcpy(&raw_mp, &tmp_mp, sizeof(tmp_mp));
+  if (raw_mp != 0) {
     _internal_set_mp(from._internal_mp());
   }
-  if (from._internal_maxhp() != 0) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_maxhp = from._internal_maxhp();
+  uint32_t raw_maxhp;
+  memcpy(&raw_maxhp, &tmp_maxhp, sizeof(tmp_maxhp));
+  if (raw_maxhp != 0) {
     _internal_set_maxhp(from._internal_maxhp());
   }
-  if (from._internal_maxmp() != 0) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_maxmp = from._internal_maxmp();
+  uint32_t raw_maxmp;
+  memcpy(&raw_maxmp, &tmp_maxmp, sizeof(tmp_maxmp));
+  if (raw_maxmp != 0) {
     _internal_set_maxmp(from._internal_maxmp());
   }
-  if (from._internal_attack() != 0) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_attack = from._internal_attack();
+  uint32_t raw_attack;
+  memcpy(&raw_attack, &tmp_attack, sizeof(tmp_attack));
+  if (raw_attack != 0) {
     _internal_set_attack(from._internal_attack());
   }
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
@@ -1905,10 +1981,18 @@ void StatInfo::MergeFrom(const StatInfo& from) {
   if (raw_speed != 0) {
     _internal_set_speed(from._internal_speed());
   }
-  if (from._internal_exp() != 0) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_exp = from._internal_exp();
+  uint32_t raw_exp;
+  memcpy(&raw_exp, &tmp_exp, sizeof(tmp_exp));
+  if (raw_exp != 0) {
     _internal_set_exp(from._internal_exp());
   }
-  if (from._internal_totalexp() != 0) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_totalexp = from._internal_totalexp();
+  uint32_t raw_totalexp;
+  memcpy(&raw_totalexp, &tmp_totalexp, sizeof(tmp_totalexp));
+  if (raw_totalexp != 0) {
     _internal_set_totalexp(from._internal_totalexp());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);

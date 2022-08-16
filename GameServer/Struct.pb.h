@@ -950,49 +950,49 @@ class StatInfo final :
   void _internal_set_level(int32_t value);
   public:
 
-  // int32 hp = 2;
+  // float hp = 2;
   void clear_hp();
-  int32_t hp() const;
-  void set_hp(int32_t value);
+  float hp() const;
+  void set_hp(float value);
   private:
-  int32_t _internal_hp() const;
-  void _internal_set_hp(int32_t value);
+  float _internal_hp() const;
+  void _internal_set_hp(float value);
   public:
 
-  // int32 mp = 3;
+  // float mp = 3;
   void clear_mp();
-  int32_t mp() const;
-  void set_mp(int32_t value);
+  float mp() const;
+  void set_mp(float value);
   private:
-  int32_t _internal_mp() const;
-  void _internal_set_mp(int32_t value);
+  float _internal_mp() const;
+  void _internal_set_mp(float value);
   public:
 
-  // int32 maxHp = 4;
+  // float maxHp = 4;
   void clear_maxhp();
-  int32_t maxhp() const;
-  void set_maxhp(int32_t value);
+  float maxhp() const;
+  void set_maxhp(float value);
   private:
-  int32_t _internal_maxhp() const;
-  void _internal_set_maxhp(int32_t value);
+  float _internal_maxhp() const;
+  void _internal_set_maxhp(float value);
   public:
 
-  // int32 maxMp = 5;
+  // float maxMp = 5;
   void clear_maxmp();
-  int32_t maxmp() const;
-  void set_maxmp(int32_t value);
+  float maxmp() const;
+  void set_maxmp(float value);
   private:
-  int32_t _internal_maxmp() const;
-  void _internal_set_maxmp(int32_t value);
+  float _internal_maxmp() const;
+  void _internal_set_maxmp(float value);
   public:
 
-  // int32 attack = 6;
+  // float attack = 6;
   void clear_attack();
-  int32_t attack() const;
-  void set_attack(int32_t value);
+  float attack() const;
+  void set_attack(float value);
   private:
-  int32_t _internal_attack() const;
-  void _internal_set_attack(int32_t value);
+  float _internal_attack() const;
+  void _internal_set_attack(float value);
   public:
 
   // float speed = 7;
@@ -1004,22 +1004,22 @@ class StatInfo final :
   void _internal_set_speed(float value);
   public:
 
-  // int32 exp = 8;
+  // float exp = 8;
   void clear_exp();
-  int32_t exp() const;
-  void set_exp(int32_t value);
+  float exp() const;
+  void set_exp(float value);
   private:
-  int32_t _internal_exp() const;
-  void _internal_set_exp(int32_t value);
+  float _internal_exp() const;
+  void _internal_set_exp(float value);
   public:
 
-  // int32 totalExp = 9;
+  // float totalExp = 9;
   void clear_totalexp();
-  int32_t totalexp() const;
-  void set_totalexp(int32_t value);
+  float totalexp() const;
+  void set_totalexp(float value);
   private:
-  int32_t _internal_totalexp() const;
-  void _internal_set_totalexp(int32_t value);
+  float _internal_totalexp() const;
+  void _internal_set_totalexp(float value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.StatInfo)
@@ -1030,14 +1030,14 @@ class StatInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   int32_t level_;
-  int32_t hp_;
-  int32_t mp_;
-  int32_t maxhp_;
-  int32_t maxmp_;
-  int32_t attack_;
+  float hp_;
+  float mp_;
+  float maxhp_;
+  float maxmp_;
+  float attack_;
   float speed_;
-  int32_t exp_;
-  int32_t totalexp_;
+  float exp_;
+  float totalexp_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
 };
@@ -2086,102 +2086,102 @@ inline void StatInfo::set_level(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.level)
 }
 
-// int32 hp = 2;
+// float hp = 2;
 inline void StatInfo::clear_hp() {
   hp_ = 0;
 }
-inline int32_t StatInfo::_internal_hp() const {
+inline float StatInfo::_internal_hp() const {
   return hp_;
 }
-inline int32_t StatInfo::hp() const {
+inline float StatInfo::hp() const {
   // @@protoc_insertion_point(field_get:Protocol.StatInfo.hp)
   return _internal_hp();
 }
-inline void StatInfo::_internal_set_hp(int32_t value) {
+inline void StatInfo::_internal_set_hp(float value) {
   
   hp_ = value;
 }
-inline void StatInfo::set_hp(int32_t value) {
+inline void StatInfo::set_hp(float value) {
   _internal_set_hp(value);
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.hp)
 }
 
-// int32 mp = 3;
+// float mp = 3;
 inline void StatInfo::clear_mp() {
   mp_ = 0;
 }
-inline int32_t StatInfo::_internal_mp() const {
+inline float StatInfo::_internal_mp() const {
   return mp_;
 }
-inline int32_t StatInfo::mp() const {
+inline float StatInfo::mp() const {
   // @@protoc_insertion_point(field_get:Protocol.StatInfo.mp)
   return _internal_mp();
 }
-inline void StatInfo::_internal_set_mp(int32_t value) {
+inline void StatInfo::_internal_set_mp(float value) {
   
   mp_ = value;
 }
-inline void StatInfo::set_mp(int32_t value) {
+inline void StatInfo::set_mp(float value) {
   _internal_set_mp(value);
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.mp)
 }
 
-// int32 maxHp = 4;
+// float maxHp = 4;
 inline void StatInfo::clear_maxhp() {
   maxhp_ = 0;
 }
-inline int32_t StatInfo::_internal_maxhp() const {
+inline float StatInfo::_internal_maxhp() const {
   return maxhp_;
 }
-inline int32_t StatInfo::maxhp() const {
+inline float StatInfo::maxhp() const {
   // @@protoc_insertion_point(field_get:Protocol.StatInfo.maxHp)
   return _internal_maxhp();
 }
-inline void StatInfo::_internal_set_maxhp(int32_t value) {
+inline void StatInfo::_internal_set_maxhp(float value) {
   
   maxhp_ = value;
 }
-inline void StatInfo::set_maxhp(int32_t value) {
+inline void StatInfo::set_maxhp(float value) {
   _internal_set_maxhp(value);
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.maxHp)
 }
 
-// int32 maxMp = 5;
+// float maxMp = 5;
 inline void StatInfo::clear_maxmp() {
   maxmp_ = 0;
 }
-inline int32_t StatInfo::_internal_maxmp() const {
+inline float StatInfo::_internal_maxmp() const {
   return maxmp_;
 }
-inline int32_t StatInfo::maxmp() const {
+inline float StatInfo::maxmp() const {
   // @@protoc_insertion_point(field_get:Protocol.StatInfo.maxMp)
   return _internal_maxmp();
 }
-inline void StatInfo::_internal_set_maxmp(int32_t value) {
+inline void StatInfo::_internal_set_maxmp(float value) {
   
   maxmp_ = value;
 }
-inline void StatInfo::set_maxmp(int32_t value) {
+inline void StatInfo::set_maxmp(float value) {
   _internal_set_maxmp(value);
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.maxMp)
 }
 
-// int32 attack = 6;
+// float attack = 6;
 inline void StatInfo::clear_attack() {
   attack_ = 0;
 }
-inline int32_t StatInfo::_internal_attack() const {
+inline float StatInfo::_internal_attack() const {
   return attack_;
 }
-inline int32_t StatInfo::attack() const {
+inline float StatInfo::attack() const {
   // @@protoc_insertion_point(field_get:Protocol.StatInfo.attack)
   return _internal_attack();
 }
-inline void StatInfo::_internal_set_attack(int32_t value) {
+inline void StatInfo::_internal_set_attack(float value) {
   
   attack_ = value;
 }
-inline void StatInfo::set_attack(int32_t value) {
+inline void StatInfo::set_attack(float value) {
   _internal_set_attack(value);
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.attack)
 }
@@ -2206,42 +2206,42 @@ inline void StatInfo::set_speed(float value) {
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.speed)
 }
 
-// int32 exp = 8;
+// float exp = 8;
 inline void StatInfo::clear_exp() {
   exp_ = 0;
 }
-inline int32_t StatInfo::_internal_exp() const {
+inline float StatInfo::_internal_exp() const {
   return exp_;
 }
-inline int32_t StatInfo::exp() const {
+inline float StatInfo::exp() const {
   // @@protoc_insertion_point(field_get:Protocol.StatInfo.exp)
   return _internal_exp();
 }
-inline void StatInfo::_internal_set_exp(int32_t value) {
+inline void StatInfo::_internal_set_exp(float value) {
   
   exp_ = value;
 }
-inline void StatInfo::set_exp(int32_t value) {
+inline void StatInfo::set_exp(float value) {
   _internal_set_exp(value);
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.exp)
 }
 
-// int32 totalExp = 9;
+// float totalExp = 9;
 inline void StatInfo::clear_totalexp() {
   totalexp_ = 0;
 }
-inline int32_t StatInfo::_internal_totalexp() const {
+inline float StatInfo::_internal_totalexp() const {
   return totalexp_;
 }
-inline int32_t StatInfo::totalexp() const {
+inline float StatInfo::totalexp() const {
   // @@protoc_insertion_point(field_get:Protocol.StatInfo.totalExp)
   return _internal_totalexp();
 }
-inline void StatInfo::_internal_set_totalexp(int32_t value) {
+inline void StatInfo::_internal_set_totalexp(float value) {
   
   totalexp_ = value;
 }
-inline void StatInfo::set_totalexp(int32_t value) {
+inline void StatInfo::set_totalexp(float value) {
   _internal_set_totalexp(value);
   // @@protoc_insertion_point(field_set:Protocol.StatInfo.totalExp)
 }
