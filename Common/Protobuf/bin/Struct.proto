@@ -29,10 +29,6 @@ message Player
 	ObjectInfo objectInfo = 3;
 	CreatureState state = 4;
 	StatInfo stat = 5;
-
-	// bool		isAlive = 2;
-	// int32	health = 3;	
-	// bool		isAttack = 4;
 }
 
 message Monster

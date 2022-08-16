@@ -19,6 +19,8 @@ namespace FrokEngine
 		PKT_S_DESPAWN = 8,
 		PKT_C_MOVE = 9,
 		PKT_S_MOVE = 10,
+		PKT_C_ATTACK = 11,
+		PKT_S_ATTACK = 12,
 	};
 
 	// Custom Handlers
@@ -29,6 +31,7 @@ namespace FrokEngine
 	bool Handle_S_MONSTERSPAWN(PacketSessionRef& session, Protocol::S_MONSTERSPAWN& pkt);
 	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
 	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
+	bool Handle_S_ATTACK(PacketSessionRef& session, Protocol::S_ATTACK& pkt);
 
 	class ServerPacketHandler
 	{
@@ -43,6 +46,7 @@ namespace FrokEngine
 			GPacketHandler[PKT_S_MONSTERSPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MONSTERSPAWN > (Handle_S_MONSTERSPAWN, session, buffer, len); };
 			GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DESPAWN > (Handle_S_DESPAWN, session, buffer, len); };
 			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
+			GPacketHandler[PKT_S_ATTACK] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ATTACK > (Handle_S_ATTACK, session, buffer, len); };
 		}
 
 		static bool HandlePacket(PacketSessionRef & session, BYTE * buffer, int32 len)
@@ -55,6 +59,7 @@ namespace FrokEngine
 		static SendBufferRef MakeSendBuffer(Protocol::C_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_C_SPAWN); }
 		static SendBufferRef MakeSendBuffer(Protocol::C_LEAVE_GAME&pkt) { return MakeSendBuffer(pkt, PKT_C_LEAVE_GAME); }
 		static SendBufferRef MakeSendBuffer(Protocol::C_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
+		static SendBufferRef MakeSendBuffer(Protocol::C_ATTACK&pkt) { return MakeSendBuffer(pkt, PKT_C_ATTACK); }
 
 	private:
 		template<typename PacketType, typename ProcessFunc>

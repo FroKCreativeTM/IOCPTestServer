@@ -76,3 +76,21 @@ message S_MOVE
 	PosInfo posInfo = 2;
 	CreatureState CreatureState = 3;
 }
+
+message C_ATTACK
+{
+	GameObjectType attackerType = 1;
+	uint64 attackerId = 2;
+	GameObjectType hittedType = 3;
+	uint64 hittedId = 4;
+}
+
+message S_ATTACK
+{
+	GameObjectType attackerType = 1;
+	uint64 attackerId = 2;
+	GameObjectType hittedType = 3;
+	uint64 hittedId = 4;
+
+	float afterHP = 5;
+}

@@ -19,6 +19,8 @@
   		PKT_S_DESPAWN = 8,
   		PKT_C_MOVE = 9,
   		PKT_S_MOVE = 10,
+  		PKT_C_ATTACK = 11,
+  		PKT_S_ATTACK = 12,
   	};
   
   	// Custom Handlers
@@ -28,6 +30,7 @@
   	bool Handle_C_SPAWN(PacketSessionRef& session, Protocol::C_SPAWN& pkt);
   	bool Handle_C_LEAVE_GAME(PacketSessionRef& session, Protocol::C_LEAVE_GAME& pkt);
   	bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt);
+  	bool Handle_C_ATTACK(PacketSessionRef& session, Protocol::C_ATTACK& pkt);
   
   	class ClientPacketHandler
   	{
@@ -41,6 +44,7 @@
   			GPacketHandler[PKT_C_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_SPAWN > (Handle_C_SPAWN, session, buffer, len); };
   			GPacketHandler[PKT_C_LEAVE_GAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_LEAVE_GAME > (Handle_C_LEAVE_GAME, session, buffer, len); };
   			GPacketHandler[PKT_C_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_MOVE > (Handle_C_MOVE, session, buffer, len); };
+  			GPacketHandler[PKT_C_ATTACK] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::C_ATTACK > (Handle_C_ATTACK, session, buffer, len); };
   		}
   
   		static bool HandlePacket(PacketSessionRef & session, BYTE * buffer, int32 len)
@@ -54,6 +58,7 @@
   		static SendBufferRef MakeSendBuffer(Protocol::S_MONSTERSPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_MONSTERSPAWN); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_DESPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_DESPAWN); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
+  		static SendBufferRef MakeSendBuffer(Protocol::S_ATTACK&pkt) { return MakeSendBuffer(pkt, PKT_S_ATTACK); }
   
   	private:
   		template<typename PacketType, typename ProcessFunc>
@@ -104,6 +109,8 @@
   		PKT_S_DESPAWN = 8,
   		PKT_C_MOVE = 9,
   		PKT_S_MOVE = 10,
+  		PKT_C_ATTACK = 11,
+  		PKT_S_ATTACK = 12,
   	};
   
   	// Custom Handlers
@@ -114,6 +121,7 @@
   	bool Handle_S_MONSTERSPAWN(PacketSessionRef& session, Protocol::S_MONSTERSPAWN& pkt);
   	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
   	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
+  	bool Handle_S_ATTACK(PacketSessionRef& session, Protocol::S_ATTACK& pkt);
   
   	class ServerPacketHandler
   	{
@@ -128,6 +136,7 @@
   			GPacketHandler[PKT_S_MONSTERSPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MONSTERSPAWN > (Handle_S_MONSTERSPAWN, session, buffer, len); };
   			GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DESPAWN > (Handle_S_DESPAWN, session, buffer, len); };
   			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
+  			GPacketHandler[PKT_S_ATTACK] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ATTACK > (Handle_S_ATTACK, session, buffer, len); };
   		}
   
   		static bool HandlePacket(PacketSessionRef & session, BYTE * buffer, int32 len)
@@ -140,6 +149,7 @@
   		static SendBufferRef MakeSendBuffer(Protocol::C_SPAWN&pkt) { return MakeSendBuffer(pkt, PKT_C_SPAWN); }
   		static SendBufferRef MakeSendBuffer(Protocol::C_LEAVE_GAME&pkt) { return MakeSendBuffer(pkt, PKT_C_LEAVE_GAME); }
   		static SendBufferRef MakeSendBuffer(Protocol::C_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
+  		static SendBufferRef MakeSendBuffer(Protocol::C_ATTACK&pkt) { return MakeSendBuffer(pkt, PKT_C_ATTACK); }
   
   	private:
   		template<typename PacketType, typename ProcessFunc>
@@ -275,7 +285,7 @@ C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 're
   GameRoom.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.cpp(116,38): warning C4244: '인수': 'FrokEngine::int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.cpp(160,38): warning C4244: '인수': 'FrokEngine::int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameServer.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.

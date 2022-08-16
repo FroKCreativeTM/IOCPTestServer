@@ -14,6 +14,7 @@ namespace FrokEngine
 		void Leave(PlayerRef player);
 		void Broadcast(SendBufferRef sendBuffer);
 		void SetPlayerPos(uint64 networkID, Protocol::PosInfo posInfo, Protocol::CreatureState animState);
+		void Attack(Protocol::C_ATTACK& attackPkt);
 		int GetPlayerNum() const { return _players.size(); }
 
 	public : 
