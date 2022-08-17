@@ -21,6 +21,7 @@ namespace FrokEngine
 		PKT_S_MOVE = 10,
 		PKT_C_ATTACK = 11,
 		PKT_S_ATTACK = 12,
+		PKT_S_DIE = 13,
 	};
 
 	// Custom Handlers
@@ -59,6 +60,7 @@ namespace FrokEngine
 		static SendBufferRef MakeSendBuffer(Protocol::S_DESPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_DESPAWN); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
 		static SendBufferRef MakeSendBuffer(Protocol::S_ATTACK&pkt) { return MakeSendBuffer(pkt, PKT_S_ATTACK); }
+		static SendBufferRef MakeSendBuffer(Protocol::S_DIE&pkt) { return MakeSendBuffer(pkt, PKT_S_DIE); }
 
 	private:
 		template<typename PacketType, typename ProcessFunc>

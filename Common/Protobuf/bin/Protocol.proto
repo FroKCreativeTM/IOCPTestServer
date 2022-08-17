@@ -94,3 +94,9 @@ message S_ATTACK
 
 	float afterHP = 5;
 }
+
+// 짜피 얘는 서버에서만 판정할 것임
+message S_DIE
+{
+	uint64 dieId = 1;
+}

@@ -21,6 +21,7 @@ namespace FrokEngine
 		PKT_S_MOVE = 10,
 		PKT_C_ATTACK = 11,
 		PKT_S_ATTACK = 12,
+		PKT_S_DIE = 13,
 	};
 
 	// Custom Handlers
@@ -32,6 +33,7 @@ namespace FrokEngine
 	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
 	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
 	bool Handle_S_ATTACK(PacketSessionRef& session, Protocol::S_ATTACK& pkt);
+	bool Handle_S_DIE(PacketSessionRef& session, Protocol::S_DIE& pkt);
 
 	class ServerPacketHandler
 	{
@@ -47,6 +49,7 @@ namespace FrokEngine
 			GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DESPAWN > (Handle_S_DESPAWN, session, buffer, len); };
 			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
 			GPacketHandler[PKT_S_ATTACK] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ATTACK > (Handle_S_ATTACK, session, buffer, len); };
+			GPacketHandler[PKT_S_DIE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DIE > (Handle_S_DIE, session, buffer, len); };
 		}
 
 		static bool HandlePacket(PacketSessionRef & session, BYTE * buffer, int32 len)

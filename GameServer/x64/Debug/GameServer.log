@@ -21,6 +21,7 @@
   		PKT_S_MOVE = 10,
   		PKT_C_ATTACK = 11,
   		PKT_S_ATTACK = 12,
+  		PKT_S_DIE = 13,
   	};
   
   	// Custom Handlers
@@ -59,6 +60,7 @@
   		static SendBufferRef MakeSendBuffer(Protocol::S_DESPAWN&pkt) { return MakeSendBuffer(pkt, PKT_S_DESPAWN); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_MOVE&pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
   		static SendBufferRef MakeSendBuffer(Protocol::S_ATTACK&pkt) { return MakeSendBuffer(pkt, PKT_S_ATTACK); }
+  		static SendBufferRef MakeSendBuffer(Protocol::S_DIE&pkt) { return MakeSendBuffer(pkt, PKT_S_DIE); }
   
   	private:
   		template<typename PacketType, typename ProcessFunc>
@@ -111,6 +113,7 @@
   		PKT_S_MOVE = 10,
   		PKT_C_ATTACK = 11,
   		PKT_S_ATTACK = 12,
+  		PKT_S_DIE = 13,
   	};
   
   	// Custom Handlers
@@ -122,6 +125,7 @@
   	bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
   	bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
   	bool Handle_S_ATTACK(PacketSessionRef& session, Protocol::S_ATTACK& pkt);
+  	bool Handle_S_DIE(PacketSessionRef& session, Protocol::S_DIE& pkt);
   
   	class ServerPacketHandler
   	{
@@ -137,6 +141,7 @@
   			GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DESPAWN > (Handle_S_DESPAWN, session, buffer, len); };
   			GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_MOVE > (Handle_S_MOVE, session, buffer, len); };
   			GPacketHandler[PKT_S_ATTACK] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_ATTACK > (Handle_S_ATTACK, session, buffer, len); };
+  			GPacketHandler[PKT_S_DIE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket < Protocol::S_DIE > (Handle_S_DIE, session, buffer, len); };
   		}
   
   		static bool HandlePacket(PacketSessionRef & session, BYTE * buffer, int32 len)
@@ -278,20 +283,20 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   ClientPacketHandler.cpp
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ConfigManager.cpp
   MapData.cpp
   GameRoom.cpp
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.cpp(160,38): warning C4244: '인수': 'FrokEngine::int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameServer.cpp
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSession.cpp
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(17,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(25,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSessionManager.cpp
   UsageManager.cpp
   코드를 생성하고 있습니다...
@@ -470,5 +475,4 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.h(1076,23): warning C4251: 'google::protobuf::internal::RepeatedPrimitiveDefaults::default_repeated_field_bool_': class 'google::protobuf::RepeatedField<bool>'에서는 class 'google::protobuf::internal::RepeatedPrimitiveDefaults'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   코드를 생성하고 있습니다...
-LINK : warning LNK4098: 'MSVCRT' defaultlib가 다른 라이브러리와 충돌합니다. /NODEFAULTLIB:library를 사용하십시오.
   GameServer.vcxproj -> C:\UnrealProject\IOCPTestServer\Binary\Debug\GameServer.exe
