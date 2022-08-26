@@ -1,0 +1,44 @@
+{
+  "levels": [
+    {
+      "level": 1,
+      "maxHp": 100,
+      "maxMp": 10,
+      "attack": 10,
+      "speed": 1.0,
+      "totalExp": 100
+    },
+    {
+      "level": 2,
+      "maxHp": 200,
+      "maxMp": 20,
+      "attack": 20,
+      "speed": 1.0,
+      "totalExp": 200
+    },
+    {
+      "level": 3,
+      "maxHp": 100,
+      "maxMp": 10,
+      "attack": 10,
+      "speed": 1.0,
+      "totalExp": 300
+    },
+    {
+      "level": 4,
+      "maxHp": 400,
+      "maxMp": 40,
+      "attack": 40,
+      "speed": 1.0,
+      "totalExp": 400
+    },
+    {
+      "level": 5,
+      "maxHp": 500,
+      "maxMp": 50,
+      "attack": 50,
+      "speed": 1.0,
+      "totalExp": 500
+    }
+  ]
+}
