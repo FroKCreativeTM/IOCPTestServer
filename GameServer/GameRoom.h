@@ -17,6 +17,13 @@ namespace FrokEngine
 		void Attack(Protocol::C_ATTACK& attackPkt);
 		int GetPlayerNum() const { return _players.size(); }
 
+	private :
+		void SendOtherPlayerDataToPlayer(PlayerRef player);
+		void SendEnterPlayerDataToOther(PlayerRef player);
+		void SendFieldMonstersDataToPlayer(PlayerRef player);
+
+		void SendLeavePlayerDataToOther(PlayerRef player);
+
 	public : 
 		void Update();
 

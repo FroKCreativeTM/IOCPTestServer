@@ -30,7 +30,7 @@ namespace FrokEngine
 		void SetLocation(float x, float y, float z);
 
 	private : 
-		Protocol::GameObjectType gameObjectType;
+		Protocol::GameObjectType gameObjectType = Protocol::GameObjectType::GAME_OBJECT_TYPE_MONSTER;
 		Protocol::ObjectInfo objectInfo;
 		Protocol::CreatureState state;
 		Protocol::StatInfo stat;
