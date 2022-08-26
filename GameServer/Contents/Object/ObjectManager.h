@@ -14,7 +14,7 @@ namespace FrokEngine
 			return _inst;
 		}
 
-		template <typename T>
+		/*template <typename T>
 		inline T Add()
 		{
 			T gameObject = new T();
@@ -29,7 +29,7 @@ namespace FrokEngine
 		{
 			WRITE_LOCK;
 			return ((int)type << 24) | (_counter++)
-		}
+		}*/
 
 	private : 
 		USE_LOCK;

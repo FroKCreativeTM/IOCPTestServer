@@ -284,19 +284,20 @@ C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\extension_set.
 C:\UnrealProject\IOCPTestServer\Libraries\Include\google\protobuf\repeated_field.h(1044): message : 'google::protobuf::RepeatedField<bool>' 선언을 참조하십시오.
   ClientPacketHandler.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(33,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ConfigManager.cpp
   MapData.cpp
   GameRoom.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.cpp(160,38): warning C4244: '인수': 'FrokEngine::int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(33,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.cpp(166,34): warning C4244: '인수': 'float'에서 'FrokEngine::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.cpp(295,38): warning C4244: '인수': 'FrokEngine::int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameServer.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(33,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSession.cpp
 C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(18,28): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(26,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\UnrealProject\IOCPTestServer\GameServer\GameRoom.h(33,29): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GameSessionManager.cpp
   UsageManager.cpp
   코드를 생성하고 있습니다...
