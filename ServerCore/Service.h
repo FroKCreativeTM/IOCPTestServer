@@ -77,6 +77,8 @@ namespace FrokEngine
 	{
 	public:
 		ServerService(NetAddress targetAddress, IocpCoreRef core, SessionFactory factory, int32 maxSessionCount = 1);
+
+		// TODO : 꺼지는 즈음에 End Packet을 전부에게 전송하기
 		virtual ~ServerService() {}
 
 		virtual bool	Start() override;

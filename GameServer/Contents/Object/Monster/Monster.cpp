@@ -1,8 +1,13 @@
 #include "../../../pch.h"
 
+#include <ThreadManager.h>
 #include <ConsoleLog.h>
 #include "Monster.h"
 #include "../Player/Player.h"
+
+#include "../../../ClientPacketHandler.h"
+#include "../../../GameRoom.h"
+
 
 namespace FrokEngine
 {
@@ -48,13 +53,29 @@ namespace FrokEngine
 
 	void Monster::HitPlayer(PlayerRef target)
 	{
-		isAttack = true;
-		target->objectInfo.mutable_statinfo()->set_hp(target->objectInfo.statinfo().hp() - hitPoint);
-		GConsoleLogger->WriteStdOut(FrokEngine::Color::RED, L"플레이어 때림\n");
-		GConsoleLogger->WriteStdOut(FrokEngine::Color::RED, L"플레이어 HP : %d\n", target->objectInfo.statinfo().hp());
-		// 1초에 한번씩 때리도록		
-		std::this_thread::sleep_for(1s);
-		isAttack = false;
+		std::thread t([&]() {
+			// 1초에 한번씩 때리도록		
+			isAttack = true;
+			target->objectInfo.mutable_statinfo()->set_hp(target->objectInfo.statinfo().hp() - hitPoint);
+			GConsoleLogger->WriteStdOut(FrokEngine::Color::RED, L"플레이어 때림\n");
+			GConsoleLogger->WriteStdOut(FrokEngine::Color::RED, L"플레이어 HP : %d\n", target->objectInfo.statinfo().hp());
+
+			Protocol::S_ATTACK attackPkt;
+			attackPkt.set_attackerid(this->GetObjectID());
+			attackPkt.set_attackertype(Protocol::GameObjectType::GAME_OBJECT_TYPE_MONSTER);
+
+			attackPkt.set_hittedid(target->objectInfo.objectid());
+			attackPkt.set_attackertype(Protocol::GameObjectType::GAME_OBJECT_TYPE_PLAYER);
+
+			attackPkt.set_afterhp(target->objectInfo.statinfo().hp() - hitPoint);
+
+			auto sendBuffer = ClientPacketHandler::MakeSendBuffer(attackPkt);
+			GRoom->Broadcast(sendBuffer);
+
+			this_thread::sleep_for(1s);
+			isAttack = false;
+			});
+		t.detach();
 	}
 
 	void Monster::Damaged(float damage)
@@ -77,8 +98,13 @@ namespace FrokEngine
 	{
 		if (abs(target->objectInfo.posinfo().posx() - objectInfo.posinfo().posx()) < traceRange
 			&& abs(target->objectInfo.posinfo().posy() - objectInfo.posinfo().posy()) < traceRange)
+		{
+			GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"PLAYER in Trace Range!~!!\n");
+			isTracing = true;
 			return true;
+		}
 
+		isTracing = false;
 		return false;
 	}
 
@@ -87,7 +113,7 @@ namespace FrokEngine
 		if (abs(target->objectInfo.posinfo().posx() - objectInfo.posinfo().posx()) < hitRange
 			&& abs(target->objectInfo.posinfo().posy() - objectInfo.posinfo().posy()) < hitRange)
 		{
-			GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"FIND PLAYER!~!!\n");
+			GConsoleLogger->WriteStdOut(FrokEngine::Color::YELLOW, L"PLAYER in Hit Range!~!!\n");
 			return true;
 		}
 
